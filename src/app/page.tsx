@@ -25,11 +25,11 @@ export default function Home() {
         <div className="relative">
           <div className='absolute top-10 left-0 right-0 z-10'>
             <h1 className="mx-auto text-center font-nomral tracking-tighter  max-w-4xl font-sans text-5xl text-gray-100 sm:text-7xl">
-              Accounting{' '}
+              Happy peoples using {' '}
               <span className="relative whitespace-nowrap text-white">
-                <span className="relative">made simple</span>
+                <span className="relative">our products</span>
               </span>{' '}
-              for small businesses.
+              for  businesses.
             </h1>
           </div>
           <div
