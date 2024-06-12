@@ -88,6 +88,14 @@ const config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
+        'background-shine': {
+          from: {
+            backgroundPosition: '0 0',
+          },
+          to: {
+            backgroundPosition: '-200% 0',
+          },
+        },
         'accordion-down': {
           from: { height: '0' },
           to: { height: 'var(--radix-accordion-content-height)' },
@@ -164,6 +172,7 @@ const config = {
         'image-rotate': 'image-rotate 1400ms ease forwards',
         'sketch-lines': 'sketch-lines 1200ms ease-out forwards',
         zap: 'zap 2250ms calc(var(--index) * 20ms) linear infinite',
+        'background-shine': 'background-shine 5s linear infinite',
       },
       backgroundImage: {
         'glass-gradient':

@@ -69,17 +69,17 @@ export default function FUIPricingSectionWithBadge() {
           {plans.map((item, idx) => (
             <div
               key={idx}
-              className={`relative flex-1 flex items-stretch flex-col rounded-2xl border-[1.2px] border-white/10 mt-6 sm:mt-0 transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset]  ${item.isMostPop ? "mt-10" : ""
+              className={`relative flex-1 flex items-stretch flex-col rounded-2xl border-[1.2px] border-white/10 mt-6 sm:mt-0 transform-gpu [border:1px_solid_rgba(255,255,255,.1)] [box-shadow:0_-20px_80px_-20px_#8686f01f_inset]  ${item.isMostPop ? "mt-10" : ""
                 }`}
             >
               {item.isMostPop ? (
-                <span className="w-32 absolute -top-5 left-0 right-0 mx-auto px-3 py-2 rounded-full border shadow-md bg-indigo-950/50 text-white/90  bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] animate-background-shine text-center text-gray-700 text-sm font-semibold">
+                <span className="w-32 absolute -top-5 left-0 right-0 mx-auto px-3 py-2 rounded-full border border-white/20 shadow-md bg-indigo-950/50 text-white/90  bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] animate-background-shine text-center text-gray-700 text-sm font-semibold">
                   Most popular
                 </span>
               ) : (
                 ""
               )}
-              <div className={cn("animate-background-shine p-8 space-y-4 border-b border-white/20", item.name === 'Enterprise' ? "dark:bg-[linear-gradient(110deg,transparent,45%,#1e1b4b,55%,transparent)] bg-[length:200%_100%] transition-colors rounded-t-2xl" : "")}>
+              <div className={cn("animate-background-shine p-8 space-y-4 border-b border-white/20", item.name === 'Enterprise' ? "bg-[linear-gradient(110deg,transparent,45%,#1e1b4b,55%,transparent)] bg-[length:200%_100%] transition-colors rounded-t-2xl" : "")}>
                 <span className="text-indigo-600 font-normal font-geist tracking-tight">{item.name}</span>
                 <div className="text-gray-200 text-3xl font-semibold">
                   ${item.price}{" "}
