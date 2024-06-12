@@ -83,7 +83,7 @@ export function Testimonials() {
     <section
       id="testimonials"
       aria-label="What our customers are saying"
-      className="bg-radial-faded relative bg-black py-20 sm:py-32 "
+      className="bg-radial-faded relative bg-black py-20 sm:py-32 z-1 "
     >
       <div
         className="absolute inset-x-0 -top-10 opacity-50 z-10 m-auto h-[27rem] max-w-lg sm:h-64 sm:max-w-7xl"
