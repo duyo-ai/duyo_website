@@ -150,14 +150,14 @@ export default function FUIFeatureSectionWithCards() {
             }}
           ></div>
         </div>
-        <hr className="mx-auto mt-96 z-20 h-px w-1/2  bg-white/10" />
-        <div className="relative mt-12">
+        {/* <hr className="mx-auto inivisible z-20 h-[0.2px] w-1/2 bg-whi" /> */}
+        <div className="relative mt-[24rem] z-20">
           <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((item, idx) => (
               <GlareCard key={idx}>
                 <li
                   key={idx}
-                  className="z-20transform-gpu space-y-3 rounded-xl border  border-white/10 bg-transparent/20 p-4 [border:1px_solid_rgba(255,255,255,.1)] [box-shadow:0_-20px_80px_-20px_#8686f01f_inset]"
+                  className="z-20 transform-gpu space-y-3 rounded-xl border  border-white/10 bg-transparent/20 p-4 [border:1px_solid_rgba(255,255,255,.1)] [box-shadow:0_-20px_80px_-20px_#8686f01f_inset]"
                 >
                   <div className="w-fit transform-gpu rounded-full p-4 text-purple-600 dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset]">
                     {item.icon}

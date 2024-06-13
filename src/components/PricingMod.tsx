@@ -51,7 +51,7 @@ export default function FUIPricingSectionWithBadge() {
   ];
 
   return (
-    <section className="py-0 pt-0 relative mt-[-32px] bg-hero-gradient">
+    <section className="py-0 pt-0 relative mt-[-0] bg-hero-gradient">
       <div className="absolute top-0 z-[0] h-screen w-screen bg-indigo-950/20  bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
       <div className="relative max-w-screen-2xl mx-auto px-4 text-gray-400 md:px-8 min-h-screen">
         <div className="relative max-w-xl mx-auto sm:text-center">
