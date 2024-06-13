@@ -3,6 +3,7 @@ import { Faqs } from '@/components/Faqs'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { Hero } from '@/components/Hero'
+import HeroMod from '@/components/HeroMod'
 import { Pricing } from '@/components/Pricing'
 import FUIPricingSectionWithBadge from '@/components/PricingMod'
 import { PrimaryFeatures } from '@/components/PrimaryFeatures'
@@ -15,7 +16,7 @@ export default function Home() {
     <>
       <Header />
       <main>
-        <Hero />
+        <HeroMod />
       
         <PrimaryFeatures />
         <SecondaryFeatures />
