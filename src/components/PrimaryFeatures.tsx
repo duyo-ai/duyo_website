@@ -63,7 +63,7 @@ export function PrimaryFeatures() {
     <section
       id="features"
       aria-label="Features for running your books"
-      className="relative bg-hero-gradient overflow-hidden mt-[-200px] min-h-screen  pb-28 pt-20 sm:py-32"
+      className="relative bg-hero-gradient overflow-hidden  mt-[-430px] p min-h-screen  pb-28  sm:py-96"
     >
         <div
         className="absolute inset-0 blur-xl h-fukl"
@@ -72,15 +72,6 @@ export function PrimaryFeatures() {
             "linear-gradient(143.6deg, rgba(52, 103, 235, 0) 20.79%, rgba(120,119,198, 0.26) 40.92%, rgba(120,119,198, 0) 70.35%)",
         }}
       ></div>
-      {/* <Image
-        className="absolute left-1/2 top-1/2 max-w-none translate-x-[-44%] translate-y-[-42%]"
-        src={backgroundImage}
-        alt=""
-        width={2245}
-        height={1636}
-        unoptimized
-      /> */}
-
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
           <h2 className="text-3xl tracking-tighter font-sans text-white sm:text-4xl md:text-5xl">

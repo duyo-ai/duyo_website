@@ -5,10 +5,12 @@ import AnimatedLogoCloud from './Company'
 const HeroMod = () => {
   return (
     <div className="relative z-10 mb-20">
+      {/* <BackgroundPlus /> */}
+
       <section className=" relative mx-auto  max-w-full">
-        <div className="  mx-auto max-w-screen-xl gap-12 px-4 py-10 text-gray-600 md:px-8">
-          <div className="leading-0 mx-auto max-w-5xl  space-y-5 text-center lg:leading-5">
-            <h1 className="font-geist group mx-auto w-fit rounded-3xl border-[2px] border-white/5 bg-gradient-to-tr from-zinc-300/5 via-gray-400/5 to-transparent  px-5 py-2 text-sm text-gray-200">
+        <div className="mx-auto  max-w-screen-xl gap-12 px-4 py-10 text-gray-600 md:px-8">
+          <div className="leading-0 mx-auto px-10 max-w-6xl  space-y-5 text-center lg:leading-5">
+            <h1 className="font-geist  group mx-auto w-fit rounded-3xl border-[2px] border-white/5 bg-gradient-to-tr from-zinc-300/5 via-gray-400/5 to-transparent  px-5 py-2 text-sm text-gray-200">
               Build products for everyone
               <ChevronRight className="ml-2 inline h-4 w-4 duration-300 group-hover:translate-x-1" />
             </h1>
@@ -20,7 +22,7 @@ const HeroMod = () => {
               </span>
             </h2>
 
-            <p className="text-md md:text-md mx-auto max-w-2xl text-gray-300">
+            <p className="text-md  md:text-md mx-auto max-w-2xl text-gray-300">
               Sed ut perspiciatis unde omnis iste natus voluptatem accusantium
               doloremque laudantium, totam rem aperiam, eaque ipsa quae.
             </p>
@@ -31,26 +33,13 @@ const HeroMod = () => {
               Get Started{' '}
               <ChevronRight className=" inline-flex items-center justify-center transition-all duration-500 group-hover:translate-x-1" />
             </Button>
-            {/* <div className="items-center  justify-center gap-x-3 space-y-3 sm:flex sm:space-y-0">
-                <span className="relative inline-block overflow-hidden rounded-full p-[1.5px]">
-                  <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-                  <div className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-gray-950  text-xs font-medium text-gray-50 backdrop-blur-3xl">
-                    <a
-                      href="javascript:void(0)"
-                      className="inline-flex rounded-full text-center group items-center w-full justify-center   bg-gradient-to-tr from-zinc-300/5 via-purple-400/20 to-transparent    text-white border-input border-[1px] hover:bg-transparent/90 transition-colors sm:w-auto py-4 px-10"
-                    >
-                      Browse courses
-                    </a>
-                  </div>
-                </span>
-              </div> */}
           </div>
           <AnimatedLogoCloud />
 
-          <div className="relative mx-10 mt-20 w-full">
+          <div className="relative mx-auto mt-20 w-full">
             <img
               src="https://projectplannerai.com/landing/hero1-dark.png"
-              className="w-full rounded-2xl z-10 border border-white/20  "
+              className="w-full rounded-2xl  mx-auto   z-10 border border-white/20"
               alt=""
             />
             <img

@@ -17,12 +17,11 @@ export default function Home() {
       <Header />
       <main>
         <HeroMod />
-      
+
         <PrimaryFeatures />
         <SecondaryFeatures />
         <CallToAction />
 
-        
         <FUIPricingSectionWithBadge />
         {/* <Pricing /> */}
         <Faqs />
