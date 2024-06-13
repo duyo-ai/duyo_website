@@ -83,7 +83,7 @@ export function Testimonials() {
     <section
       id="testimonials"
       aria-label="What our customers are saying"
-      className="bg-radial-faded relative bg-black py-20 sm:py-32 z-1 "
+      className=" relative bg-transpaarent py-20 sm:py-32 z-1 "
     >
       <div
         className="absolute inset-x-0 -top-10 opacity-50 z-10 m-auto h-[27rem] max-w-lg sm:h-64 sm:max-w-7xl"
@@ -96,7 +96,7 @@ export function Testimonials() {
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
           <h2 className="font-display text-3xl tracking-tighter text-gray-100 sm:text-6xl">
-            Loved by businesses worldwide.
+            <span className='bg-gradient-to-br from-indigo-400 via-indigo-300 to-indigo-700 bg-clip-text text-transparent'>Loved</span> by businesses worldwide.
           </h2>
           <p className="mt-4 text-lg tracking-tight text-gray-200">
             Our software is so simple that people can’t help but fall in love
