@@ -229,11 +229,18 @@ export function SecondaryFeatures() {
     <section
       id="secondary-features"
       aria-label="Features for simplifying everyday business tasks"
-      className="pb-14 relative pt-20 bg-page-gradient bg-black sm:pb-20 sm:pt-32 lg:pb-32"
+      className="pb-14 relative pt-20 bg-page-gradient bg-hero-gradient sm:pb-20 sm:pt-32 lg:pb-32"
     >
       <Container>
-      <div className="absolute -z-1 inset-x-0 -top-0 opacity-15  h-[600px] w-full bg-transparent  bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
-        <img
+      <div className="absolute -z-1 inset-x-0 -top-0 opacity-10  h-[600px] w-full bg-transparent  bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+      <div
+        className="absolute inset-0 rotate-180  blur-xl h-fukl"
+        style={{
+          background:
+            "linear-gradient(143.6deg, rgba(52, 103, 235, 0) 20.79%, rgba(120,119,198, 0.26) 40.92%, rgba(120,119,198, 0) 70.35%)",
+        }}
+      ></div>
+        {/* <img
           className="absolute inset-x-0 -top-0 opacity-75 "
           src={
             "https://pipe.com/_next/image?url=%2Fassets%2Fimg%2Fhero-left.png&w=384&q=75"
@@ -241,7 +248,7 @@ export function SecondaryFeatures() {
           width={1000}
           height={1000}
           alt="back bg"
-        />
+        /> */}
         <div className="mr-auto max-w-2xl md:text-start">
           <h2 className="font-display  text-4xl tracking-tight text-gray-200 sm:text-6xl">
             Simplify everyday business tasks.
