@@ -2,6 +2,7 @@ import RetroGrid from '../../components/farmui/RetroGrid'
 import { ChevronRight } from 'lucide-react'
 import { Button } from './Button'
 import AnimatedLogoCloud from './Company'
+import TextRotate from '../../components/farmui/RotateText'
 const HeroMod = () => {
   return (
     <div className="relative z-10 mb-20">
@@ -9,17 +10,20 @@ const HeroMod = () => {
 
       <section className=" relative mx-auto  max-w-full">
         <div className="mx-auto  max-w-screen-xl gap-12 px-4 py-10 text-gray-600 md:px-8">
-          <div className="leading-0 mx-auto px-10 max-w-6xl  space-y-5 text-center lg:leading-5">
+          <div className="leading-0 mx-auto max-w-6xl space-y-5  px-10 text-center lg:leading-5">
             <h1 className="font-geist  group mx-auto w-fit rounded-3xl border-[2px] border-white/5 bg-gradient-to-tr from-zinc-300/5 via-gray-400/5 to-transparent  px-5 py-2 text-sm text-gray-200">
               Build products for everyone
               <ChevronRight className="ml-2 inline h-4 w-4 duration-300 group-hover:translate-x-1" />
             </h1>
 
-            <h2 className="font-geist mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)]  bg-clip-text text-4xl tracking-tighter   text-transparent md:text-7xl">
-              Designing your projects faster with{' '}
+            <h2 className="font-geist  mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)]  bg-clip-text text-4xl tracking-tighter   text-transparent md:text-7xl">
+             
+                
+               Designing your projects faster with{' '}
               <span className="bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent">
-                the AI First project manager.
+                the AI First project manager
               </span>
+            
             </h2>
 
             <p className="text-md  md:text-md mx-auto max-w-2xl text-gray-300">
@@ -39,12 +43,12 @@ const HeroMod = () => {
           <div className="relative mx-auto mt-20 w-full">
             <img
               src="https://projectplannerai.com/landing/hero1-dark.png"
-              className="w-full rounded-2xl  mx-auto   z-10 border border-white/20"
+              className="z-10 mx-auto  w-full   rounded-2xl border border-white/20"
               alt=""
             />
             <img
               src="https://framerusercontent.com/images/0pkkUPiiBy68AdWhcnSLJijrCvQ.svg"
-              className="w-full rounded-lg opacity-30  absolute -bottom-60 -z-10 w-full"
+              className="absolute -bottom-60 -z-10  w-full w-full rounded-lg opacity-30"
               alt=""
             />
           </div>
