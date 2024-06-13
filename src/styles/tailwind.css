@@ -71,17 +71,17 @@
 
   @layer base {
     * {
-      @apply border-border;
+      @apply  border-border;
     }
     body {
-      @apply text-foreground;
-      background: linear-gradient(
+      @apply bg-glass-gradient text-foreground;
+      /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-      
+       */
     }
   }
   
