@@ -229,17 +229,17 @@ export function SecondaryFeatures() {
     <section
       id="secondary-features"
       aria-label="Features for simplifying everyday business tasks"
-      className="pb-14 relative pt-20 bg-page-gradient bg-hero-gradient sm:pb-20 sm:pt-32 lg:pb-32"
+      className="bg-page-gradient bg-hero-gradient relative pb-14 pt-20 sm:pb-20 sm:pt-32 lg:pb-32"
     >
       <Container>
-      <div className="absolute -z-1 inset-x-0 -top-0 opacity-10  h-[600px] w-full bg-transparent  bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
-      <div
-        className="absolute inset-0 rotate-180  blur-xl h-fukl"
-        style={{
-          background:
-            "linear-gradient(143.6deg, rgba(52, 103, 235, 0) 20.79%, rgba(120,119,198, 0.26) 40.92%, rgba(120,119,198, 0) 70.35%)",
-        }}
-      ></div>
+        <div className="-z-1 absolute inset-x-0 -top-0 h-[600px]  w-full bg-transparent bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)]  bg-[size:6rem_4rem] opacity-10 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+        <div
+          className="h-fukl absolute inset-0  rotate-180 blur-xl"
+          style={{
+            background:
+              'linear-gradient(143.6deg, rgba(52, 103, 235, 0) 20.79%, rgba(120,119,198, 0.26) 40.92%, rgba(120,119,198, 0) 70.35%)',
+          }}
+        ></div>
         {/* <img
           className="absolute inset-x-0 -top-0 opacity-75 "
           src={
@@ -250,8 +250,11 @@ export function SecondaryFeatures() {
           alt="back bg"
         /> */}
         <div className="mr-auto max-w-2xl md:text-start">
-          <h2 className="font-display  text-4xl tracking-tight text-gray-200 sm:text-6xl">
-            Simplify everyday business tasks.
+          <h2 className="font-display  text-4xl tracking-tight text-gray-200 sm:text-7xl">
+            <span className="bg-gradient-to-br from-indigo-400 via-indigo-300 to-indigo-700 bg-clip-text text-transparent">
+              Simplify{' '}
+            </span>{' '}
+            everyday business tasks.
           </h2>
           <p className="mt-4 text-lg tracking-tight text-gray-100">
             Because you’d probably be a little confused if we suggested you
