@@ -34,7 +34,7 @@ export default function Home() {
           </div>
           <div
             className={cn(
-              'mask-radial-faded  z-2  -pointer-events-none relative -my-[6rem] h-[70rem] overflow-hidden bg-black',
+              'mask-radial-faded  z-2  -pointer-events-none relative -my-[6rem] h-[70rem] overflow-hidden bg-page-gradient bg-black',
               'before:bg-radial-faded [--color:#7877C6] before:absolute before:inset-0 before:opacity-[0.4]',
               'after:absolute after:-left-1/2 after:top-1/2 after:h-[142.8%] after:w-[200%] after:rounded-[50%] after:border-t after:border-[rgba(120,119,198,0.4)] after:bg-black',
             )}

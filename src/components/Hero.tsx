@@ -11,20 +11,20 @@ import logoTuple from '@/images/logos/tuple.svg'
 
 export function Hero() {
   return (
-    <section className="m relative">
-      <Container className="relative pb-10 pt-20 text-center lg:pt-10">
-        <h1 className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-gray-100 sm:text-7xl">
+    <section className=" relative">
+      <Container className="relative min-h-screen pb-10 pt-20 text-left lg:pt-30">
+        <h1 className="mr-auto max-w-3xl font-display text-5xl  font-normal tracking-tighter text-gray-100 sm:text-7xl">
           Accounting{' '}
           <span className="relative whitespace-nowrap text-indigo-500">
             <span className="relative">made simple</span>
           </span>{' '}
-          for small businesses.
+          for small businesses and rising startups
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-gray-200">
+        <p className="mr-auto text-left mt-6 max-w-2xl text-lg tracking-tight text-gray-200">
           Most bookkeeping software is accurate, but hard to use. We make the
           opposite trade-off, and hope you don’t get audited.
         </p>
-        <div className="mt-10 flex justify-center gap-x-6">
+        <div className="mt-10 flex justify-start gap-x-6">
           <Button
             className="font-geist flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-indigo-400 to-indigo-700 px-4 py-3 text-center text-lg text-xl tracking-tighter text-zinc-50 ring-2 ring-indigo-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-indigo-500/70"
             href="/register"
@@ -38,7 +38,7 @@ export function Hero() {
           </p>
           <ul
             role="list"
-            className="mt-8 flex items-center justify-center gap-x-8 sm:flex-col sm:gap-x-0 sm:gap-y-10 xl:flex-row xl:gap-x-12 xl:gap-y-0"
+            className="mt-8 flex items-center justify-start gap-x-8 sm:flex-col sm:gap-x-0 sm:gap-y-10 xl:flex-row xl:gap-x-12 xl:gap-y-0"
           >
             {[
               [

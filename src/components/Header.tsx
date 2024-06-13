@@ -100,8 +100,8 @@ function MobileNavigation() {
 
 export function Header() {
   return (
-    <header className="py-10">
-      <Container>
+    <header className="py-10   bg-transparent">
+      <Container className=''>
         <nav className="relative z-50 flex justify-between text-gray-100">
           <div className="flex items-center md:gap-x-12">
             <Link href="#" aria-label="Home">
