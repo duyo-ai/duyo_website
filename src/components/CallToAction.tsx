@@ -43,8 +43,8 @@ export function CallToAction() {
         </div>
         <Testimonials />
       </Container>
-        <div className="relative">
-          <div className='absolute  top-40 left-0 right-0 z-10'>
+        <div className="relative  mt-20">
+          <div className='absolute  top-20 left-0 right-0 z-10'>
             <h1 className="mx-auto  text-center font-nomral tracking-tighter  max-w-4xl font-sans text-5xl text-gray-100 sm:text-8xl">
               Happy peoples using {' '}
               <span className="relative whitespace-nowrap">
@@ -52,12 +52,15 @@ export function CallToAction() {
               </span>{' '}
               for  businesses.
             </h1>
+            <button className="w-fit mx-auto mt-5 px-10 font-geist tracking-tighter text-center rounded-md text-md bg-gradient-to-br from-indigo-400 to-indigo-700  py-2 text-lg text-zinc-50 ring-2 ring-indigo-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-indigo-500/70 flex items-center justify-center gap-2">
+                  Explore more
+                </button>
           </div>
           <div
             className={cn(
-              'mask-radial-faded  z-2  -pointer-events-none relative -my-[6rem] h-[70rem] overflow-hidden bg-',
+              'mask-radial-faded  z-2  -pointer-events-none relative -my-[6rem] h-[40rem] rounded-4xl overflow-hidden bg-',
               'before:bg-radial-faded [--color:#7877C6] before:absolute before:inset-0 before:opacity-[0.4]',
-              'after:absolute after:-left-1/2 after:top-1/2 after:h-[142.8%] after:w-[200%] after:rounded-[50%] after:border-t after:border-[rgba(120,119,198,0.4)] after:bg-hero-gradient',
+              'after:absolute  after:top-[17rem] after:left-0 after:right-1/2 after:mt-[70px] after:h-[120.8%] after:py-20 after:w-[100%] after:mx-auto after:rounded-[500%] after:border-t after:border-[rgba(120,119,198,0.4)] after:bg-hero-gradient',
             )}
           ></div>
         </div>
