@@ -6,7 +6,7 @@ import { NavLink } from '@/components/NavLink'
 
 export function Footer() {
   return (
-    <footer className="bg-radial-faded relative bg-black">
+    <footer className="bg-radial-faded relative">
       <div className="absolute top-0 z-[0] h-full w-screen bg-indigo-950/20  bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
 
       <Container>
@@ -21,7 +21,7 @@ export function Footer() {
         </div>
         <div className="flex flex-col items-center border-t border-slate-400/10 py-10 sm:flex-row-reverse sm:justify-between">
           <div className="flex gap-x-6">
-            <Link href="#" className="group" aria-label="TaxPal on X">
+            <Link href="#" className="group" aria-label="Curves on X">
               <svg
                 className="h-6 w-6 fill-slate-500 group-hover:fill-slate-700"
                 aria-hidden="true"
@@ -30,7 +30,7 @@ export function Footer() {
                 <path d="M13.3174 10.7749L19.1457 4H17.7646L12.7039 9.88256L8.66193 4H4L10.1122 12.8955L4 20H5.38119L10.7254 13.7878L14.994 20H19.656L13.3171 10.7749H13.3174ZM11.4257 12.9738L10.8064 12.0881L5.87886 5.03974H8.00029L11.9769 10.728L12.5962 11.6137L17.7652 19.0075H15.6438L11.4257 12.9742V12.9738Z" />
               </svg>
             </Link>
-            <Link href="#" className="group" aria-label="TaxPal on GitHub">
+            <Link href="#" className="group" aria-label="Curves on GitHub">
               <svg
                 className="h-6 w-6 fill-slate-500 group-hover:fill-slate-700"
                 aria-hidden="true"
@@ -41,7 +41,7 @@ export function Footer() {
             </Link>
           </div>
           <p className="mt-6 text-sm text-slate-500 sm:mt-0">
-            Copyright &copy; {new Date().getFullYear()} TaxPal. All rights
+            Copyright &copy; {new Date().getFullYear()} Curves. All rights
             reserved.
           </p>
         </div>

@@ -9,7 +9,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-    './@/**/*.{ts,tsx}', 
+    './@/**/*.{ts,tsx}',
   ],
   prefix: '',
   theme: {
@@ -97,6 +97,10 @@ const config = {
             backgroundPosition: '-200% 0',
           },
         },
+        'logo-cloud': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(calc(-100% - 1rem))' },
+        },
         'accordion-down': {
           from: { height: '0' },
           to: { height: 'var(--radix-accordion-content-height)' },
@@ -174,6 +178,7 @@ const config = {
         'sketch-lines': 'sketch-lines 1200ms ease-out forwards',
         zap: 'zap 2250ms calc(var(--index) * 20ms) linear infinite',
         'background-shine': 'background-shine 5s linear infinite',
+        'logo-cloud': 'logo-cloud 30s linear infinite',
       },
       backgroundImage: {
         'glass-gradient':

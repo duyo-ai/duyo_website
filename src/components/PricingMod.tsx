@@ -79,7 +79,7 @@ export default function FUIPricingSectionWithBadge() {
               ) : (
                 ""
               )}
-              <div className={cn("animate-background-shine p-8 space-y-4 border-b border-white/20", item.name === 'Enterprise' ? "bg-[linear-gradient(110deg,transparent,45%,#1e1b4b,55%,transparent)] bg-[length:200%_100%] transition-colors rounded-t-2xl" : "")}>
+              <div className={cn("animate-background-shine p-8 space-y-4 border-b border-white/10", item.name === 'Enterprise' ? "bg-[linear-gradient(110deg,transparent,45%,#1e1b4b,55%,transparent)] bg-[length:200%_100%] transition-colors rounded-t-2xl" : "")}>
                 <span className="text-indigo-600 font-normal font-geist tracking-tight">{item.name}</span>
                 <div className="text-gray-200 text-3xl font-semibold">
                   ${item.price}{" "}

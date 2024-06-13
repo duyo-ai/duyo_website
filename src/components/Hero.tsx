@@ -8,6 +8,7 @@ import logoStatamic from '@/images/logos/statamic.svg'
 import logoStaticKit from '@/images/logos/statickit.svg'
 import logoTransistor from '@/images/logos/transistor.svg'
 import logoTuple from '@/images/logos/tuple.svg'
+import AnimatedLogoCloud from './Company'
 
 export function Hero() {
   return (
@@ -33,10 +34,11 @@ export function Hero() {
           </Button>
         </div>
         <div className="mt-36 lg:mt-44">
-          <p className="font-display text-base text-gray-100">
+          <p className="font-mono uppercase tracking-tighter text-base text-gray-100 bg-gradient-to-br from-indigo-400 via-indigo-300 to-indigo-700 bg-clip-text text-transparent">
             Trusted by these six companies so far
           </p>
-          <ul
+          <AnimatedLogoCloud />
+          {/* <ul
             role="list"
             className="mt-8 flex items-center justify-start gap-x-8 sm:flex-col sm:gap-x-0 sm:gap-y-10 xl:flex-row xl:gap-x-12 xl:gap-y-0"
           >
@@ -69,7 +71,7 @@ export function Hero() {
                 </ul>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       </Container>
     </section>
