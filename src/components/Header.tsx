@@ -102,6 +102,7 @@ function MobileNavigation() {
 export function Header() {
   return (
     <header className="py-10   bg-transparent">
+      
       <SlideNavTabs />
       {/* <Container className=''>
         <nav className="relative z-50 flex justify-between text-gray-100">
