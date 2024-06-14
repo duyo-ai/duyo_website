@@ -16,7 +16,7 @@ const DashboardDemo = () => {
             src={'https://projectplannerai.com/landing/hero1-dark.png'}
             width={2000}
             height={2000}
-            className="z-30  mx-auto hidden max-w-7xl  object-cover shadow-lg sm:hidden md:block"
+            className="z-30  mx-auto hidden opacity-85 max-w-7xl rounded-3xl border-[2px] border-white/10  object-cover shadow-lg sm:hidden md:block"
             alt="Dashboard showcase"
           />
           {/* <BorderBeam size={250} duration={12} delay={9} /> */}
