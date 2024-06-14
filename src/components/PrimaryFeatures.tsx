@@ -63,7 +63,7 @@ export function PrimaryFeatures() {
     <section
       id="features"
       aria-label="Features for running your books"
-      className="relative bg-hero-gradient overflow-hidden min-h-screen mt-[-160px] pb-10 z-20  sm:pt-[33rem]"
+      className="relative bg-hero-gradient overflow-hidden min-h-screen mt-[-160px] pb-10 z-10  sm:pt-[33rem]"
     >
         <div
         className="absolute inset-0 blur-xl h-fukl"
@@ -72,7 +72,7 @@ export function PrimaryFeatures() {
             "linear-gradient(143.6deg, rgba(52, 103, 235, 0) 20.79%, rgba(120,119,198, 0.26) 40.92%, rgba(120,119,198, 0) 70.35%)",
         }}
       ></div>
-      <Container className="relative">
+      <Container className="relative z-30">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
           <h2 className="text-3xl tracking-tighter font-sans text-white sm:text-4xl md:text-5xl">
             Everything you need to run your books.
