@@ -63,7 +63,7 @@ export function PrimaryFeatures() {
     <section
       id="features"
       aria-label="Features for running your books"
-      className="relative bg-hero-gradient overflow-hidden  mt-[-430px] p min-h-screen  pb-28  sm:py-96"
+      className="relative bg-hero-gradient overflow-hidden min-h-screen mt-[-160px] pb-28  sm:py-[33rem]"
     >
         <div
         className="absolute inset-0 blur-xl h-fukl"

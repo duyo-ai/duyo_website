@@ -15,6 +15,7 @@ import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
 import { NavLink } from '@/components/NavLink'
+import { SlideNavTabs } from './Tabs'
 
 function MobileNavLink({
   href,
@@ -101,11 +102,11 @@ function MobileNavigation() {
 export function Header() {
   return (
     <header className="py-10   bg-transparent">
-      <Container className=''>
+      <SlideNavTabs />
+      {/* <Container className=''>
         <nav className="relative z-50 flex justify-between text-gray-100">
           <div className="flex items-center md:gap-x-12">
             <Link href="#" aria-label="Home">
-              {/* <Logo className="h-10 w-auto" /> */}
             </Link>
             <div className="hidden md:flex md:gap-x-6">
               <NavLink href="#features">Features</NavLink>
@@ -120,14 +121,14 @@ export function Header() {
             <Button href="/register" color="blue">
               <span>
                 Get started <span className="hidden lg:inline">today</span>
-              </span>
+            </span>
             </Button>
             <div className="-mr-1 md:hidden">
               <MobileNavigation />
             </div>
           </div>
         </nav>
-      </Container>
+      </Container> */}
     </header>
   )
 }

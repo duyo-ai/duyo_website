@@ -1,4 +1,5 @@
 import { CallToAction } from '@/components/CallToAction'
+import DashboardDemo from '@/components/DashboardShowcase'
 import { Faqs } from '@/components/Faqs'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
@@ -17,6 +18,7 @@ export default function Home() {
       <Header />
       <main>
         <HeroMod />
+       
 
         <PrimaryFeatures />
         <SecondaryFeatures />

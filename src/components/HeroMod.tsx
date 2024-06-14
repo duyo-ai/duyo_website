@@ -3,12 +3,11 @@ import { ChevronRight } from 'lucide-react'
 import { Button } from './Button'
 import AnimatedLogoCloud from './Company'
 import TextRotate from '../../components/farmui/RotateText'
+import DashboardDemo from './DashboardShowcase'
 const HeroMod = () => {
   return (
     <div className="relative z-10 mb-20">
-      {/* <BackgroundPlus /> */}
-
-      <section className=" relative mx-auto  max-w-full">
+      <section className=" relative mx-auto min-h-screen  max-w-full">
         <div className="mx-auto  max-w-screen-xl gap-12 px-4 py-10 text-gray-600 md:px-8">
           <div className="leading-0 mx-auto max-w-6xl space-y-5  px-10 text-center lg:leading-5">
             <h1 className="font-geist  group mx-auto w-fit rounded-3xl border-[2px] border-white/5 bg-gradient-to-tr from-zinc-300/5 via-gray-400/5 to-transparent  px-5 py-2 text-sm text-gray-200">
@@ -17,13 +16,10 @@ const HeroMod = () => {
             </h1>
 
             <h2 className="font-geist  mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)]  bg-clip-text text-4xl tracking-tighter   text-transparent md:text-7xl">
-             
-                
-               Designing your projects faster with{' '}
+              Designing your projects faster with{' '}
               <span className="bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent">
                 the AI First project manager
               </span>
-            
             </h2>
 
             <p className="text-md  md:text-md mx-auto max-w-2xl text-gray-300">
@@ -39,19 +35,10 @@ const HeroMod = () => {
             </Button>
           </div>
           <AnimatedLogoCloud />
+        </div>
+        <div className='relative max-w-full'>
+          <DashboardDemo />
 
-          <div className="relative mx-auto mt-20 w-full">
-            <img
-              src="https://projectplannerai.com/landing/hero1-dark.png"
-              className="z-10 mx-auto  w-full   rounded-2xl border border-white/20"
-              alt=""
-            />
-            <img
-              src="https://framerusercontent.com/images/0pkkUPiiBy68AdWhcnSLJijrCvQ.svg"
-              className="absolute -bottom-60 -z-10  w-full w-full rounded-lg opacity-30"
-              alt=""
-            />
-          </div>
         </div>
       </section>
     </div>
