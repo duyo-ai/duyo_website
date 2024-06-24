@@ -6,8 +6,8 @@ import TextRotate from '../../components/farmui/RotateText'
 import DashboardDemo from './DashboardShowcase'
 const HeroMod = () => {
   return (
-    <div className="relative z-20 mb-20">
-      <section className=" relative mx-auto min-h-screen  max-w-full z-30">
+    <div className="relative z-50  mb-20">
+      <section className="relative z-50 mx-auto  min-h-screen max-w-full ">
         <div className="mx-auto  max-w-screen-xl gap-12 px-4 py-10 text-gray-600 md:px-8">
           <div className="leading-0 mx-auto max-w-6xl space-y-5  px-10 text-center lg:leading-5">
             <h1 className="font-geist  group mx-auto w-fit rounded-3xl border-[2px] border-white/5 bg-gradient-to-tr from-zinc-300/5 via-gray-400/5 to-transparent  px-5 py-2 text-sm text-gray-200">
@@ -27,7 +27,7 @@ const HeroMod = () => {
               doloremque laudantium, totam rem aperiam, eaque ipsa quae.
             </p>
             <Button
-              className="font-geist z-20 group flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-indigo-400 to-indigo-700 px-4 py-3 text-center text-lg text-xl tracking-tighter text-zinc-50 ring-2 ring-indigo-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-indigo-500/70"
+              className="font-geist group z-50 flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-indigo-400 to-indigo-700 px-4 py-3 text-center text-lg text-xl tracking-tighter text-zinc-50 ring-2 ring-indigo-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-indigo-500/70"
               href="/register"
             >
               Get Started{' '}
@@ -36,9 +36,8 @@ const HeroMod = () => {
           </div>
           <AnimatedLogoCloud />
         </div>
-        <div className='relative max-w-full'>
+        <div className="relative max-w-full">
           <DashboardDemo />
-
         </div>
       </section>
     </div>
