@@ -13,12 +13,11 @@ export const metadata: Metadata = {
 export default function Login() {
   return (
     <SlimLayout>
-      <div className="flex">
+      <div className="bg-inherit">
         <Link href="/" aria-label="Home">
-          <Logo className="h-10 w-auto" />
         </Link>
       </div>
-      <h2 className="mt-20 text-lg font-semibold text-gray-900">
+      <h2 className="mt-20 text-lg font-semibold text-gray-200">
         Sign in to your account
       </h2>
       <p className="mt-2 text-sm text-gray-700">
