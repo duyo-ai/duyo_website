@@ -269,7 +269,7 @@ function FeaturesDesktop() {
           </div>
           
           <div className={clsx(
-            "relative mt-0 overflow-hidden rounded-4xl bg-slate-200 px-14 py-16 xl:px-16 transition-opacity duration-700",
+            "relative mt-0 overflow-hidden rounded-4xl bg-transparent px-14 py-16 xl:px-16 transition-opacity duration-700 max-w-[1000px] mx-auto",
             currentStep === -1 ? "opacity-30" : "opacity-100"
           )}>
             <div className="relative">
@@ -310,7 +310,7 @@ export function SecondaryFeatures() {
           
           <div className="mr-auto max-w-2xl md:text-start px-4 sm:px-0">
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl tracking-tight text-gray-200">
-              <span className="bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent">
+              <span className="font-semibold  bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent">
                 간단한 3단계로{' '}
               </span>{' '}<br/>              콘텐츠 제작 완성.
             </h2>

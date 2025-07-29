@@ -24,7 +24,7 @@ const HeroMod = () => {
               <ChevronRight className="ml-1 sm:ml-2 inline h-3 w-3 sm:h-4 sm:w-4 duration-300 group-hover:translate-x-1" />
             </h1>
 
-            <h2 className="font-medium mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] bg-clip-text text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tighter text-transparent mb-6 sm:mb-10 leading-tight">
+            <h2 className="font-semibold mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] bg-clip-text text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tighter text-transparent mb-6 sm:mb-10 leading-tight">
               
               텍스트 한
               줄로 만드는 바이럴 숏폼{' '}<br/>

@@ -94,7 +94,7 @@ export function PrimaryFeatures() {
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none px-4 sm:px-0">
           <h2 className="text-2xl sm:text-3xl tracking-tighter font-sans text-white md:text-4xl lg:text-5xl relative">
             
-            <span className='font-medium bg-gradient-to-br from-purple-400 via-purple-100 to-purple-400 bg-clip-text text-transparent'>AI 기반</span> 동영상 제작 플랫폼
+            <span className='font-semibold bg-gradient-to-br from-purple-200 via-purple-100 to-purple-200 bg-clip-text text-transparent'>AI 기반</span> 동영상 제작 플랫폼
             
           </h2>
           <p className="mt-4 sm:mt-6 text-base sm:text-lg tracking-tight font-normal font-sans text-blue-100">
