@@ -83,7 +83,7 @@ export function Testimonials() {
     <section
       id="testimonials"
       aria-label="What our customers are saying"
-      className="relative bg-hero-gradient  z-1"
+      className="relative   z-1"
     >
       <div
         className="absolute inset-0 blur-xl h-full"
@@ -131,7 +131,7 @@ export function Testimonials() {
                         </div>
                         <div className="overflow-hidden rounded-full bg-slate-50">
                           <Image
-                            className="h-10 w-10 sm:h-14 sm:w-14 object-cover rounded-full"
+                            className="h-10 w-10 sm:h-14 sm:w-14 object-cover"
                             src={testimonial.author.image}
                             alt=""
                             width={56}

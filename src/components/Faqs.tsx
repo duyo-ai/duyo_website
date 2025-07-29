@@ -60,13 +60,13 @@ export function Faqs() {
     <section
       id="faq"
       aria-labelledby="faq-title"
-      className="relative bg-hero-gradient  overflow-hidden  py-20 sm:py-32"
+      className="relative   overflow-hidden  py-20 sm:py-32"
     >
       <div className="absolute top-0 z-[0] h-full w-screen bg-[#1A0540]/20  bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(106,20,255,0.3),rgba(255,255,255,0))]"></div>
 
    
       <Container className="relative">
-        <div className="mx-auto max-w-2xl lg:mx-0">
+        <div className="mx-auto max-w-3xl lg:mx-0">
           <h2
             id="faq-title"
             className="font-display text-3xl tracking-tight text-gray-200 sm:text-4xl"

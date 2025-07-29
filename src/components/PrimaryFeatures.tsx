@@ -78,7 +78,7 @@ export function PrimaryFeatures() {
     <section
       id="features"
       aria-label="AI 기반 동영상 제작 기능들"
-      className="relative overflow-hidden min-h-screen pt-12 sm:pt-20 pb-12 sm:pb-20"
+      className="relative overflow-hidden min-h-screen pt-12 sm:pt-36 pb-12 sm:pb-20"
       style={{
         background: 'radial-gradient(ellipse 50% 80% at 20% 40%, rgba(93, 52, 221, 0.1), transparent)'
       }}
@@ -92,8 +92,10 @@ export function PrimaryFeatures() {
       ></div>
       <Container className="relative z-30">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none px-4 sm:px-0">
-          <h2 className="text-2xl sm:text-3xl tracking-tighter font-sans text-white md:text-4xl lg:text-5xl">
-            <span className='font-medium bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent'>AI 기반</span> 동영상 제작 플랫폼
+          <h2 className="text-2xl sm:text-3xl tracking-tighter font-sans text-white md:text-4xl lg:text-5xl relative">
+            
+            <span className='font-medium bg-gradient-to-br from-purple-400 via-purple-100 to-purple-400 bg-clip-text text-transparent'>AI 기반</span> 동영상 제작 플랫폼
+            
           </h2>
           <p className="mt-4 sm:mt-6 text-base sm:text-lg tracking-tight font-normal font-sans text-blue-100">
             콘텐츠 제작부터 업로드까지, 모든 과정을 AI가 자동화합니다.

@@ -1,13 +1,23 @@
 'use client'
 
+import { useState } from 'react'
 import { BentoCard } from './bento-card'
 import { Container } from './Container'
 
 export function DarkBentoSection() {
+  const [globalMousePosition, setGlobalMousePosition] = useState({ x: 0, y: 0 })
+
+  const handleGlobalMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    setGlobalMousePosition({ x: e.clientX, y: e.clientY })
+  }
+
   return (
-    <div className="mx-2 mt-2 rounded-4xl py-16 sm:py-24 lg:py-32 bg-hero-gradient">
+    <div 
+      className="mx-2 mt-2 rounded-4xl py-16 sm:py-24 lg:py-32 bg-slate-800/25"
+      onMouseMove={handleGlobalMouseMove}
+    >
       <Container>
-        <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
+        <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none ">
           <h2 className="font-medium mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] bg-clip-text text-4xl tracking-tighter text-transparent md:text-6xl mb-10">
             누구나 쉽게 만드는{' '}<br/>
             <span className="bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent block mt-6">
@@ -33,6 +43,7 @@ export function DarkBentoSection() {
             }
             fade={['top']}
             className="max-lg:rounded-t-4xl lg:col-span-4 lg:rounded-tl-4xl"
+            globalMousePosition={globalMousePosition}
           />
           <BentoCard
             eyebrow="Content Creator"
@@ -48,6 +59,7 @@ export function DarkBentoSection() {
               </div>
             }
             className="lg:col-span-2 lg:rounded-tr-4xl"
+            globalMousePosition={globalMousePosition}
           />
           <BentoCard
             dark={true}
@@ -64,6 +76,7 @@ export function DarkBentoSection() {
               </div>
             }
             className="lg:col-span-2 lg:rounded-bl-4xl"
+            globalMousePosition={globalMousePosition}
           />
           <BentoCard
             dark={true}
@@ -78,6 +91,7 @@ export function DarkBentoSection() {
                 />
             }
             className="max-lg:rounded-b-4xl lg:col-span-4 lg:rounded-br-4xl"
+            globalMousePosition={globalMousePosition}
           />
         </div>
       </Container>

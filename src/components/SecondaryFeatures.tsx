@@ -295,7 +295,7 @@ export function SecondaryFeatures() {
     <section
       id="secondary-features"
       aria-label="Features for simplifying everyday business tasks"
-      className="bg-page-gradient bg-hero-gradient relative"
+      className="bg-page-gradient  relative"
     >
       <Container>
         <div className="py-8 sm:py-14 lg:py-20 xl:py-32">
