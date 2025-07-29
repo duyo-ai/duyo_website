@@ -6,53 +6,51 @@ import backgroundImage from '@/images/background-faqs.jpg'
 const faqs = [
   [
     {
-      question: 'Does TaxPal handle VAT?',
+      question: 'Cutple로 얼마나 빨리 영상을 만들 수 있나요?',
       answer:
-        'Well no, but if you move your company offshore you can probably ignore it.',
+        '키워드 입력부터 완성된 영상까지 평균 5분 이내에 제작할 수 있습니다. 대본 생성, 음성 변환, 이미지 배치까지 모든 과정이 자동화되어 있습니다.',
     },
     {
-      question: 'Can I pay for my subscription via purchase order?',
-      answer: 'Absolutely, we are happy to take your money in all forms.',
+      question: '어떤 플랫폼에 업로드할 수 있나요?',
+      answer: '유튜브 쇼츠, 인스타그램 릴스, 틱톡에 자동으로 동시 업로드가 가능합니다.',
     },
     {
-      question: 'How do I apply for a job at TaxPal?',
+      question: '편집 경험이 없어도 사용할 수 있나요?',
       answer:
-        'We only hire our customers, so subscribe for a minimum of 6 months and then let’s talk.',
+        '네, 전혀 문제없습니다. 편집 지식이나 기술적 배경 없이도 아이디어만 있으면 바로 시작할 수 있도록 설계되었습니다.',
     },
   ],
   [
     {
-      question: 'What was that testimonial about tax fraud all about?',
+      question: 'AI 음성은 어떤 종류를 지원하나요?',
       answer:
-        'TaxPal is just a software application, ultimately your books are your responsibility.',
+        'Typecast, 볼리, ElevenLabs 등 다양한 AI 음성 플랫폼을 통합하여 감정과 톤에 맞는 자연스러운 음성을 제공합니다.',
     },
     {
-      question:
-        'TaxPal sounds horrible but why do I still feel compelled to purchase?',
+      question: '생성된 영상의 품질은 어느 정도인가요?',
       answer:
-        'This is the power of excellent visual design. You just can’t resist it, no matter how poorly it actually functions.',
+        '실제 바이럴 포맷 구조에 기반한 고품질 대본과 전문적인 편집 효과로 바로 업로드 가능한 수준의 영상을 생성합니다.',
     },
     {
-      question:
-        'I found other companies called TaxPal, are you sure you can use this name?',
+      question: '저작권 문제는 없나요?',
       answer:
-        'Honestly not sure at all. We haven’t actually incorporated or anything, we just thought it sounded cool and made this website.',
+        'AI로 생성되는 모든 콘텐츠(대본, 이미지, 음성)는 저작권 걱정 없이 상업적으로도 자유롭게 사용할 수 있습니다.',
     },
   ],
   [
     {
-      question: 'How do you generate reports?',
+      question: '월 몇 개의 영상을 만들 수 있나요?',
       answer:
-        'You just tell us what data you need a report for, and we get our kids to create beautiful charts for you using only the finest crayons.',
+        '요금제에 따라 다르지만, 기본 플랜도 월 50개 이상의 영상을 제작할 수 있으며, 무제한 플랜도 제공합니다.',
     },
     {
-      question: 'Can we expect more inventory features?',
-      answer: 'In life it’s really better to never expect anything at all.',
+      question: '다른 영상 편집 툴과 연동이 가능한가요?',
+      answer: '생성된 영상은 모든 주요 편집 프로그램에서 추가 편집이 가능한 형태로 다운로드됩니다.',
     },
     {
-      question: 'I lost my password, how do I get into my account?',
+      question: '계정 관련 문제가 생기면 어떻게 하나요?',
       answer:
-        'Send us an email and we will send you a copy of our latest password spreadsheet so you can find your information.',
+        '24시간 고객지원 채팅을 통해 즉시 도움을 받을 수 있으며, 이메일로도 문의 가능합니다.',
     },
   ],
 ]
@@ -73,11 +71,11 @@ export function Faqs() {
             id="faq-title"
             className="font-display text-3xl tracking-tight text-gray-200 sm:text-4xl"
           >
-            Frequently asked questions
+            자주 묻는 질문
           </h2>
           <p className="mt-4 text-lg tracking-tight text-gray-400">
-            If you can’t find what you’re looking for, email our support team
-            and if you’re lucky someone will get back to you.
+            궁금한 점이 해결되지 않으셨다면 고객지원팀에 문의해 주세요.
+            빠른 시간 내에 답변드리겠습니다.
           </p>
         </div>
         <ul

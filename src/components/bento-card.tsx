@@ -30,10 +30,10 @@ export function BentoCard({
       className={clsx(
         className,
         'group relative flex flex-col overflow-hidden rounded-lg',
-        'bg-transparent transform-gpu [border:1px_solid_rgba(255,255,255,.1)] [box-shadow:0_-20px_80px_-20px_#8686f01f_inset] shadow-sm ring-white/15',
+        'bg-transparent [border:1px_solid_rgba(255,255,255,.1)] [box-shadow:0_-20px_80px_-20px_#8686f01f_inset] shadow-sm ring-white/15',
       )}
     >
-      <div className="relative h-[29rem] shrink-0 group-hover:scale-105 transition-transform duration-300">
+      <div className="relative h-[29rem] shrink-0 overflow-hidden will-change-transform group-hover:scale-105 transition-transform duration-300">
         {graphic}
         {fade.includes('top') && (
           <div className="absolute inset-0 bg-gradient-to-b from-gray-800 from-[-25%] to-50% opacity-25" />

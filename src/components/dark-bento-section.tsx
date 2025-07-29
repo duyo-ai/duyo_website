@@ -25,7 +25,11 @@ export function DarkBentoSection() {
             title="초보 유튜버"
             description="직접 영상 편집이 부담스러운 초보 유튜버들을 위해 설계되었습니다. 복잡한 편집 툴 없이도 전문적인 영상을 만들 수 있습니다."
             graphic={
-              <div className="h-80 bg-white bg-[size:851px_344px] bg-no-repeat " />
+              <img 
+                  src="/example.png" 
+                  alt="얼굴 없는 크리에이터" 
+                  className="w-full h-full object-cover"
+                />
             }
             fade={['top']}
             className="max-lg:rounded-t-4xl lg:col-span-4 lg:rounded-tl-4xl"
@@ -67,12 +71,11 @@ export function DarkBentoSection() {
             title="마케팅 에이전시 & 셀러"
             description="바이럴 영상 제작을 희망하는 마케팅 에이전시와 텍스트 기반 광고 콘텐츠가 필요한 셀러들을 지원합니다."
             graphic={
-              <div className="h-80 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
-                <div className="text-white text-center">
-                  <div className="text-6xl mb-4">🚀</div>
-                  <div className="text-xl font-semibold">마케터</div>
-                </div>
-              </div>
+              <img 
+                  src="/example.png" 
+                  alt="얼굴 없는 크리에이터" 
+                  className="w-full h-full object-cover"
+                />
             }
             className="max-lg:rounded-b-4xl lg:col-span-4 lg:rounded-br-4xl"
           />

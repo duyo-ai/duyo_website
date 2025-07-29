@@ -6,22 +6,22 @@ import { NavLink } from '@/components/NavLink'
 
 export function Footer() {
   return (
-    <footer className="relative bg-hero-gradient">
+    <footer className="relative bg-hero-gradient rounded-xs">
       <div className="absolute top-0 z-[0] h-full w-screen bg-[#1A0540]/20  bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(106,20,255,0.3),rgba(255,255,255,0))]"></div>
 
       <Container>
         <div className="py-8 sm:py-12 lg:py-16">
-          <nav className="mt-6 sm:mt-10 text-sm" aria-label="quick links">
+          <nav className="mt-6 sm:mt-10 text-sm" aria-label="빠른 링크">
             <div className="-my-1 flex justify-center gap-x-4 sm:gap-x-6 flex-wrap">
-              <NavLink href="#features">Features</NavLink>
-              <NavLink href="#testimonials">Testimonials</NavLink>
-              <NavLink href="#pricing">Pricing</NavLink>
+              <NavLink href="#features">주요 기능</NavLink>
+              <NavLink href="#testimonials">고객 후기</NavLink>
+              <NavLink href="#pricing">요금제</NavLink>
             </div>
           </nav>
         </div>
-        <div className="flex flex-col items-center border-t border-slate-400/10 py-6 sm:py-10 sm:flex-row-reverse sm:justify-between gap-4 sm:gap-0">
+        <div className="flex flex-col items-center border-t border-slate-400/10 py-6 sm:py-10 sm:flex-row-reverse sm:justify-between gap-4 sm:gap-0 rounded-xs">
           <div className="flex gap-x-4 sm:gap-x-6">
-            <Link href="#" className="group" aria-label="Curves on X">
+            <Link href="#" className="group rounded-xs" aria-label="Cutple X(트위터)">
               <svg
                 className="h-5 w-5 sm:h-6 sm:w-6 fill-slate-500 group-hover:fill-slate-700"
                 aria-hidden="true"
@@ -30,7 +30,7 @@ export function Footer() {
                 <path d="M13.3174 10.7749L19.1457 4H17.7646L12.7039 9.88256L8.66193 4H4L10.1122 12.8955L4 20H5.38119L10.7254 13.7878L14.994 20H19.656L13.3171 10.7749H13.3174ZM11.4257 12.9738L10.8064 12.0881L5.87886 5.03974H8.00029L11.9769 10.728L12.5962 11.6137L17.7652 19.0075H15.6438L11.4257 12.9742V12.9738Z" />
               </svg>
             </Link>
-            <Link href="#" className="group" aria-label="Curves on GitHub">
+            <Link href="#" className="group rounded-xs" aria-label="Cutple GitHub">
               <svg
                 className="h-5 w-5 sm:h-6 sm:w-6 fill-slate-500 group-hover:fill-slate-700"
                 aria-hidden="true"
@@ -41,8 +41,7 @@ export function Footer() {
             </Link>
           </div>
           <p className="text-xs sm:text-sm text-slate-500 text-center sm:text-left">
-            Copyright &copy; {new Date().getFullYear()} Curves. All rights
-            reserved.
+            Copyright &copy; {new Date().getFullYear()} Cutple. 모든 권리 보유.
           </p>
         </div>
       </Container>

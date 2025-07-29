@@ -41,7 +41,7 @@ const HeroMod = () => {
               className="font-geist group z-50 flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-indigo-400 to-indigo-700 px-6 py-3 sm:px-8 sm:py-4 text-center text-base sm:text-lg lg:text-xl tracking-tighter text-zinc-50 ring-2 ring-indigo-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-indigo-500/70 w-fit mx-auto"
               href="/register"
             >
-              Get Started{' '}
+              지금 시작하기{' '}
               <ChevronRight className="inline-flex items-center justify-center transition-all duration-500 group-hover:translate-x-1 h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
                     </div>

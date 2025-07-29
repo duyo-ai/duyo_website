@@ -5,9 +5,9 @@ import Image, { type ImageProps } from 'next/image'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import screenshotContacts from '@/images/screenshots/contacts.png'
-import screenshotInventory from '@/images/screenshots/inventory.png'
-import screenshotProfitLoss from '@/images/screenshots/profit-loss.png'
+import screenshotContacts from '@/images/usage/text-adjust.gif'
+import screenshotInventory from '@/images/usage/script-generation.gif'
+import screenshotProfitLoss from '@/images/usage/original-story.gif'
 
 interface Feature {
   name: React.ReactNode
@@ -126,7 +126,7 @@ function Feature({
         <div
           className={clsx(
             'w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-500 flex-shrink-0',
-                            isActive ? 'bg-white/10 border border-white/20 backdrop-blur-md shadow-lg' : 'bg-white/5 border border-white/10',
+                            isActive ? 'bg-white/10 ring-2 ring-gradient-to-r ring-purple-400/40 backdrop-blur-md shadow-lg shadow-purple-500/20' : 'bg-white/5 ring-1 ring-purple-300/20',
           )}
         >
           <span className="text-white font-semibold text-lg">
@@ -171,7 +171,7 @@ function FeaturesMobile() {
       {features.map((feature, index) => (
         <div key={feature.summary}>
           <div className="flex items-center space-x-4 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white font-bold text-sm shadow-lg">
+            <div className="w-8 h-8 rounded-lg bg-white/10 ring-2 ring-purple-400/40 backdrop-blur-md flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-purple-500/20">
               {index + 1}
             </div>
             <div className="h-px bg-gray-600 flex-1" />

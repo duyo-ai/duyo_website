@@ -45,7 +45,7 @@ export function HeroSection() {
             className="group flex items-center gap-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-purple-500/25 transition-all hover:scale-105 hover:shadow-purple-500/40"
             href="/register"
           >
-            Get Started
+            지금 시작하기
             <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
           </Button>
           

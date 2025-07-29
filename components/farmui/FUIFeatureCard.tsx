@@ -20,8 +20,8 @@ export default function FUIFeatureSectionWithCards() {
           />
         </svg>
       ),
-      title: 'Fast Refresh',
-      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius.',
+      title: '빠른 생성',
+      desc: '키워드 입력 후 5분 이내에 완성된 영상을 제작할 수 있습니다. 대본부터 편집까지 모든 과정이 자동화되어 있습니다.',
     },
     {
       icon: (
@@ -40,8 +40,8 @@ export default function FUIFeatureSectionWithCards() {
           />
         </svg>
       ),
-      title: 'Analytics',
-      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius.',
+      title: '성과 분석',
+      desc: '생성된 영상의 조회수, 참여도, 댓글 등을 실시간으로 분석하여 더 나은 콘텐츠 제작을 도와드립니다.',
     },
     {
       icon: (
@@ -60,8 +60,8 @@ export default function FUIFeatureSectionWithCards() {
           />
         </svg>
       ),
-      title: 'Datacenter security',
-      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius.',
+      title: '안전한 보안',
+      desc: '엔터프라이즈급 보안 시스템으로 개인정보와 콘텐츠를 안전하게 보호합니다. 모든 데이터는 암호화되어 저장됩니다.',
     },
     {
       icon: (
@@ -80,8 +80,8 @@ export default function FUIFeatureSectionWithCards() {
           />
         </svg>
       ),
-      title: 'Build on your terms',
-      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius.',
+      title: '맞춤형 제작',
+      desc: '브랜드 톤앤매너와 개인의 스타일에 맞춘 영상을 제작합니다. 템플릿부터 완전 커스텀까지 자유롭게 선택하세요.',
     },
     {
       icon: (
@@ -100,8 +100,8 @@ export default function FUIFeatureSectionWithCards() {
           />
         </svg>
       ),
-      title: 'Safe to use',
-      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius.',
+      title: '검증된 안전성',
+      desc: 'AI 생성 콘텐츠의 저작권 문제 없이 안전하게 상업적 이용이 가능합니다. 모든 콘텐츠가 원본성을 보장합니다.',
     },
     {
       icon: (
@@ -120,23 +120,23 @@ export default function FUIFeatureSectionWithCards() {
           />
         </svg>
       ),
-      title: 'Flexible',
-      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius.',
+      title: '유연한 활용',
+      desc: '다양한 플랫폼과 포맷에 맞는 영상을 동시에 생성합니다. 유튜브, 인스타그램, 틱톡 등 어디든 활용 가능합니다.',
     },
   ]
 
   return (
-    <section className="relative py-14 z-20 ">
+    <section className="relative py-14 z-20 rounded-xs">
       <img
         src="https://tailwindcss.com/_next/static/media/docs@30.8b9a76a2.avif"
         alt=""
-        className="z-2 absolute -top-0 left-10"
+        className="z-2 absolute -top-0 left-10 rounded-xs"
       />
       <div className="mx-auto max-w-screen-xl px-4 text-gray-400 md:px-8">
         <div className="relative mx-auto max-w-2xl sm:text-center">
           <div className="relative z-10">
             <h3 className="font-geist mt-4 text-3xl font-normal tracking-tighter text-gray-200 sm:text-4xl md:text-5xl">
-              {/* Let’s help power your SaaS */}
+              {/* Let's help power your SaaS */}
             </h3>
             {/* <p className="mt-3 font-geist text-gray-200">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
@@ -144,7 +144,7 @@ export default function FUIFeatureSectionWithCards() {
             </p> */}
           </div>
           <div
-            className="absolute inset-0 mx-auto h-44 max-w-xs blur-[118px]"
+            className="absolute inset-0 mx-auto h-44 max-w-xs blur-[118px] rounded-xs"
             style={{
               background:
                 'linear-gradient(152.92deg, rgba(192, 132, 252, 0.2) 4.54%, rgba(232, 121, 249, 0.26) 34.2%, rgba(192, 132, 252, 0.1) 77.55%)',
@@ -158,15 +158,17 @@ export default function FUIFeatureSectionWithCards() {
               <GlareCard key={idx}>
                 <li
                   key={idx}
-                  className="z-20 transform-gpu space-y-3 rounded-xl border  border-white/10 bg-transparent/20 p-4 [border:1px_solid_rgba(255,255,255,.1)] [box-shadow:0_-20px_80px_-20px_#8686f01f_inset]"
+                  className="group z-20 transform-gpu space-y-4 rounded-xl bg-gradient-to-br from-slate-900/40 to-slate-800/30 border border-slate-700/50 p-6 transition-all duration-300 hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-1 backdrop-blur-sm"
                 >
-                  <div className="w-fit transform-gpu rounded-full p-4 text-purple-600 dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset]">
-                    {item.icon}
+                  <div className="w-fit p-3 rounded-lg bg-gradient-to-br from-purple-500/20 to-blue-500/20 border border-purple-400/30 group-hover:border-purple-400/50 transition-all duration-300 group-hover:scale-105">
+                    <div className="text-purple-300 group-hover:text-purple-200 transition-colors duration-300">
+                      {item.icon}
+                    </div>
                   </div>
-                  <h4 className="font-geist text-lg font-bold tracking-tighter text-gray-300">
+                  <h4 className="font-geist text-lg font-semibold tracking-tight text-slate-200 group-hover:text-white transition-colors duration-300">
                     {item.title}
                   </h4>
-                  <p className="text-gray-500">{item.desc}</p>
+                  <p className="text-slate-400 group-hover:text-slate-300 transition-colors duration-300 leading-relaxed">{item.desc}</p>
                 </li>
               </GlareCard>
             ))}

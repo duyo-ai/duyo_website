@@ -177,7 +177,7 @@ export function PrimaryFeatures() {
                   </div>
                   <div className="mt-6 sm:mt-10 w-full overflow-visible shadow-xl shadow-blue-900/20 sm:w-auto lg:mt-0 px-4 sm:px-0">
                     <Image
-                      className="w-full lg:scale-[1.03] lg:origin-left rounded-lg sm:rounded-xl"
+                      className="lg:min-w-[1200px] lg:origin-left lg:-translate-y-5 rounded-lg sm:rounded-xl"
                       src={feature.image}
                       alt=""
                       priority

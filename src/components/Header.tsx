@@ -48,7 +48,7 @@ export function Header() {
               href="/register"
               className="inline-flex items-center justify-center rounded-3xl bg-purple-200/10 backdrop-blur-md border border-white/10 px-6 py-2 text-sm font-semibold text-white hover:bg-white/20 hover:border-white/30 transition-all shadow-lg"
             >
-              Get Started
+              지금 시작하기
             </Link>
           </div>
 
@@ -58,7 +58,7 @@ export function Header() {
               href="/register"
               className="inline-flex items-center justify-center rounded-2xl bg-purple-200/10 backdrop-blur-md border border-white/10 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/20 hover:border-white/30 transition-all shadow-lg"
             >
-              Get Started
+              지금 시작하기
             </Link>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
