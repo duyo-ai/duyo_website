@@ -37,7 +37,7 @@ export function DarkBentoSection() {
             graphic={
               <div className="h-full flex items-center justify-center overflow-hidden ">
                 <img 
-                  src="/얼굴없는크리에이터.png" 
+                  src="/faceless-creator.png" 
                   alt="얼굴 없는 크리에이터" 
                   className="w-full h-full object-cover"
                 />

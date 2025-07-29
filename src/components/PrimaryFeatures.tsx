@@ -7,13 +7,13 @@ import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
 import backgroundImage from '@/images/background-features.jpg'
-import usageScriptGeneration from '@/images/usage/대본_생성1.gif'
-import usageAiVoice from '@/images/usage/AI 목소리.gif'
-import usageBackgroundImage from '@/images/usage/배경 이미지 추가.gif'
-import usageDragDrop from '@/images/usage/드래그드롭1.gif'
-import usageTextAdjust from '@/images/usage/텍스트 조정1.gif'
-import usageOriginalStory from '@/images/usage/원본 썰 기반.gif'
-import usageSpacing from '@/images/usage/문장 간격 조절1.gif'
+import usageScriptGeneration from '@/images/usage/script-generation.gif'
+import usageAiVoice from '@/images/usage/ai-voice.gif'
+import usageBackgroundImage from '@/images/usage/background-image.gif'
+import usageDragDrop from '@/images/usage/drag-drop.gif'
+import usageTextAdjust from '@/images/usage/text-adjust.gif'
+import usageOriginalStory from '@/images/usage/original-story.gif'
+import usageSpacing from '@/images/usage/spacing-adjust.gif'
 
 const features = [
   {
