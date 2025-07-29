@@ -12,7 +12,7 @@ const HeroMod = () => {
       <section 
         className="min-h-screen w-full relative mb-0"
         style={{
-          background: 'radial-gradient(ellipse 50% 80% at 20% 40%, rgba(93, 52, 221, 0.1), transparent), radial-gradient(ellipse 50% 80% at 50% 80%, rgba(0, 160, 255, 0.3), transparent)'
+          background: 'radial-gradient(ellipse 50% 80% at 20% 40%, rgba(93, 52, 221, 0.1), transparent), radial-gradient(ellipse 50% 80% at 50% 80%, rgba(0, 160, 255, 0.2), transparent)'
         }}
       >
         <GridBackground />
