@@ -1,8 +1,7 @@
 'use client'
 
-import { useId } from 'react'
+import { useId, useEffect, useState, useRef } from 'react'
 import Image, { type ImageProps } from 'next/image'
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
@@ -20,12 +19,11 @@ interface Feature {
 
 const features: Array<Feature> = [
   {
-    name: 'Reporting',
-    summary: 'Stay on top of things with always up-to-date reporting features.',
-    description:
-      'We talked about reporting in the section above but we needed three items here, so mentioning it one more time for posterity.',
+    name: '키워드 입력',
+    summary: '원하는 콘텐츠의 키워드를 간단히 입력하세요.',
+    description: '',
     image: screenshotProfitLoss,
-    icon: function ReportingIcon() {
+    icon: function KeywordIcon() {
       let id = useId()
       return (
         <>
@@ -43,7 +41,7 @@ const features: Array<Feature> = [
             </linearGradient>
           </defs>
           <path
-            d="m30 15-4 5-4-11-4 18-4-11-4 7-4-5"
+            d="M8 12h8m-8 6h8m2-6h8m-8 6h8"
             stroke={`url(#${id})`}
             strokeWidth={2}
             strokeLinecap="round"
@@ -54,27 +52,25 @@ const features: Array<Feature> = [
     },
   },
   {
-    name: 'Inventory',
-    summary:
-      'Never lose track of what’s in stock with accurate inventory tracking.',
-    description:
-      'We don’t offer this as part of our software but that statement is inarguably true. Accurate inventory tracking would help you for sure.',
+    name: '템플릿 선택',
+    summary: '음성, 이미지를 포함한 다양한 템플릿 중 선택하세요.',
+    description: '',
     image: screenshotInventory,
-    icon: function InventoryIcon() {
+    icon: function TemplateIcon() {
       return (
         <>
           <path
             opacity=".5"
-            d="M8 17a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2Z"
+            d="M8 10a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-4Z"
             fill="#fff"
           />
           <path
             opacity=".3"
-            d="M8 24a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2Z"
+            d="M8 18a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-4Z"
             fill="#fff"
           />
           <path
-            d="M8 10a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2Z"
+            d="M8 26a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-2Z"
             fill="#fff"
           />
         </>
@@ -82,23 +78,24 @@ const features: Array<Feature> = [
     },
   },
   {
-    name: 'Contacts',
-    summary:
-      'Organize all of your contacts, service providers, and invoices in one place.',
-    description:
-      'This also isn’t actually a feature, it’s just some friendly advice. We definitely recommend that you do this, you’ll feel really organized and professional.',
+    name: '90% 초안에서 최종 수정',
+    summary: '거의 완성된 초안을 최종 검토하고 세부 수정하세요.',
+    description: '',
     image: screenshotContacts,
-    icon: function ContactsIcon() {
+    icon: function EditIcon() {
       return (
         <>
           <path
             opacity=".5"
-            d="M25.778 25.778c.39.39 1.027.393 1.384-.028A11.952 11.952 0 0 0 30 18c0-6.627-5.373-12-12-12S6 11.373 6 18c0 2.954 1.067 5.659 2.838 7.75.357.421.993.419 1.384.028.39-.39.386-1.02.036-1.448A9.959 9.959 0 0 1 8 18c0-5.523 4.477-10 10-10s10 4.477 10 10a9.959 9.959 0 0 1-2.258 6.33c-.35.427-.354 1.058.036 1.448Z"
+            d="M20 20L8 8l12 12Z"
             fill="#fff"
           />
           <path
-            d="M12 28.395V28a6 6 0 0 1 12 0v.395A11.945 11.945 0 0 1 18 30c-2.186 0-4.235-.584-6-1.605ZM21 16.5c0-1.933-.5-3.5-3-3.5s-3 1.567-3 3.5 1.343 3.5 3 3.5 3-1.567 3-3.5Z"
-            fill="#fff"
+            d="m22 10-8 8-4-4 8-8 4 4ZM8 28h16"
+            stroke="#fff"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </>
       )
@@ -117,40 +114,68 @@ function Feature({
 }) {
   return (
     <div
-      className={clsx(className, !isActive && 'opacity-75 hover:opacity-100')}
+      className={clsx(
+        className, 
+        'transition-all duration-700 ease-in-out',
+        !isActive && 'opacity-50 scale-95'
+      )}
       {...props}
     >
-      <div
-        className={clsx(
-          'w-9 rounded-lg',
-          isActive ? 'bg-blue-600' : 'bg-slate-500',
-        )}
-      >
-        <svg aria-hidden="true" className="h-9 w-9" fill="none">
-          <feature.icon />
-        </svg>
+      <div className="flex items-start gap-4">
+        {/* 좌측 원형 숫자 배지 */}
+        <div
+          className={clsx(
+            'w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-500 flex-shrink-0',
+                            isActive ? 'bg-white/10 border border-white/20 backdrop-blur-md shadow-lg' : 'bg-white/5 border border-white/10',
+          )}
+        >
+          <span className="text-white font-semibold text-lg">
+            {features.findIndex(f => f === feature) + 1}
+          </span>
+        </div>
+
+        {/* 우측 텍스트 영역 */}
+        <div className="flex-1 min-w-0">
+          <h3
+            className={clsx(
+              'text-xl font-bold transition-colors duration-500 leading-tight',
+              isActive ? 'text-indigo-400' : 'text-gray-400',
+            )}
+          >
+            {feature.name}
+          </h3>
+          <p className={clsx(
+            'mt-2 font-display text-base transition-colors duration-500 leading-relaxed',
+            isActive ? 'text-gray-100' : 'text-gray-400'
+          )}>
+            {feature.summary}
+          </p>
+        </div>
       </div>
-      <h3
-        className={clsx(
-          'mt-6 text-sm font-medium',
-          isActive ? 'text-blue-600' : 'text-gray-300',
-        )}
-      >
-        {feature.name}
-      </h3>
-      <p className="mt-2 font-display text-xl text-gray-200">
-        {feature.summary}
-      </p>
-      <p className="mt-4 text-sm text-gray-300">{feature.description}</p>
+
+      {/* 연결선 (마지막 요소가 아닐 때만) */}
+      {features.findIndex(f => f === feature) < features.length - 1 && (
+        <div className="flex justify-start mt-4 mb-2">
+          <div className="ml-6 w-px h-8 bg-gradient-to-b from-indigo-500/30 to-transparent" />
+        </div>
+      )}
     </div>
   )
 }
 
+
+
 function FeaturesMobile() {
   return (
     <div className="-mx-4 mt-20 flex flex-col gap-y-10 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
-      {features.map((feature) => (
+      {features.map((feature, index) => (
         <div key={feature.summary}>
+          <div className="flex items-center space-x-4 mb-4">
+            <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white font-bold text-sm shadow-lg">
+              {index + 1}
+            </div>
+            <div className="h-px bg-gray-600 flex-1" />
+          </div>
           <Feature feature={feature} className="mx-auto max-w-2xl" isActive />
           <div className="relative mt-10 pb-10">
             <div className="absolute -inset-x-4 bottom-0 top-8 bg-slate-200 sm:-inset-x-6" />
@@ -170,57 +195,98 @@ function FeaturesMobile() {
 }
 
 function FeaturesDesktop() {
-  return (
-    <TabGroup className="hidden lg:mt-20 lg:block">
-      {({ selectedIndex }) => (
-        <>
-          <TabList className="grid grid-cols-3 gap-x-8">
+  const [currentStep, setCurrentStep] = useState(0)
+  const [isSticky, setIsSticky] = useState(false)
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current || !contentRef.current) return
+
+      const sectionRect = sectionRef.current.getBoundingClientRect()
+      const windowHeight = window.innerHeight
+      
+      // 섹션 상단이 뷰포트 상단에 닿았을 때 sticky 활성화
+      if (sectionRect.top <= 40) { // top-10 = 2.5rem = 40px
+        setIsSticky(true)
+      } else {
+        setIsSticky(false)
+      }
+
+      // 섹션이 화면에 보이는 동안에만 작동
+      if (sectionRect.top <= windowHeight * 0.3 && sectionRect.bottom >= windowHeight * 0.7) {
+        
+        // 🔧 전체 스크롤 가능 거리 계산 (섹션 높이 - 뷰포트 높이)
+        const totalScrollableHeight = sectionRef.current.offsetHeight - windowHeight
+        
+        // 현재 스크롤된 거리 (0~100% 비율로 정규화)
+        const scrolled = Math.max(0, windowHeight * 0.3 - sectionRect.top)
+        const scrollProgress = Math.min(scrolled / totalScrollableHeight, 1)
+        
+        // 🎯 3단계를 더 짧게, 빠져나가기 구간 확보
+        // 0~30% = 1단계, 30~60% = 2단계, 60~80% = 3단계, 80~100% = 빠져나가기
+        let currentStep
+        if (scrollProgress < 0.3) {
+          currentStep = 0  // 1단계 (30% 구간)
+        } else if (scrollProgress < 0.6) {
+          currentStep = 1  // 2단계 (30% 구간)
+        } else if (scrollProgress < 0.8) {
+          currentStep = 2  // 3단계 (20% 구간 - 더 짧게!)
+        } else {
+          currentStep = -1  // 80% 이후 빠져나가기 - 모든 단계 비활성화
+        }
+        
+        setCurrentStep(currentStep)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll() // 초기 상태 설정
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+      return (
+      <div ref={sectionRef} className="hidden lg:block lg:mt-20" style={{ height: '600vh' }}>
+      <div 
+        ref={contentRef}
+        className={clsx(
+          "pt-0",
+          isSticky ? "sticky top-10" : "relative"
+        )}
+      >
+        <div className="w-full">
+          <div className="grid grid-cols-3 gap-x-8">
             {features.map((feature, featureIndex) => (
               <Feature
                 key={feature.summary}
-                feature={{
-                  ...feature,
-                  name: (
-                    <Tab className="ui-not-focus-visible:outline-none">
-                      <span className="absolute inset-0" />
-                      {feature.name}
-                    </Tab>
-                  ),
-                }}
-                isActive={featureIndex === selectedIndex}
+                feature={feature}
+                isActive={featureIndex === currentStep}
                 className="relative"
               />
             ))}
-          </TabList>
-          <TabPanels className="relative mt-20 overflow-hidden rounded-4xl bg-slate-200 px-14 py-16 xl:px-16">
-            <div className="-mx-5 flex">
-              {features.map((feature, featureIndex) => (
-                <TabPanel
-                  static
-                  key={feature.summary}
-                  className={clsx(
-                    'px-5 transition duration-500 ease-in-out ui-not-focus-visible:outline-none',
-                    featureIndex !== selectedIndex && 'opacity-60',
-                  )}
-                  style={{ transform: `translateX(-${selectedIndex * 100}%)` }}
-                  aria-hidden={featureIndex !== selectedIndex}
-                >
-                  <div className="w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-gray-200/5 ring-1 ring-slate-500/10">
-                    <Image
-                      className="w-full"
-                      src={feature.image}
-                      alt=""
-                      sizes="52.75rem"
-                    />
-                  </div>
-                </TabPanel>
-              ))}
+          </div>
+          
+          <div className={clsx(
+            "relative mt-0 overflow-hidden rounded-4xl bg-slate-200 px-14 py-16 xl:px-16 transition-opacity duration-700",
+            currentStep === -1 ? "opacity-30" : "opacity-100"
+          )}>
+            <div className="relative">
+              <div className="w-full overflow-hidden rounded-xl bg-white shadow-lg shadow-gray-200/5 ring-1 ring-slate-500/10">
+                <Image
+                  className="w-full transition-opacity duration-700 rounded-2xl"
+                  src={features[Math.max(0, currentStep)].image}
+                  alt=""
+                  sizes="52.75rem"
+                />
+              </div>
             </div>
             <div className="pointer-events-none absolute inset-0 rounded-4xl ring-1 ring-inset ring-gray-200/10" />
-          </TabPanels>
-        </>
-      )}
-    </TabGroup>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -229,40 +295,33 @@ export function SecondaryFeatures() {
     <section
       id="secondary-features"
       aria-label="Features for simplifying everyday business tasks"
-      className="bg-page-gradient bg-hero-gradient relative pb-14 pt-20 sm:pb-20 sm:pt-32 lg:pb-32"
+      className="bg-page-gradient bg-hero-gradient relative"
     >
       <Container>
-        <div className="-z-1 absolute inset-x-0 -top-0 h-[600px]  w-full bg-transparent bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)]  bg-[size:6rem_4rem] opacity-10 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
-        <div
-          className="h-fukl absolute inset-0  rotate-180 blur-xl"
-          style={{
-            background:
-              'linear-gradient(143.6deg, rgba(52, 103, 235, 0) 20.79%, rgba(120,119,198, 0.26) 40.92%, rgba(120,119,198, 0) 70.35%)',
-          }}
-        ></div>
-        {/* <img
-          className="absolute inset-x-0 -top-0 opacity-75 "
-          src={
-            "https://pipe.com/_next/image?url=%2Fassets%2Fimg%2Fhero-left.png&w=384&q=75"
-          }
-          width={1000}
-          height={1000}
-          alt="back bg"
-        /> */}
-        <div className="mr-auto max-w-2xl md:text-start">
-          <h2 className="font-display  text-4xl tracking-tight text-gray-200 sm:text-7xl">
-            <span className="bg-gradient-to-br from-indigo-400 via-indigo-300 to-indigo-700 bg-clip-text text-transparent">
-              Simplify{' '}
-            </span>{' '}
-            everyday business tasks.
-          </h2>
-          <p className="mt-4 text-lg tracking-tight text-gray-100">
-            Because you’d probably be a little confused if we suggested you
-            complicate your everyday business tasks instead.
-          </p>
+        <div className="py-8 sm:py-14 lg:py-20 xl:py-32">
+          <div className="-z-1 absolute inset-x-0 -top-0 h-[600px]  w-full bg-transparent bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)]  bg-[size:6rem_4rem] opacity-10 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+          <div
+            className="h-full absolute inset-0 rotate-180 blur-lg"
+            style={{
+              background:
+                'linear-gradient(143.6deg, rgba(52, 103, 235, 0) 15%, rgba(111,79,249, 0.35) 40%, rgba(111,79,249, 0) 50%)',
+            }}
+          ></div>
+          
+          <div className="mr-auto max-w-2xl md:text-start px-4 sm:px-0">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl tracking-tight text-gray-200">
+              <span className="bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent">
+                간단한 3단계로{' '}
+              </span>{' '}<br/>              콘텐츠 제작 완성.
+            </h2>
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg tracking-tight text-gray-100">
+              키워드만 입력하면 AI가 템플릿 추천부터 최종 완성까지 
+              모든 과정을 도와드립니다.
+            </p>
+          </div>
+          <FeaturesMobile />
+          <FeaturesDesktop />
         </div>
-        <FeaturesMobile />
-        <FeaturesDesktop />
       </Container>
     </section>
   )

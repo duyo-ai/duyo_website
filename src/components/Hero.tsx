@@ -16,7 +16,7 @@ export function Hero() {
       <Container className="relative min-h-screen pb-10 pt-20 text-left lg:pt-30">
         <h1 className="mr-auto max-w-3xl font-display text-5xl  font-normal tracking-tighter text-gray-100 sm:text-7xl">
           Accounting{' '}
-          <span className="relative whitespace-nowrap text-indigo-500">
+                          <span className="relative whitespace-nowrap text-[#6A14FF]">
             <span className="relative">made simple</span>
           </span>{' '}
           for small businesses and rising startups
@@ -27,14 +27,14 @@ export function Hero() {
         </p>
         <div className="mt-10 flex justify-start gap-x-6">
           <Button
-            className="font-geist flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-indigo-400 to-indigo-700 px-4 py-3 text-center text-lg text-xl tracking-tighter text-zinc-50 ring-2 ring-indigo-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-indigo-500/70"
+            className="font-geist flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-[#8B44FF] to-[#4A0FBF] px-4 py-3 text-center text-lg text-xl tracking-tighter text-zinc-50 ring-2 ring-[#6A14FF]/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-[#6A14FF]/70"
             href="/register"
           >
             Get Started with Click
           </Button>
         </div>
         <div className="mt-36 lg:mt-44">
-          <p className="font-mono uppercase tracking-tighter text-base text-gray-100 bg-gradient-to-br from-indigo-400 via-indigo-300 to-indigo-700 bg-clip-text text-transparent">
+          <p className="font-mono uppercase tracking-tighter text-base text-gray-100 bg-gradient-to-br from-[#8B44FF] via-[#6BA4FF] to-[#4A0FBF] bg-clip-text text-transparent">
             Trusted by these six companies so far
           </p>
           <AnimatedLogoCloud />

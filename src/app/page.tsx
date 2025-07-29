@@ -10,6 +10,7 @@ import FUIPricingSectionWithBadge from '@/components/PricingMod'
 import { PrimaryFeatures } from '@/components/PrimaryFeatures'
 import { SecondaryFeatures } from '@/components/SecondaryFeatures'
 import { Testimonials } from '@/components/Testimonials'
+import { DarkBentoSection } from '@/components/dark-bento-section'
 import { cn } from '@/lib/utils'
 
 export default function Home() {
@@ -20,8 +21,9 @@ export default function Home() {
         <HeroMod />
         <PrimaryFeatures />
         <SecondaryFeatures />
+        <DarkBentoSection />
+        
         <CallToAction />
-        <FUIPricingSectionWithBadge />
         <Faqs />
       </main>
       <Footer />

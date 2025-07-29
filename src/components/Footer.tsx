@@ -7,23 +7,23 @@ import { NavLink } from '@/components/NavLink'
 export function Footer() {
   return (
     <footer className="relative bg-hero-gradient">
-      <div className="absolute top-0 z-[0] h-full w-screen bg-indigo-950/20  bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+      <div className="absolute top-0 z-[0] h-full w-screen bg-[#1A0540]/20  bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(106,20,255,0.3),rgba(255,255,255,0))]"></div>
 
       <Container>
-        <div className="py-16">
-          <nav className="mt-10 text-sm" aria-label="quick links">
-            <div className="-my-1 flex justify-center gap-x-6">
+        <div className="py-8 sm:py-12 lg:py-16">
+          <nav className="mt-6 sm:mt-10 text-sm" aria-label="quick links">
+            <div className="-my-1 flex justify-center gap-x-4 sm:gap-x-6 flex-wrap">
               <NavLink href="#features">Features</NavLink>
               <NavLink href="#testimonials">Testimonials</NavLink>
               <NavLink href="#pricing">Pricing</NavLink>
             </div>
           </nav>
         </div>
-        <div className="flex flex-col items-center border-t border-slate-400/10 py-10 sm:flex-row-reverse sm:justify-between">
-          <div className="flex gap-x-6">
+        <div className="flex flex-col items-center border-t border-slate-400/10 py-6 sm:py-10 sm:flex-row-reverse sm:justify-between gap-4 sm:gap-0">
+          <div className="flex gap-x-4 sm:gap-x-6">
             <Link href="#" className="group" aria-label="Curves on X">
               <svg
-                className="h-6 w-6 fill-slate-500 group-hover:fill-slate-700"
+                className="h-5 w-5 sm:h-6 sm:w-6 fill-slate-500 group-hover:fill-slate-700"
                 aria-hidden="true"
                 viewBox="0 0 24 24"
               >
@@ -32,7 +32,7 @@ export function Footer() {
             </Link>
             <Link href="#" className="group" aria-label="Curves on GitHub">
               <svg
-                className="h-6 w-6 fill-slate-500 group-hover:fill-slate-700"
+                className="h-5 w-5 sm:h-6 sm:w-6 fill-slate-500 group-hover:fill-slate-700"
                 aria-hidden="true"
                 viewBox="0 0 24 24"
               >
@@ -40,7 +40,7 @@ export function Footer() {
               </svg>
             </Link>
           </div>
-          <p className="mt-6 text-sm text-slate-500 sm:mt-0">
+          <p className="text-xs sm:text-sm text-slate-500 text-center sm:text-left">
             Copyright &copy; {new Date().getFullYear()} Curves. All rights
             reserved.
           </p>

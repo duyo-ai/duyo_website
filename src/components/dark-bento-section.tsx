@@ -1,0 +1,83 @@
+'use client'
+
+import { BentoCard } from './bento-card'
+import { Container } from './Container'
+
+export function DarkBentoSection() {
+  return (
+    <div className="mx-2 mt-2 rounded-4xl py-16 sm:py-24 lg:py-32 bg-hero-gradient">
+      <Container>
+        <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
+          <h2 className="font-medium mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] bg-clip-text text-4xl tracking-tighter text-transparent md:text-6xl mb-10">
+            누구나 쉽게 만드는{' '}<br/>
+            <span className="bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent block mt-6">
+              프로급 숏폼 영상
+            </span>
+          </h2>
+          <p className="mt-6 text-md md:text-md mx-auto max-w-2xl text-gray-300">
+            경험이나 기술적 배경과 상관없이, 아이디어만 있으면 바로 시작할 수 있습니다. <br/>간단한 키워드 입력부터 완성된 영상까지, 모든 과정이 자동화됩니다.
+          </p>
+        </div>
+
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+        <BentoCard
+            eyebrow="Beginner YouTuber"
+            title="초보 유튜버"
+            description="직접 영상 편집이 부담스러운 초보 유튜버들을 위해 설계되었습니다. 복잡한 편집 툴 없이도 전문적인 영상을 만들 수 있습니다."
+            graphic={
+              <div className="h-80 bg-white bg-[size:851px_344px] bg-no-repeat " />
+            }
+            fade={['top']}
+            className="max-lg:rounded-t-4xl lg:col-span-4 lg:rounded-tl-4xl"
+          />
+          <BentoCard
+            eyebrow="Content Creator"
+            title="얼굴 없는 크리에이터"
+            description="얼굴 노출 없이 전문 지식으로 콘텐츠를 만들고 싶은 크리에이터들에게 완벽한 솔루션입니다."
+            graphic={
+              <div className="h-full flex items-center justify-center overflow-hidden ">
+                <img 
+                  src="/얼굴없는크리에이터.png" 
+                  alt="얼굴 없는 크리에이터" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            }
+            className="lg:col-span-2 lg:rounded-tr-4xl"
+          />
+          <BentoCard
+            dark={true}
+            eyebrow="Content Manager"
+            title="콘텐츠 운영자"
+            description="매일 쇼츠 콘텐츠를 업로드해야 하는 운영자들을 위한 효율적인 대량 생산 시스템입니다."
+            graphic={
+              <div className="h-full flex items-center justify-center overflow-hidden">
+                <img 
+                  src="/image.png" 
+                  alt="콘텐츠 운영자" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            }
+            className="lg:col-span-2 lg:rounded-bl-4xl"
+          />
+          <BentoCard
+            dark={true}
+            eyebrow="Marketing & Sales"
+            title="마케팅 에이전시 & 셀러"
+            description="바이럴 영상 제작을 희망하는 마케팅 에이전시와 텍스트 기반 광고 콘텐츠가 필요한 셀러들을 지원합니다."
+            graphic={
+              <div className="h-80 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+                <div className="text-white text-center">
+                  <div className="text-6xl mb-4">🚀</div>
+                  <div className="text-xl font-semibold">마케터</div>
+                </div>
+              </div>
+            }
+            className="max-lg:rounded-b-4xl lg:col-span-4 lg:rounded-br-4xl"
+          />
+        </div>
+      </Container>
+    </div>
+  )
+} 

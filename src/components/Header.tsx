@@ -1,110 +1,114 @@
 'use client'
 
 import Link from 'next/link'
-import {
-  Popover,
-  PopoverButton,
-  PopoverOverlay,
-  PopoverPanel,
-  Transition,
-  TransitionChild,
-} from '@headlessui/react'
-import clsx from 'clsx'
-
+import Image from 'next/image'
 import { Button } from '@/components/Button'
-import { Container } from '@/components/Container'
-import { Logo } from '@/components/Logo'
-import { NavLink } from '@/components/NavLink'
-import { SlideNavTabs } from './Tabs'
-
-function MobileNavLink({
-  href,
-  children,
-}: {
-  href: string
-  children: React.ReactNode
-}) {
-  return (
-    <PopoverButton as={Link} href={href} className="block w-full p-2">
-      {children}
-    </PopoverButton>
-  )
-}
-
-function MobileNavIcon({ open }: { open: boolean }) {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-3.5 w-3.5 overflow-visible stroke-slate-700"
-      fill="none"
-      strokeWidth={2}
-      strokeLinecap="round"
-    >
-      <path
-        d="M0 1H14M0 7H14M0 13H14"
-        className={clsx(
-          'origin-center transition',
-          open && 'scale-90 opacity-0',
-        )}
-      />
-      <path
-        d="M2 2L12 12M12 2L2 12"
-        className={clsx(
-          'origin-center transition',
-          !open && 'scale-90 opacity-0',
-        )}
-      />
-    </svg>
-  )
-}
-
-function MobileNavigation() {
-  return (
-    <Popover>
-      <PopoverButton
-        className="relative z-10 flex h-8 w-8 items-center justify-center ui-not-focus-visible:outline-none"
-        aria-label="Toggle Navigation"
-      >
-        {({ open }) => <MobileNavIcon open={open} />}
-      </PopoverButton>
-      <Transition>
-        <TransitionChild
-          enter="duration-150 ease-out"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="duration-150 ease-in"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <PopoverOverlay className="fixed inset-0 bg-gray-100/50" />
-        </TransitionChild>
-        <TransitionChild
-          enter="duration-150 ease-out"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="duration-100 ease-in"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          <PopoverPanel className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5">
-            <MobileNavLink href="#features">Features</MobileNavLink>
-            <MobileNavLink href="#testimonials">Testimonials</MobileNavLink>
-            <MobileNavLink href="#pricing">Pricing</MobileNavLink>
-            <hr className="m-2 border-gray-100/40" />
-            <MobileNavLink href="/login">Sign in</MobileNavLink>
-          </PopoverPanel>
-        </TransitionChild>
-      </Transition>
-    </Popover>
-  )
-}
+import { useState } from 'react'
+import { Menu, X } from 'lucide-react'
 
 export function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
   return (
-    <header className="py-10   bg-transparent">
-      
-      <SlideNavTabs />
-  
+    <header className="relative p-2 sm:p-4">
+      <div className="mx-auto max-w-7xl">
+        <nav className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/20 px-4 py-3 sm:px-6 sm:py-4 backdrop-blur-md">
+          {/* Logo */}
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/logo_white.svg"
+                alt="Company Logo"
+                width={120}
+                height={32}
+                className="h-6 w-auto sm:h-8"
+              />
+            </Link>
+          </div>
+
+          {/* Navigation Items - Hidden on mobile */}
+          <div className="hidden md:flex items-center space-x-8">
+            <Link href="#features" className="text-gray-300 hover:text-white transition-colors">
+              Features
+            </Link>
+            <Link href="#solution" className="text-gray-300 hover:text-white transition-colors">
+              Solution
+            </Link>
+            <Link href="#pricing" className="text-gray-300 hover:text-white transition-colors">
+              Pricing
+            </Link>
+            <Link href="#about" className="text-gray-300 hover:text-white transition-colors">
+              About
+            </Link>
+          </div>
+
+          {/* Desktop Get Started Button */}
+          <div className="hidden md:flex items-center">
+            <Link
+              href="/register"
+              className="inline-flex items-center justify-center rounded-3xl bg-purple-200/10 backdrop-blur-md border border-white/10 px-6 py-2 text-sm font-semibold text-white hover:bg-white/20 hover:border-white/30 transition-all shadow-lg"
+            >
+              Get Started
+            </Link>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center space-x-2">
+            <Link
+              href="/register"
+              className="inline-flex items-center justify-center rounded-2xl bg-purple-200/10 backdrop-blur-md border border-white/10 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/20 hover:border-white/30 transition-all shadow-lg"
+            >
+              Get Started
+            </Link>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
+          </div>
+        </nav>
+
+        {/* Mobile menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-2">
+            <div className="rounded-2xl border border-white/10 bg-black/20 backdrop-blur-md p-4 space-y-3">
+              <Link 
+                href="#features" 
+                className="block text-gray-300 hover:text-white transition-colors py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Features
+              </Link>
+              <Link 
+                href="#solution" 
+                className="block text-gray-300 hover:text-white transition-colors py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Solution
+              </Link>
+              <Link 
+                href="#pricing" 
+                className="block text-gray-300 hover:text-white transition-colors py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Pricing
+              </Link>
+              <Link 
+                href="#about" 
+                className="block text-gray-300 hover:text-white transition-colors py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
     </header>
   )
 }

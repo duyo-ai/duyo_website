@@ -11,19 +11,19 @@ const testimonials = [
   [
     {
       content:
-        'TaxPal is so easy to use I can’t help but wonder if it’s really doing the things the government expects me to do.',
+        '처음에는 반신반의했는데, 정말 5분 만에 완성도 높은 영상이 나왔습니다. 기존에 편집하던 시간을 생각하면 하루가 48시간이 된 기분이에요. 특히 대본 생성 기능이 정말 놀라워서, 제가 쓰던 스타일까지 학습해서 자연스러운 썰을 만들어줍니다. 이제 아이디어만 있으면 바로 영상으로 만들 수 있어서 콘텐츠 제작 속도가 10배는 빨라졌어요.',
       author: {
-        name: 'Sheryl Berge',
-        role: 'CEO at Lynch LLC',
+        name: '김태현',
+        role: '구독자 8만 썰 유튜버',
         image: avatarImage1,
       },
     },
     {
       content:
-        'I’m trying to get a hold of someone in support, I’m in a lot of trouble right now and they are saying it has something to do with my books. Please get back to me right away.',
+        'AI가 생성한 이미지라고는 믿기 힘들 정도로 감정과 분위기를 정확히 담아냅니다. 특히 브랜드 톤앤매너에 맞는 이미지를 일관성 있게 만들어주는 게 가장 만족스러워요. 기존에 디자이너와 커뮤니케이션하며 수정 요청하던 시간이 완전히 사라졌습니다. 마케팅 캠페인용 숏폼을 대량으로 제작할 때 특히 유용하고, 퀄리티도 전혀 떨어지지 않아서 클라이언트들도 매우 만족해합니다.',
       author: {
-        name: 'Amy Hahn',
-        role: 'Director at Velocity Industries',
+        name: '정수영',
+        role: '브랜드 마케팅 디렉터',
         image: avatarImage4,
       },
     },
@@ -31,19 +31,19 @@ const testimonials = [
   [
     {
       content:
-        'The best part about TaxPal is every time I pay my employees, my bank balance doesn’t go down like it used to. Looking forward to spending this extra cash when I figure out why my card is being declined.',
+        '가장 놀라운 건 이미지가 자동으로 맥락을 맞춰준다는 점입니다. 텍스트만 입력해도 스토리 흐름에 맞는 적절한 이미지를 배치해주고, 감정의 기복까지 시각적으로 표현해줘서 시청자들의 몰입도가 확실히 높아졌어요. 예전에는 스톡 이미지 찾느라 시간을 많이 썼는데, 이제는 그런 고민 없이 창작에만 집중할 수 있게 되었습니다. 특히 추상적인 개념도 이미지로 잘 표현해주는 게 신기해요.',
       author: {
-        name: 'Leland Kiehn',
-        role: 'Founder of Kiehn and Sons',
+        name: '김민수',
+        role: '교육 콘텐츠 크리에이터',
         image: avatarImage5,
       },
     },
     {
       content:
-        'There are so many things I had to do with my old software that I just don’t do at all with TaxPal. Suspicious but I can’t say I don’t love it.',
+        '유튜브 시작한 지 3개월 된 완전 초보인데, 이 툴 덕분에 하루에 3편씩도 무리 없이 제작하고 있어요. 처음에는 대본 쓰는 것부터 막막했는데, AI가 제안해주는 스토리 구조를 보고 많이 배웠습니다. 목소리 톤이나 속도도 자동으로 조절해줘서 마치 성우가 읽어주는 것 같아요. 구독자도 벌써 5천 명을 넘어서고, 댓글에서 퀄리티를 칭찬해주는 분들이 많아서 정말 뿌듯합니다.',
       author: {
-        name: 'Erin Powlowski',
-        role: 'COO at Armstrong Inc',
+        name: '이지원',
+        role: '신입 유튜버',
         image: avatarImage2,
       },
     },
@@ -51,20 +51,20 @@ const testimonials = [
   [
     {
       content:
-        'I used to have to remit tax to the EU and with TaxPal I somehow don’t have to do that anymore. Nervous to travel there now though.',
+        '기획 단계 없이 바로 시작해도 완성도 높은 영상이 나오는 게 제일 편합니다. 회사에서 급하게 프로모션 영상이 필요할 때 정말 유용해요. 키워드 몇 개만 입력하면 스토리보드부터 최종 영상까지 자동으로 완성되니까, 마케팅 캠페인의 속도가 완전히 달라졌습니다. 특히 A/B 테스트용으로 여러 버전을 빠르게 만들 수 있어서 데이터 기반 마케팅을 할 때 정말 도움이 많이 됩니다.',
       author: {
-        name: 'Peter Renolds',
-        role: 'Founder of West Inc',
+        name: '박지영',
+        role: '마케팅 매니저',
         image: avatarImage3,
       },
     },
     {
       content:
-        'This is the fourth email I’ve sent to your support team. I am literally being held in jail for tax fraud. Please answer your damn emails, this is important.',
+        '기존에 유료 작가에게 맡겼던 대본보다 훨씬 더 자연스럽고 매력적인 스토리가 나와서 깜짝 놀랐어요. AI가 최신 트렌드와 바이럴 요소까지 고려해서 대본을 짜주니까, 조회수도 이전보다 평균 3배 이상 늘었습니다. 특히 감정적인 몰입도가 높은 스토리를 만들어주는 능력이 정말 뛰어나요. 이제는 작가비 예산을 다른 곳에 투자할 수 있게 되어서 채널 운영에 여유가 생겼습니다.',
       author: {
-        name: 'Amy Hahn',
-        role: 'Director at Velocity Industries',
-        image: avatarImage4,
+        name: '이현수',
+        role: '유튜브 채널 운영자 (구독자 15만)',
+        image: avatarImage1,
       },
     },
   ],
@@ -83,55 +83,55 @@ export function Testimonials() {
     <section
       id="testimonials"
       aria-label="What our customers are saying"
-      className=" relative bg-transpaarent py-20 sm:py-32 z-1 "
+      className="relative bg-hero-gradient  z-1"
     >
       <div
-        className="absolute inset-x-0 -top-10 opacity-50 z-10 m-auto h-[27rem] max-w-lg sm:h-64 sm:max-w-7xl"
+        className="absolute inset-0 blur-xl h-full"
         style={{
           background:
-            'linear-gradient(106.89deg, rgba(192, 132, 252, 0.11) 15.73%, rgba(14, 165, 233, 0.41) 15.74%, rgba(232, 121, 249, 0.26) 56.49%, rgba(79, 70, 229, 0.4) 115.91%)',
-          filter: 'blur(118px)',
+            "linear-gradient(143.6deg, rgba(30, 20, 60, 0) 20.79%, rgba(60, 50, 80, 0.15) 40.92%, rgba(40, 30, 70, 0) 70.35%)",
         }}
       ></div>
       <Container>
-        <div className="mx-auto max-w-2xl md:text-center">
-          <h2 className="font-display text-3xl tracking-tighter text-gray-100 sm:text-6xl">
-            <span className='bg-gradient-to-br from-indigo-400 via-indigo-300 to-indigo-700 bg-clip-text text-transparent'>Loved</span> by businesses worldwide.
+        <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none px-4 sm:px-0">
+          <h2 className="font-medium mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] bg-clip-text text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-tighter text-transparent mb-6 sm:mb-10">
+            실제 사용자들의{' '}<br/>
+            <span className="bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent block mt-3 sm:mt-6">
+              생생한 후기
+            </span>
           </h2>
-          <p className="mt-4 text-lg tracking-tight text-gray-200">
-            Our software is so simple that people can’t help but fall in love
-            with it. Simplicity is easy when you just skip tons of
-            mission-critical features.
+          <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg mx-auto max-w-2xl text-gray-300">
+            전국의 크리에이터들이 이미 경험하고 있는 변화를 확인해보세요. <br className="hidden sm:block"/>간단한 키워드 입력만으로도 놀라운 결과를 만들어내고 있습니다.
           </p>
         </div>
         <ul
           role="list"
-          className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"
+          className="mx-auto mt-8 sm:mt-16 lg:mt-20 grid max-w-2xl grid-cols-1 gap-4 sm:gap-6 lg:gap-8 lg:max-w-none lg:grid-cols-3"
         >
           {testimonials.map((column, columnIndex) => (
             <li key={columnIndex}>
-              <ul role="list" className="flex flex-col gap-y-6 sm:gap-y-8">
+              <ul role="list" className="flex flex-col gap-y-4 sm:gap-y-6 lg:gap-y-8">
                 {column.map((testimonial, testimonialIndex) => (
                   <li key={testimonialIndex}>
-                    <figure className="relative rounded-2xl bg-transparent transform-gpu [border:1px_solid_rgba(255,255,255,.1)] [box-shadow:0_-20px_80px_-20px_#8686f01f_inset] p-6 shadow-xl ">
-                      <QuoteIcon className="absolute left-6 top-6 fill-slate-950" />
+                    <figure className="relative rounded-xl sm:rounded-2xl bg-transparent transform-gpu [border:1px_solid_rgba(255,255,255,.1)] [box-shadow:0_-20px_80px_-20px_#8686f01f_inset] p-4 sm:p-6 shadow-xl">
+                      <QuoteIcon className="absolute left-4 sm:left-6 top-4 sm:top-6 fill-slate-950 w-16 h-12 sm:w-20 sm:h-15" />
                       <blockquote className="relative">
-                        <p className="text-lg tracking-tight text-gray-100">
+                        <p className="text-sm sm:text-base lg:text-lg tracking-tight text-gray-100 pt-8 sm:pt-6">
                           {testimonial.content}
                         </p>
                       </blockquote>
-                      <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100/10 pt-6">
+                      <figcaption className="relative mt-4 sm:mt-6 flex items-center justify-between border-t border-slate-100/10 pt-4 sm:pt-6">
                         <div>
-                          <div className="font-display text-base text-gray-100">
+                          <div className="font-display text-sm sm:text-base text-gray-100">
                             {testimonial.author.name}
                           </div>
-                          <div className="mt-1 text-sm text-slate-500">
+                          <div className="mt-1 text-xs sm:text-sm text-slate-500">
                             {testimonial.author.role}
                           </div>
                         </div>
                         <div className="overflow-hidden rounded-full bg-slate-50">
                           <Image
-                            className="h-14 w-14 object-cover"
+                            className="h-10 w-10 sm:h-14 sm:w-14 object-cover rounded-full"
                             src={testimonial.author.image}
                             alt=""
                             width={56}

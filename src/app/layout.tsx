@@ -5,6 +5,8 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import '@/styles/tailwind.css'
 import BackgroundPlus from '@/components/PlusGrid'
+import ToolbarProvider from '@/components/ToolbarProvider'
+
 
 export const metadata: Metadata = {
   title: {
@@ -43,9 +45,12 @@ export default function RootLayout({
         GeistSans.variable
       )}
     >
-      <div className="absolute top-0 z-1 h-screen w-screen bg-indigo-950/20  bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+      <body className="flex h-full flex-col bg-hero-gradient">
+        <div className="absolute top-0 z-1 h-screen w-screen bg-black/50  bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(106,20,255,0.2),rgba(255,255,255,0))]"></div>
 
-      <body className="flex h-full flex-col bg-hero-gradient">{children}</body>
+        {children}
+        <ToolbarProvider />
+      </body>
     </html> 
   )
 }

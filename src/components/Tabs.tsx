@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export const SlideNavTabs = () => {
   return (
-    <div className="bg-transparent text-white fixed top-5 left-0 right-0 mx-auto z-30 ">
+    <div className="bg-transparent text-white mx-auto">
       <SlideTabs />
     </div>
   );
@@ -68,7 +68,7 @@ const Cursor = ({ position }) => {
       animate={{
         ...position,
       }}
-      className="absolute z-0 h-7 rounded-full bg-indigo-800 bg-glass-gradient  md:h-11 "
+                      className="absolute z-0 h-7 rounded-full bg-[#4A0FBF] bg-glass-gradient  md:h-11 "
     />
   );
 };

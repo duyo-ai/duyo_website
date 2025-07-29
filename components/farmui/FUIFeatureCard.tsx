@@ -129,6 +129,7 @@ export default function FUIFeatureSectionWithCards() {
     <section className="relative py-14 z-20 ">
       <img
         src="https://tailwindcss.com/_next/static/media/docs@30.8b9a76a2.avif"
+        alt=""
         className="z-2 absolute -top-0 left-10"
       />
       <div className="mx-auto max-w-screen-xl px-4 text-gray-400 md:px-8">
