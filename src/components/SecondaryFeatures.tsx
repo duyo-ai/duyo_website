@@ -119,8 +119,8 @@ function Feature({
       className={clsx(
         className, 
         'transition-all duration-300 ease-in-out cursor-pointer rounded-xl p-4',
-        !isActive && 'bg-slate-800/30 border-purple-500/0 hover:bg-slate-700/40 hover:border-slate-600/60 active:scale-[0.98]',
-        isActive && 'bg-gradient-to-br from-purple-900/20 to-blue-900/20 border-purple-500/0'
+        !isActive && 'bg-slate-800/30  hover:bg-slate-700/40 active:scale-[0.98]',
+        isActive && 'bg-gradient-to-br from-purple-900/20 to-blue-900/20'
       )}
       onClick={onClick}
       {...props}
