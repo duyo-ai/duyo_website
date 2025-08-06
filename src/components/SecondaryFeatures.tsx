@@ -1,6 +1,6 @@
 'use client'
 
-import { useId, useEffect, useState, useRef } from 'react'
+import { useId, useState } from 'react'
 import Image, { type ImageProps } from 'next/image'
 import clsx from 'clsx'
 
@@ -53,7 +53,7 @@ const features: Array<Feature> = [
   },
   {
     name: '템플릿 선택',
-    summary: '음성, 이미지를 포함한 다양한 템플릿 중 선택하세요.',
+    summary: '음성, 이미지를 포함한 템플릿을 선택하세요.',
     description: '',
     image: screenshotInventory,
     icon: function TemplateIcon() {
@@ -79,7 +79,7 @@ const features: Array<Feature> = [
   },
   {
     name: '90% 초안에서 최종 수정',
-    summary: '거의 완성된 초안을 최종 검토하고 세부 수정하세요.',
+    summary: '거의 완성된 초안을 검토하고 세부 수정하세요.',
     description: '',
     image: screenshotContacts,
     icon: function EditIcon() {
@@ -107,26 +107,30 @@ function Feature({
   feature,
   isActive,
   className,
+  onClick,
   ...props
 }: React.ComponentPropsWithoutRef<'div'> & {
   feature: Feature
   isActive: boolean
+  onClick?: () => void
 }) {
   return (
     <div
       className={clsx(
         className, 
-        'transition-all duration-700 ease-in-out',
-        !isActive && 'opacity-50 scale-95'
+        'transition-all duration-300 ease-in-out cursor-pointer rounded-xl p-4',
+        !isActive && 'bg-slate-800/30 border-purple-500/0 hover:bg-slate-700/40 hover:border-slate-600/60 active:scale-[0.98]',
+        isActive && 'bg-gradient-to-br from-purple-900/20 to-blue-900/20 border-purple-500/0'
       )}
+      onClick={onClick}
       {...props}
     >
       <div className="flex items-start gap-4">
         {/* 좌측 원형 숫자 배지 */}
         <div
           className={clsx(
-            'w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-500 flex-shrink-0',
-                            isActive ? 'bg-white/10 ring-2 ring-gradient-to-r ring-purple-400/40 backdrop-blur-md shadow-lg shadow-purple-500/20' : 'bg-white/5 ring-1 ring-purple-300/20',
+            'w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-500 flex-shrink-0  shadow-black',
+                            isActive ? 'bg-white/10' : 'bg-white/5 ',
           )}
         >
           <span className="text-white font-semibold text-lg">
@@ -139,13 +143,13 @@ function Feature({
           <h3
             className={clsx(
               'text-xl font-bold transition-colors duration-500 leading-tight',
-              isActive ? 'text-indigo-400' : 'text-gray-400',
+              isActive ? 'text-purple-400' : 'text-gray-400',
             )}
           >
             {feature.name}
           </h3>
           <p className={clsx(
-            'mt-2 font-display text-base transition-colors duration-500 leading-relaxed',
+            'mt-2 font-display text-sm transition-colors duration-500 leading-relaxed',
             isActive ? 'text-gray-100' : 'text-gray-400'
           )}>
             {feature.summary}
@@ -154,11 +158,7 @@ function Feature({
       </div>
 
       {/* 연결선 (마지막 요소가 아닐 때만) */}
-      {features.findIndex(f => f === feature) < features.length - 1 && (
-        <div className="flex justify-start mt-4 mb-2">
-          <div className="ml-6 w-px h-8 bg-gradient-to-b from-indigo-500/30 to-transparent" />
-        </div>
-      )}
+      
     </div>
   )
 }
@@ -196,93 +196,43 @@ function FeaturesMobile() {
 
 function FeaturesDesktop() {
   const [currentStep, setCurrentStep] = useState(0)
-  const [isSticky, setIsSticky] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current || !contentRef.current) return
-
-      const sectionRect = sectionRef.current.getBoundingClientRect()
-      const windowHeight = window.innerHeight
-      
-      // 섹션 상단이 뷰포트 상단에 닿았을 때 sticky 활성화
-      if (sectionRect.top <= 40) { // top-10 = 2.5rem = 40px
-        setIsSticky(true)
-      } else {
-        setIsSticky(false)
-      }
-
-      // 섹션이 화면에 보이는 동안에만 작동
-      if (sectionRect.top <= windowHeight * 0.3 && sectionRect.bottom >= windowHeight * 0.7) {
-        
-        // 🔧 전체 스크롤 가능 거리 계산 (섹션 높이 - 뷰포트 높이)
-        const totalScrollableHeight = sectionRef.current.offsetHeight - windowHeight
-        
-        // 현재 스크롤된 거리 (0~100% 비율로 정규화)
-        const scrolled = Math.max(0, windowHeight * 0.3 - sectionRect.top)
-        const scrollProgress = Math.min(scrolled / totalScrollableHeight, 1)
-        
-        // 🎯 3단계를 더 짧게, 빠져나가기 구간 확보
-        // 0~30% = 1단계, 30~60% = 2단계, 60~80% = 3단계, 80~100% = 빠져나가기
-        let currentStep
-        if (scrollProgress < 0.3) {
-          currentStep = 0  // 1단계 (30% 구간)
-        } else if (scrollProgress < 0.6) {
-          currentStep = 1  // 2단계 (30% 구간)
-        } else if (scrollProgress < 0.8) {
-          currentStep = 2  // 3단계 (20% 구간 - 더 짧게!)
-        } else {
-          currentStep = -1  // 80% 이후 빠져나가기 - 모든 단계 비활성화
-        }
-        
-        setCurrentStep(currentStep)
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll() // 초기 상태 설정
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const handleStepClick = (stepIndex: number) => {
+    setCurrentStep(stepIndex)
+  }
 
       return (
-      <div ref={sectionRef} className="hidden lg:block lg:mt-20" style={{ height: '600vh' }}>
-      <div 
-        ref={contentRef}
-        className={clsx(
-          "pt-0",
-          isSticky ? "sticky top-10" : "relative"
-        )}
-      >
+      <div className="hidden lg:block lg:mt-20">
+      <div className="pt-0 relative">
         <div className="w-full">
-          <div className="grid grid-cols-3 gap-x-8">
-            {features.map((feature, featureIndex) => (
-              <Feature
-                key={feature.summary}
-                feature={feature}
-                isActive={featureIndex === currentStep}
-                className="relative"
-              />
-            ))}
+          {/* 버튼 영역 */}
+          <div className="pb-12">
+            <div className="grid grid-cols-3 gap-x-8">
+              {features.map((feature, featureIndex) => (
+                <Feature
+                  key={feature.summary}
+                  feature={feature}
+                  isActive={featureIndex === currentStep}
+                  onClick={() => handleStepClick(featureIndex)}
+                  className="relative"
+                />
+              ))}
+            </div>
           </div>
           
-          <div className={clsx(
-            "relative mt-0 overflow-hidden rounded-4xl bg-transparent px-14 py-16 xl:px-16 transition-opacity duration-700 max-w-[1000px] mx-auto",
-            currentStep === -1 ? "opacity-30" : "opacity-100"
-          )}>
+          {/* 이미지 영역 */}
+          <div className="relative overflow-hidden rounded-4xl bg-transparent max-w-[900px] mx-auto">
             <div className="relative">
               <div className="w-full overflow-hidden rounded-xl bg-white shadow-lg shadow-gray-200/5 ring-1 ring-slate-500/10">
                 <Image
-                  className="w-full transition-opacity duration-700 rounded-2xl"
-                  src={features[Math.max(0, currentStep)].image}
+                  className="w-full transition-all duration-500 rounded-2xl"
+                  src={features[currentStep].image}
                   alt=""
                   sizes="52.75rem"
                 />
               </div>
             </div>
-            <div className="pointer-events-none absolute inset-0 rounded-4xl ring-1 ring-inset ring-gray-200/10" />
+            
           </div>
         </div>
       </div>
@@ -295,11 +245,11 @@ export function SecondaryFeatures() {
     <section
       id="secondary-features"
       aria-label="Features for simplifying everyday business tasks"
-      className="bg-page-gradient  relative"
+      className="relative"
     >
       <Container>
         <div className="py-8 sm:py-14 lg:py-20 xl:py-32">
-          <div className="-z-1 absolute inset-x-0 -top-0 h-[600px]  w-full bg-transparent bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)]  bg-[size:6rem_4rem] opacity-10 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+
           <div
             className="h-full absolute inset-0 rotate-180 blur-lg"
             style={{

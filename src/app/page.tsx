@@ -22,7 +22,6 @@ export default function Home() {
         <PrimaryFeatures />
         <SecondaryFeatures />
         <DarkBentoSection />
-        
         <CallToAction />
         <Faqs />
       </main>

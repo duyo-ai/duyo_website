@@ -1,5 +1,6 @@
 import RetroGrid from '../../components/farmui/RetroGrid'
 import { ChevronRight } from 'lucide-react'
+import Link from 'next/link'
 import { Button } from './Button'
 import AnimatedLogoCloud from './Company'
 import TextRotate from '../../components/farmui/RotateText'
@@ -19,10 +20,12 @@ const HeroMod = () => {
         
         <div className="relative z-10 mx-auto max-w-screen-xl gap-12 px-4 py-6 sm:py-10 text-gray-600 md:px-8">
           <div className="leading-0 mx-auto max-w-6xl space-y-6 sm:space-y-10 px-4 sm:px-6 lg:px-10 text-center lg:leading-5">
-            <h1 className="font-geist group mx-auto w-fit rounded-2xl sm:rounded-3xl border-[2px] border-white/5 bg-gradient-to-tr from-zinc-300/5 via-gray-400/5 to-transparent px-3 py-2 sm:px-5 text-xs sm:text-sm text-gray-200">
-              Welcome to Cutple
-              <ChevronRight className="ml-1 sm:ml-2 inline h-3 w-3 sm:h-4 sm:w-4 duration-300 group-hover:translate-x-1" />
-            </h1>
+            <Link href="https://slashpage.com/cutple" className="block w-fit mx-auto">
+              <h1 className="font-geist group mx-auto w-fit rounded-2xl sm:rounded-3xl border-[2px] border-white/5 bg-gradient-to-tr from-zinc-300/5 via-gray-400/5 to-transparent px-3 py-2 sm:px-5 text-xs sm:text-sm text-gray-200 hover:bg-white/5 transition-colors">
+                Welcome to Cutple
+                <ChevronRight className="ml-1 sm:ml-2 inline h-3 w-3 sm:h-4 sm:w-4 duration-300 group-hover:translate-x-1" />
+              </h1>
+            </Link>
 
             <h2 className="font-semibold mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] bg-clip-text text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tighter text-transparent mb-6 sm:mb-10 leading-tight">
               
@@ -44,12 +47,14 @@ const HeroMod = () => {
               지금 시작하기{' '}
               <ChevronRight className="inline-flex items-center justify-center transition-all duration-500 group-hover:translate-x-1 h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
-                    </div>
-          <AnimatedLogoCloud />
-        </div>
-        <div className="relative max-w-full">
-          <DashboardDemo />
-        </div>
+                                         </div>
+          </div>
+          <div className="relative max-w-full">
+            <DashboardDemo />
+          </div>
+          <div className="pb-20">
+            <AnimatedLogoCloud />
+          </div>
       </section>
     </>
   )

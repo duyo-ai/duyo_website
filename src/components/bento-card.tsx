@@ -86,7 +86,7 @@ export function BentoCard({
         />
       )}
       
-      <div className="relative h-[29rem] shrink-0 overflow-hidden will-change-transform group-hover:scale-105 transition-transform duration-300">
+      <div className="relative h-[29rem] shrink-0 overflow-hidden">
         {graphic}
         {fade.includes('top') && (
           <div className="absolute inset-0 bg-gradient-to-b from-gray-800 from-[-25%] to-50% opacity-25" />

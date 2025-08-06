@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 import { Container } from '@/components/Container'
 import avatarImage1 from '@/images/avatars/avatar-1.png'
 import avatarImage2 from '@/images/avatars/avatar-2.png'
@@ -83,20 +81,13 @@ export function Testimonials() {
     <section
       id="testimonials"
       aria-label="What our customers are saying"
-      className="relative   z-1"
+      className="relative bg-slate-950 z-1 pt-20 "
     >
-      <div
-        className="absolute inset-0 blur-xl h-full"
-        style={{
-          background:
-            "linear-gradient(143.6deg, rgba(30, 20, 60, 0) 20.79%, rgba(60, 50, 80, 0.15) 40.92%, rgba(40, 30, 70, 0) 70.35%)",
-        }}
-      ></div>
       <Container>
-        <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none px-4 sm:px-0">
+        <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
           <h2 className="font-medium mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] bg-clip-text text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-tighter text-transparent mb-6 sm:mb-10">
             실제 사용자들의{' '}<br/>
-            <span className="bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent block mt-3 sm:mt-6">
+            <span className="bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent block mt-3 sm:mt-6 font-bold">
               생생한 후기
             </span>
           </h2>
@@ -129,15 +120,16 @@ export function Testimonials() {
                             {testimonial.author.role}
                           </div>
                         </div>
-                        <div className="overflow-hidden rounded-full bg-slate-50">
-                          <Image
-                            className="h-10 w-10 sm:h-14 sm:w-14 object-cover rounded-full ring-1 ring-inset ring-white/10"
-                            src={testimonial.author.image}
-                            alt=""
-                            width={56}
-                            height={56}
-                          />
-                        </div>
+                        <div 
+                          className="h-10 w-10 sm:h-14 sm:w-14 rounded-full bg-slate-50 ring-1 ring-inset ring-white/10 overflow-hidden flex-shrink-0"
+                          style={{
+                            backgroundImage: `url(${testimonial.author.image.src})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            borderRadius: '50%'
+                          }}
+                        />
                       </figcaption>
                     </figure>
                   </li>
