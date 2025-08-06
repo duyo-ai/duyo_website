@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main className="pt-20 sm:pt-24">
         <HeroMod />
         <PrimaryFeatures />
         <SecondaryFeatures />

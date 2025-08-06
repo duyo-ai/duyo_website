@@ -10,7 +10,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
-    <header className="relative p-2 sm:p-4">
+    <header className="fixed top-0 left-0 right-0 z-50 p-2 sm:p-4">
       <div className="mx-auto max-w-7xl">
         <nav className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/20 px-4 py-3 sm:px-6 sm:py-4 backdrop-blur-md">
           {/* Logo */}
