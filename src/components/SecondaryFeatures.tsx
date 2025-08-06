@@ -55,7 +55,7 @@ const features: Array<Feature> = [
     name: '템플릿 선택',
     summary: '음성, 이미지를 포함한 템플릿을 선택하세요.',
     description: '',
-    image: screenshotInventory,
+    image: screenshotProfitLoss,
     icon: function TemplateIcon() {
       return (
         <>
@@ -81,7 +81,7 @@ const features: Array<Feature> = [
     name: '90% 초안에서 최종 수정',
     summary: '거의 완성된 초안을 검토하고 세부 수정하세요.',
     description: '',
-    image: screenshotContacts,
+    image: screenshotProfitLoss,
     icon: function EditIcon() {
       return (
         <>
