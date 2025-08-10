@@ -50,9 +50,7 @@ const DownloadPage = () => {
           <div className="relative z-10 py-20">
             {/* Header Section */}
             <div className="text-center mb-5">
-              <span className="inline-block px-3 py-1 text-xs font-semibold text-purple-200 bg-purple-500/20 rounded-full border border-purple-400/30 mb-6">
-                Desktop & Mobile
-              </span>
+              
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent mb-6">
                 Download Cutple.
