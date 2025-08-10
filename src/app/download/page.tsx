@@ -97,28 +97,28 @@ const DownloadPage = () => {
             </div>
 
             {/* Spacer below showcase */}
-
-            <div className="inline-flex bg-white/5 rounded-xl p-1 border border-white/10 mb-5">
-              <button
-                onClick={() => setActiveVersion('stable')}
-                className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all ${activeVersion === 'stable'
+            <div className='mt-20 flex justify-center'>
+              <div className="inline-flex  items-center justify-center bg-white/5 rounded-xl p-1 border border-white/10 mb-5">
+                <button
+                  onClick={() => setActiveVersion('stable')}
+                  className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all ${activeVersion === 'stable'
                     ? 'bg-white/10 text-white shadow-lg'
                     : 'text-gray-400 hover:text-white'
-                  }`}
-              >
-                정식 버전
-              </button>
-              <button
-                onClick={() => setActiveVersion('beta')}
-                className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all ${activeVersion === 'beta'
+                    }`}
+                >
+                  정식 버전
+                </button>
+                <button
+                  onClick={() => setActiveVersion('beta')}
+                  className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all ${activeVersion === 'beta'
                     ? 'bg-white/10 text-white shadow-lg'
                     : 'text-gray-400 hover:text-white'
-                  }`}
-              >
-                베타 버전
-              </button>
+                    }`}
+                >
+                  베타 버전
+                </button>
+              </div>
             </div>
-
 
             {/* Mac Downloads */}
             <div className="mb-16">
@@ -146,8 +146,8 @@ const DownloadPage = () => {
                         <div className="flex items-center gap-2">
                           <h3 className="text-lg font-semibold text-white">macOS</h3>
                           <span className={`px-2 py-1 text-xs font-semibold rounded-md ${activeVersion === 'stable'
-                              ? 'bg-green-500/20 text-green-300'
-                              : 'bg-orange-500/20 text-orange-300'
+                            ? 'bg-green-500/20 text-green-300'
+                            : 'bg-orange-500/20 text-orange-300'
                             }`}>
                             {activeVersion === 'stable' ? 'Apple Silicon' : 'Beta • Apple Silicon'}
                           </span>
@@ -163,8 +163,8 @@ const DownloadPage = () => {
                       <button
                         onClick={() => handleDownload('macOS Apple Silicon', currentVersions.macSilicon.version)}
                         className={`px-6 py-2 rounded-lg font-semibold transition-all ${activeVersion === 'stable'
-                            ? 'bg-white text-gray-900 hover:bg-gray-100'
-                            : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
+                          ? 'bg-white text-gray-900 hover:bg-gray-100'
+                          : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
                           }`}
                       >
                         Download
@@ -201,8 +201,8 @@ const DownloadPage = () => {
                         <div className="flex items-center gap-2">
                           <h3 className="text-lg font-semibold text-white">Windows</h3>
                           <span className={`px-2 py-1 text-xs font-semibold rounded-md ${activeVersion === 'stable'
-                              ? 'bg-green-500/20 text-green-300'
-                              : 'bg-orange-500/20 text-orange-300'
+                            ? 'bg-green-500/20 text-green-300'
+                            : 'bg-orange-500/20 text-orange-300'
                             }`}>
                             {activeVersion === 'stable' ? '64-bit' : 'Beta • 64-bit'}
                           </span>
@@ -218,8 +218,8 @@ const DownloadPage = () => {
                       <button
                         onClick={() => handleDownload('Windows', currentVersions.windows.version)}
                         className={`px-6 py-2 rounded-lg font-semibold transition-all ${activeVersion === 'stable'
-                            ? 'bg-white text-gray-900 hover:bg-gray-100'
-                            : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
+                          ? 'bg-white text-gray-900 hover:bg-gray-100'
+                          : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
                           }`}
                       >
                         Download
