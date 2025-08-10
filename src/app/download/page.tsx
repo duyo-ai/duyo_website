@@ -44,7 +44,7 @@ const DownloadPage = () => {
   return (
     <div className="min-h-screen bg-gray-950">
       <Header />
-      
+
       <main className="pt-20">
         <Container>
           <div className="relative z-10 py-20">
@@ -53,17 +53,17 @@ const DownloadPage = () => {
               <span className="inline-block px-3 py-1 text-xs font-semibold text-purple-200 bg-purple-500/20 rounded-full border border-purple-400/30 mb-6">
                 Desktop & Mobile
               </span>
-              
+
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent mb-6">
                 Download Cutple.
               </h1>
-              
+
               <p className="text-lg text-gray-200 mb-10 max-w-2xl mx-auto">
                 Mac, Windows에서 사용 가능합니다. Apple Silicon에 최적화되어 있습니다.
               </p>
 
               {/* Version Toggle */}
-              
+
             </div>
             {/* Primary Download Button - Current OS */}
             {(osType === 'mac' || osType === 'windows') && (
@@ -85,7 +85,7 @@ const DownloadPage = () => {
             )}
 
             {/* Download showcase image (plain) */}
-            <div className="mx-auto max-w-2xl mb-16 px-4 sm:px-6">
+            <div className="mx-auto max-w-xl -mt-52">
               <Image
                 src="/download_asset.svg"
                 alt="Cutple download showcase"
@@ -97,30 +97,28 @@ const DownloadPage = () => {
             </div>
 
             {/* Spacer below showcase */}
-            <div className="mb-8" />
+
             <div className="inline-flex bg-white/5 rounded-xl p-1 border border-white/10 mb-5">
-                <button
-                  onClick={() => setActiveVersion('stable')}
-                  className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all ${
-                    activeVersion === 'stable'
-                      ? 'bg-white/10 text-white shadow-lg'
-                      : 'text-gray-400 hover:text-white'
+              <button
+                onClick={() => setActiveVersion('stable')}
+                className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all ${activeVersion === 'stable'
+                    ? 'bg-white/10 text-white shadow-lg'
+                    : 'text-gray-400 hover:text-white'
                   }`}
-                >
-                  정식 버전
-                </button>
-                <button
-                  onClick={() => setActiveVersion('beta')}
-                  className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all ${
-                    activeVersion === 'beta'
-                      ? 'bg-white/10 text-white shadow-lg'
-                      : 'text-gray-400 hover:text-white'
+              >
+                정식 버전
+              </button>
+              <button
+                onClick={() => setActiveVersion('beta')}
+                className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all ${activeVersion === 'beta'
+                    ? 'bg-white/10 text-white shadow-lg'
+                    : 'text-gray-400 hover:text-white'
                   }`}
-                >
-                  베타 버전
-                </button>
-              </div>
-            
+              >
+                베타 버전
+              </button>
+            </div>
+
 
             {/* Mac Downloads */}
             <div className="mb-16">
@@ -135,24 +133,22 @@ const DownloadPage = () => {
 
               <div className="space-y-4">
                 {/* macOS Apple Silicon */}
-                <div className={`p-6 rounded-xl border transition-all hover:bg-white/5 ${
-                  osType === 'mac' ? 'bg-purple-500/10 border-purple-500/30' : 'bg-white/5 border-white/10'
-                }`}>
+                <div className={`p-6 rounded-xl border transition-all hover:bg-white/5 ${osType === 'mac' ? 'bg-purple-500/10 border-purple-500/30' : 'bg-white/5 border-white/10'
+                  }`}>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
                         <svg className="h-6 w-6 text-white fill-current" viewBox="0 0 24 24">
-                          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
                         </svg>
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
                           <h3 className="text-lg font-semibold text-white">macOS</h3>
-                          <span className={`px-2 py-1 text-xs font-semibold rounded-md ${
-                            activeVersion === 'stable' 
-                              ? 'bg-green-500/20 text-green-300' 
+                          <span className={`px-2 py-1 text-xs font-semibold rounded-md ${activeVersion === 'stable'
+                              ? 'bg-green-500/20 text-green-300'
                               : 'bg-orange-500/20 text-orange-300'
-                          }`}>
+                            }`}>
                             {activeVersion === 'stable' ? 'Apple Silicon' : 'Beta • Apple Silicon'}
                           </span>
                         </div>
@@ -166,11 +162,10 @@ const DownloadPage = () => {
                       </div>
                       <button
                         onClick={() => handleDownload('macOS Apple Silicon', currentVersions.macSilicon.version)}
-                        className={`px-6 py-2 rounded-lg font-semibold transition-all ${
-                          activeVersion === 'stable'
+                        className={`px-6 py-2 rounded-lg font-semibold transition-all ${activeVersion === 'stable'
                             ? 'bg-white text-gray-900 hover:bg-gray-100'
                             : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
-                        }`}
+                          }`}
                       >
                         Download
                       </button>
@@ -193,24 +188,22 @@ const DownloadPage = () => {
 
               <div className="space-y-4">
                 {/* Windows */}
-                <div className={`p-6 rounded-xl border transition-all hover:bg-white/5 ${
-                  osType === 'windows' ? 'bg-purple-500/10 border-purple-500/30' : 'bg-white/5 border-white/10'
-                }`}>
+                <div className={`p-6 rounded-xl border transition-all hover:bg-white/5 ${osType === 'windows' ? 'bg-purple-500/10 border-purple-500/30' : 'bg-white/5 border-white/10'
+                  }`}>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
                         <svg className="h-6 w-6 text-white fill-current" viewBox="0 0 24 24">
-                          <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.801"/>
+                          <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.801" />
                         </svg>
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
                           <h3 className="text-lg font-semibold text-white">Windows</h3>
-                          <span className={`px-2 py-1 text-xs font-semibold rounded-md ${
-                            activeVersion === 'stable' 
-                              ? 'bg-green-500/20 text-green-300' 
+                          <span className={`px-2 py-1 text-xs font-semibold rounded-md ${activeVersion === 'stable'
+                              ? 'bg-green-500/20 text-green-300'
                               : 'bg-orange-500/20 text-orange-300'
-                          }`}>
+                            }`}>
                             {activeVersion === 'stable' ? '64-bit' : 'Beta • 64-bit'}
                           </span>
                         </div>
@@ -224,11 +217,10 @@ const DownloadPage = () => {
                       </div>
                       <button
                         onClick={() => handleDownload('Windows', currentVersions.windows.version)}
-                        className={`px-6 py-2 rounded-lg font-semibold transition-all ${
-                          activeVersion === 'stable'
+                        className={`px-6 py-2 rounded-lg font-semibold transition-all ${activeVersion === 'stable'
                             ? 'bg-white text-gray-900 hover:bg-gray-100'
                             : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
-                        }`}
+                          }`}
                       >
                         Download
                       </button>
@@ -254,7 +246,7 @@ const DownloadPage = () => {
         </Container>
       </main>
 
-      <Footer/>
+      <Footer />
     </div>
   )
 }
