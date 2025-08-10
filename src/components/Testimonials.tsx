@@ -84,17 +84,17 @@ export function Testimonials() {
       className="relative bg-slate-950 z-1 pt-20 "
     >
       <Container>
-        <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
-          <h2 className="font-medium mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] bg-clip-text text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-tighter text-transparent mb-6 sm:mb-10">
-            실제 사용자들의{' '}<br/>
-            <span className="bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent block mt-3 sm:mt-6 font-bold">
+        <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-6xl text-white leading-tight mb-6">
+            실제 사용자들의{' '}<br /> 
+              <span className="font-bold bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent">
               생생한 후기
-            </span>
-          </h2>
-          <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg mx-auto max-w-2xl text-gray-300">
+              </span>
+            </h2>
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed break-keep">
             전국의 크리에이터들이 이미 경험하고 있는 변화를 확인해보세요. <br className="hidden sm:block"/>간단한 키워드 입력만으로도 놀라운 결과를 만들어내고 있습니다.
-          </p>
-        </div>
+            </p>
+          </div>
         <ul
           role="list"
           className="mx-auto mt-8 sm:mt-16 lg:mt-20 grid max-w-2xl grid-cols-1 gap-4 sm:gap-6 lg:gap-8 lg:max-w-none lg:grid-cols-3"

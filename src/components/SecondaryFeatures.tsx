@@ -117,7 +117,7 @@ function Feature({
   return (
     <div
       className={clsx(
-        className, 
+        className,
         'transition-all duration-300 ease-in-out cursor-pointer rounded-xl p-4',
         !isActive && 'bg-slate-800/30  hover:bg-slate-700/40 active:scale-[0.98]',
         isActive && 'bg-gradient-to-br from-purple-900/20 to-blue-900/20'
@@ -130,7 +130,7 @@ function Feature({
         <div
           className={clsx(
             'w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-500 flex-shrink-0  shadow-black',
-                            isActive ? 'bg-white/10' : 'bg-white/5 ',
+            isActive ? 'bg-white/10' : 'bg-white/5 ',
           )}
         >
           <span className="text-white font-semibold text-lg">
@@ -158,7 +158,7 @@ function Feature({
       </div>
 
       {/* 연결선 (마지막 요소가 아닐 때만) */}
-      
+
     </div>
   )
 }
@@ -201,8 +201,8 @@ function FeaturesDesktop() {
     setCurrentStep(stepIndex)
   }
 
-      return (
-      <div className="hidden lg:block lg:mt-20">
+  return (
+    <div className="hidden lg:block lg:mt-20">
       <div className="pt-0 relative">
         <div className="w-full">
           {/* 버튼 영역 */}
@@ -219,9 +219,9 @@ function FeaturesDesktop() {
               ))}
             </div>
           </div>
-          
+
           {/* 이미지 영역 */}
-          <div className="relative overflow-hidden rounded-4xl bg-transparent max-w-[900px] mx-auto">
+          <div className="relative overflow-hidden rounded-4xl bg-transparent w-full mx-auto">
             <div className="relative">
               <div className="w-full overflow-hidden rounded-xl bg-white shadow-lg shadow-gray-200/5 ring-1 ring-slate-500/10">
                 <Image
@@ -232,7 +232,7 @@ function FeaturesDesktop() {
                 />
               </div>
             </div>
-            
+
           </div>
         </div>
       </div>
@@ -257,15 +257,15 @@ export function SecondaryFeatures() {
                 'linear-gradient(143.6deg, rgba(52, 103, 235, 0) 15%, rgba(111,79,249, 0.35) 40%, rgba(111,79,249, 0) 50%)',
             }}
           ></div>
-          
-          <div className="mr-auto max-w-2xl md:text-start px-4 sm:px-0">
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl tracking-tight text-gray-200">
-              <span className="font-semibold  bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent">
-                간단한 3단계로{' '}
-              </span>{' '}<br/>              콘텐츠 제작 완성.
+
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-6xl text-white leading-tight mb-6">
+              <span className="font-bold bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent">
+                간단한 3단계로
+              </span>{' '}<br />              콘텐츠 제작 완성.
             </h2>
-            <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg tracking-tight text-gray-100">
-              키워드만 입력하면 AI가 템플릿 추천부터 최종 완성까지 
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed break-keep">
+              키워드만 입력하면 AI가 템플릿 추천부터 최종 완성까지
               모든 과정을 도와드립니다.
             </p>
           </div>

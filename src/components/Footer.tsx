@@ -2,46 +2,51 @@ import Link from 'next/link'
 
 import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
-import { NavLink } from '@/components/NavLink'
 
 export function Footer() {
   return (
-    <footer className="relative  rounded-xs">
-      <div className="absolute top-0 z-[0] h-full w-screen bg-[#1A0540]/20  bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(106,20,255,0.3),rgba(255,255,255,0))]"></div>
-
+    <footer className="relative rounded-xs border-t border-white/10">
       <Container>
         <div className="py-8 sm:py-12 lg:py-16">
-          <nav className="mt-6 sm:mt-10 text-sm" aria-label="빠른 링크">
-            <div className="-my-1 flex justify-center gap-x-4 sm:gap-x-6 flex-wrap">
-              <NavLink href="#features">주요 기능</NavLink>
-              <NavLink href="#testimonials">고객 후기</NavLink>
-              <NavLink href="#pricing">요금제</NavLink>
+          <nav className="text-sm" aria-label="사이트 링크">
+            <div className="flex justify-end gap-x-6 flex-wrap text-gray-300">
+              <Link href="#">회사소개</Link>
+              <Link href="#">이용약관</Link>
+              <Link href="#">개인정보처리방침</Link>
+              <Link href="#">이용안내</Link>
             </div>
           </nav>
         </div>
-        <div className="flex flex-col items-center border-t border-slate-400/10 py-6 sm:py-10 sm:flex-row-reverse sm:justify-between gap-4 sm:gap-0 rounded-xs">
-          <div className="flex gap-x-4 sm:gap-x-6">
-            <Link href="#" className="group rounded-xs" aria-label="Cutple X(트위터)">
-              <svg
-                className="h-5 w-5 sm:h-6 sm:w-6 fill-slate-500 group-hover:fill-slate-700"
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-              >
-                <path d="M13.3174 10.7749L19.1457 4H17.7646L12.7039 9.88256L8.66193 4H4L10.1122 12.8955L4 20H5.38119L10.7254 13.7878L14.994 20H19.656L13.3171 10.7749H13.3174ZM11.4257 12.9738L10.8064 12.0881L5.87886 5.03974H8.00029L11.9769 10.728L12.5962 11.6137L17.7652 19.0075H15.6438L11.4257 12.9742V12.9738Z" />
-              </svg>
-            </Link>
-            <Link href="#" className="group rounded-xs" aria-label="Cutple GitHub">
-              <svg
-                className="h-5 w-5 sm:h-6 sm:w-6 fill-slate-500 group-hover:fill-slate-700"
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
-              </svg>
-            </Link>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 text-gray-200">
+          <div className="space-y-6">
+            <Logo />
+            <div>
+              <h3 className="font-semibold mb-2">고객센터 정보</h3>
+              <p className="text-sm">상담/주문전화&nbsp;&nbsp; 070-7666-9891</p>
+              <p className="text-sm">상담/주문 이메일&nbsp;&nbsp; contact@duyo.ai</p>
+              <p className="text-sm">CS운영시간&nbsp;&nbsp; 09:00 ~ 21:00</p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">결제 정보</h3>
+              <p className="text-sm">무통장 계좌정보</p>
+              <p className="text-sm">토스뱅크&nbsp;&nbsp; 100045939891&nbsp;&nbsp; 김진우</p>
+            </div>
           </div>
-          <p className="text-xs sm:text-sm text-slate-500 text-center sm:text-left">
-            Copyright &copy; {new Date().getFullYear()} Cutple. 모든 권리 보유.
+
+          <div className="space-y-4">
+            <h3 className="font-semibold">쇼핑몰 기본정보</h3>
+            <p className="text-sm">상호명&nbsp; 두오&nbsp;&nbsp; 대표자명&nbsp; 김진우</p>
+            <p className="text-sm">사업장 주소&nbsp; 06978 서울 동작구 상도로55길 6 304-2호</p>
+            <p className="text-sm">대표 전화&nbsp; 070-7666-9891&nbsp;&nbsp; 사업자 등록번호&nbsp; 826-08-02196</p>
+            <p className="text-sm">통신판매업 신고번호&nbsp; 2023-서울관악-2318 [사업자정보확인]</p>
+            <p className="text-sm">개인정보보호책임자&nbsp; 김진우</p>
+          </div>
+        </div>
+
+        <div className="py-6 sm:py-10">
+          <p className="text-xs sm:text-sm text-gray-400 text-center">
+            Copyright &copy; 두요(DUYO) | 두고두고 요긴한 업무 자동화 솔루션. All Rights Reserved.
           </p>
         </div>
       </Container>

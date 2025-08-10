@@ -17,17 +17,16 @@ export function DarkBentoSection() {
       onMouseMove={handleGlobalMouseMove}
     >
       <Container>
-        <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none ">
-          <h2 className="font-medium mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] bg-clip-text text-4xl tracking-tighter text-transparent md:text-6xl mb-10">
-            누구나 쉽게 만드는{' '}<br/>
-            <span className="font-bold bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent block mt-6">
-              프로급 숏폼 영상
-            </span>
-          </h2>
-          <p className="mt-6 text-md md:text-md mx-auto max-w-2xl text-gray-300">
+        <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-6xl text-white leading-tight mb-6">
+              <span className="font-bold bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent">
+              누구나 쉽게 만드는
+              </span>{' '}<br />              프로급 숏폼 영상
+            </h2>
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed break-keep">
             경험이나 기술적 배경과 상관없이, 아이디어만 있으면 바로 시작할 수 있습니다. <br/>간단한 키워드 입력부터 완성된 영상까지, 모든 과정이 자동화됩니다.
-          </p>
-        </div>
+            </p>
+          </div>
 
         <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
         <BentoCard

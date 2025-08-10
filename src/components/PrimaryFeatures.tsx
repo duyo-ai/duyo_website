@@ -55,7 +55,7 @@ function AISection() {
     <div className="mb-32">
       {/* 제목 섹션 */}
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+        <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white leading-tight mb-6">
           <span className="font-bold bg-gradient-to-r from-blue-200 via-blue-100 to-blue-200 bg-clip-text text-transparent">
             AI로 더 쉽게
           </span>
@@ -98,14 +98,12 @@ function EditSection() {
     <div className="space-y-16">
       {/* 제목 */}
       <div className="text-center">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+        <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white leading-tight mb-6">
           <span className="font-bold bg-gradient-to-r from-purple-200 via-purple-100 to-purple-200 bg-clip-text text-transparent">
             누구나 쉽게
           </span>
         </h2>
-        <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed break-keep">
-          직관적인 편집 도구로 누구나 전문가처럼 영상을 만들 수 있습니다.
-        </p>
+        
       </div>
 
       {/* 메인 피처 (드래그&드롭) - 큰 카드 */}
