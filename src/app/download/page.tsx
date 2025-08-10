@@ -42,7 +42,7 @@ const DownloadPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950">
+    <div className="bg-slate-950">
       <Header />
 
       <main className="pt-20">
@@ -67,17 +67,19 @@ const DownloadPage = () => {
             </div>
             {/* Primary Download Button - Current OS */}
             {(osType === 'mac' || osType === 'windows') && (
-              <div className="text-center mb-16">
-                <button
-                  onClick={() => handleDownload(osType, currentVersions[osType === 'mac' ? 'macSilicon' : 'windows'].version)}
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold rounded-xl hover:from-purple-600 hover:to-indigo-700 transition-all transform  shadow-lg"
-                >
-                  <Download className="h-5 w-5" />
-                  Download for {osType === 'mac' ? 'Mac' : 'Windows'}
-                  <span className="text-purple-200 text-sm ml-2">
-                    v{currentVersions[osType === 'mac' ? 'macSilicon' : 'windows'].version}
-                  </span>
-                </button>
+              <div className="relative z-30 text-center mb-16 pointer-events-auto">
+                <div className="inline-flex">
+                  <button
+                    onClick={() => handleDownload(osType, currentVersions[osType === 'mac' ? 'macSilicon' : 'windows'].version)}
+                    className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 px-8 py-3.5 text-white font-semibold shadow-lg ring-2 ring-indigo-500/30 ring-offset-2 ring-offset-slate-950 transition-all hover:opacity-80 text-base sm:text-lg"
+                  >
+                    <Download className="h-5 w-5 sm:h-6 sm:w-6" />
+                    <span className="font-semibold tracking-tight">Download for {osType === 'mac' ? 'macOS' : 'Windows'}</span>
+                    <span className="ml-2 text-xs sm:text-sm text-white/80">
+                      v{currentVersions[osType === 'mac' ? 'macSilicon' : 'windows'].version}
+                    </span>
+                  </button>
+                </div>
                 <p className="text-gray-400 text-sm mt-3">
                   {osType === 'mac' ? 'Apple Silicon에 최적화' : 'Windows 10 이상 지원'}
                 </p>
@@ -85,7 +87,7 @@ const DownloadPage = () => {
             )}
 
             {/* Download showcase image (plain) */}
-            <div className="mx-auto max-w-xl -mt-52">
+            <div className="relative z-10 mx-auto max-w-xl -mt-52">
               <Image
                 src="/download_asset.svg"
                 alt="Cutple download showcase"

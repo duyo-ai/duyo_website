@@ -97,8 +97,8 @@ export function Header() {
             <Link href="#pricing" className="text-gray-300 hover:text-white transition-colors">
               Pricing
             </Link>
-            <Link href="#about" className="text-gray-300 hover:text-white transition-colors">
-              About
+            <Link href="/download" className="text-gray-300 hover:text-white transition-colors">
+              Download
             </Link>
             <Link href="https://slashpage.com/cutple" target="_blank" className="text-gray-300 hover:text-white transition-colors">
               Docs
@@ -174,11 +174,11 @@ export function Header() {
                 Pricing
               </Link>
               <Link 
-                href="#about" 
+                href="/download" 
                 className="block text-gray-300 hover:text-white transition-colors py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                About
+                Download
               </Link>
               <Link 
                 href="https://slashpage.com/cutple" 

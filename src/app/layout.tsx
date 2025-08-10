@@ -48,7 +48,6 @@ export default function RootLayout({
       )}
     >
       <body className="flex h-full flex-col">
-        <div className="absolute top-0 z-1 h-screen w-screen bg-black/80  bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(106,20,255,0.4),rgba(255,255,255,0))]"></div>
 
         {children}
         <ToolbarProvider />

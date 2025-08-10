@@ -30,12 +30,11 @@ const HeroMod = () => {
   }
   return (
     <>
-      <section
-        className="min-h-screen w-full relative mb-0"
-        style={{
-          background: 'radial-gradient(ellipse 50% 80% at 20% 40%, rgba(93, 52, 221, 0), transparent), radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0, 160, 255, 0.2), transparent)'
-        }}
-      >
+      <section className="min-h-screen w-full relative mb-0">
+        {/* Top hero-only gradient (doesn't stick on scroll) */}
+        <div className="pointer-events-none absolute inset-x-0 -top-10 h-[70vh] -z-10 bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(106,20,255,0.2),rgba(255,255,255,0))]" />
+        {/* Bottom rising blue glow (hero only) */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[120vh] -z-10 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(0,160,255,0.3),transparent)]" />
         {/* Grid background removed */}
 
         <div className="relative z-10 mx-auto max-w-screen-xl gap-6 px-4 py-6 sm:py-10 text-gray-600 md:px-8">
