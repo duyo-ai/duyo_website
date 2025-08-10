@@ -68,7 +68,7 @@ function AISection() {
       {/* 3개 카드 한 줄 */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {aiFeatures.map((feature, index) => (
-                     <div key={feature.title} className="relative overflow-hidden rounded-2xl bg-slate-800/80">
+                     <div key={feature.title} className="relative overflow-hidden rounded-2xl bg-slate-900/80">
             <div className="aspect-video relative overflow-hidden">
               <Image
                 src={feature.image}
@@ -107,7 +107,7 @@ function EditSection() {
       </div>
 
       {/* 메인 피처 (드래그&드롭) - 큰 카드 */}
-      <div className="relative overflow-hidden rounded-3xl bg-slate-800/80 p-8 lg:p-12">
+      <div className="relative overflow-hidden rounded-3xl bg-slate-900/80 p-8 lg:p-12">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           <div className="flex-1 space-y-6">
             <h3 className="text-2xl lg:text-3xl font-bold text-white">
@@ -132,7 +132,7 @@ function EditSection() {
       {/* 나머지 두 피처 - 사이드바이사이드 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {editFeatures.slice(1).map((feature, index) => (
-                     <div key={feature.title} className="relative overflow-hidden rounded-2xl bg-slate-800/80">
+                     <div key={feature.title} className="relative overflow-hidden rounded-2xl bg-slate-900/80">
             <div className="aspect-video relative overflow-hidden">
               <Image
                 src={feature.image}
