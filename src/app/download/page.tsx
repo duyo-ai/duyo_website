@@ -66,10 +66,10 @@ const DownloadPage = () => {
             {/* Primary Download Button - Current OS */}
             {(osType === 'mac' || osType === 'windows') && (
               <div className="relative z-30 text-center mb-16 pointer-events-auto">
-                <div className="inline-flex">
+                <div className="inline-flex flex-row flex-nowrap">
                   <button
                     onClick={() => handleDownload(osType, currentVersions[osType === 'mac' ? 'macSilicon' : 'windows'].version)}
-                    className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 px-8 py-3.5 text-white font-semibold shadow-lg ring-2 ring-indigo-500/30 ring-offset-2 ring-offset-slate-950 transition-all hover:opacity-80 text-base sm:text-lg"
+                    className="inline-flex items-center gap-2 whitespace-nowrap rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 px-5 py-2.5 sm:px-8 sm:py-3.5 text-white font-semibold shadow-lg ring-2 ring-indigo-500/30 ring-offset-2 ring-offset-slate-950 transition-all hover:opacity-80 text-sm sm:text-lg"
                   >
                     <Download className="h-5 w-5 sm:h-6 sm:w-6" />
                     <span className="font-semibold tracking-tight">Download for {osType === 'mac' ? 'macOS' : 'Windows'}</span>
@@ -85,7 +85,7 @@ const DownloadPage = () => {
             )}
 
             {/* Download showcase image (plain) */}
-            <div className="relative z-10 mx-auto max-w-xl -mt-52">
+            <div className="relative z-10 mx-auto max-w-lg sm:max-w-xl -mt-44 sm:-mt-52">
               <Image
                 src="/download_asset.svg"
                 alt="Cutple download showcase"

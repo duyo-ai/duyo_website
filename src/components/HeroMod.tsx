@@ -40,7 +40,7 @@ const HeroMod = () => {
         <div className="relative z-10 mx-auto max-w-screen-xl gap-6 px-4 py-6 sm:py-10 text-gray-600 md:px-8">
           <div className="leading-0 mx-auto max-w-6xl space-y-2 sm:space-y-3 px-4 sm:px-6 lg:px-10 text-center lg:leading-5">
 
-            <h2 className="sm:mt-36 mt-10 font-semibold mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] bg-clip-text text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tighter text-transparent mb-2 sm:mb-3 leading-[1.12]">
+            <h2 className="sm:mt-36 mt-20 font-semibold mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] bg-clip-text text-3xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tighter text-transparent mb-2 sm:mb-3 leading-[1.15] ">
 
               텍스트 한
               줄로 만드는 바이럴 숏폼{' '}<br />
@@ -50,14 +50,14 @@ const HeroMod = () => {
               </span>
             </h2>
 
-            <p className="text-sm sm:text-base md:text-lg mx-auto max-w-xl sm:max-w-2xl text-gray-300 px-4 sm:px-0 pb-10 lg:pb-40">
+            <p className="text-sm sm:text-base md:text-lg mx-auto max-w-[32rem] sm:max-w-2xl text-gray-300 px-4 sm:px-0 pb-32 lg:pb-40 break-keep">
               키워드를 입력하면 대본이 나오고, 목소리가 입혀지고, 이미지가 배치됩니다. <br className="hidden sm:block" />심지어 장면 간의 간격까지 AI가 조절합니다.
             </p>
             
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            <div className="flex flex-row flex-nowrap items-center justify-center gap-2 sm:gap-4 px-3">
               <button
                 onClick={() => setIsAuthModalOpen(true)}
-                className="font-semibold group z-50 flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-indigo-400 to-indigo-700 px-6 py-3 sm:px-8 sm:py-4 text-center text-base sm:text-lg lg:text-xl tracking-tighter text-zinc-50 ring-2 ring-indigo-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-indigo-500/70"
+                className="font-semibold whitespace-nowrap group z-50 flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-indigo-400 to-indigo-700 px-4 py-2 text-sm sm:px-8 sm:py-4 text-center sm:text-lg lg:text-xl tracking-tighter text-zinc-50 ring-2 ring-indigo-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-indigo-500/70"
               >
                 지금 시작하기{' '}
                 <ChevronRight className="inline-flex items-center justify-center transition-all duration-500 group-hover:translate-x-1 h-4 w-4 sm:h-5 sm:w-5" />
@@ -66,7 +66,7 @@ const HeroMod = () => {
               {(osType === 'mac' || osType === 'windows') && (
                 <button
                   onClick={handleDownload}
-                  className="font-semibold group z-50 flex items-center justify-center gap-2 rounded-md bg-white/[0.08] backdrop-blur-md border border-white/20 px-6 py-3 sm:px-8 sm:py-4 text-center text-base sm:text-lg lg:text-xl tracking-tighter text-white hover:bg-white/[0.12] hover:border-white/30 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg"
+                  className="font-semibold whitespace-nowrap group z-50 flex items-center justify-center gap-2 rounded-md bg-white/[0.08] backdrop-blur-md border border-white/20 px-4 py-2 text-sm sm:px-8 sm:py-4 text-center sm:text-lg lg:text-xl tracking-tighter text-white hover:bg-white/[0.12] hover:border-white/30 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg"
                 >
                   <Download className="h-4 w-4 sm:h-5 sm:w-5" />
                   Download for {osType === 'mac' ? 'Mac' : 'Windows'}
