@@ -1,11 +1,125 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
-import { Download, Monitor, Smartphone, Laptop, Computer } from 'lucide-react'
+import { Monitor, Smartphone, Laptop, Computer } from 'lucide-react'
 import { Container } from '@/components/Container'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+
+type GlowRingWrapperProps = {
+  children: React.ReactNode
+  variant?: 'primary' | 'neutral'
+}
+
+function GlowRingWrapper({ children, variant = 'neutral' }: GlowRingWrapperProps) {
+  const wrapperRef = useRef<HTMLDivElement | null>(null)
+  const [isHovered, setIsHovered] = useState(false)
+  const targetXRef = useRef<number>(0)
+  const targetYRef = useRef<number>(0)
+  const currentXRef = useRef<number>(0)
+  const currentYRef = useRef<number>(0)
+  const rafRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    const el = wrapperRef.current
+    if (!el) return
+
+    const rect = el.getBoundingClientRect()
+    targetXRef.current = rect.width / 2
+    targetYRef.current = rect.height / 2
+    currentXRef.current = targetXRef.current
+    currentYRef.current = targetYRef.current
+    el.style.setProperty('--mx', `${currentXRef.current}px`)
+    el.style.setProperty('--my', `${currentYRef.current}px`)
+
+    const handleMove = (e: MouseEvent) => {
+      const r = el.getBoundingClientRect()
+      // 마우스 추적 범위를 확장하여 더 먼 거리에서도 작동
+      const centerX = r.left + r.width / 2
+      const centerY = r.top + r.height / 2
+      const mouseX = e.clientX
+      const mouseY = e.clientY
+      
+      // 버튼 중심에서 최대 800px까지 영향 받음 - 매우 넓은 범위
+      const distance = Math.sqrt(Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2))
+      const maxDistance = 800
+      
+      if (distance <= maxDistance) {
+        targetXRef.current = e.clientX - r.left
+        targetYRef.current = e.clientY - r.top
+      }
+    }
+
+    const smoothFollow = () => {
+      const lerp = 0.2 // 매우 부드러운 딜레이 (작을수록 더 느림)
+      const nx = currentXRef.current + (targetXRef.current - currentXRef.current) * lerp
+      const ny = currentYRef.current + (targetYRef.current - currentYRef.current) * lerp
+      currentXRef.current = nx
+      currentYRef.current = ny
+      el.style.setProperty('--mx', `${nx.toFixed(2)}px`)
+      el.style.setProperty('--my', `${ny.toFixed(2)}px`)
+      rafRef.current = requestAnimationFrame(smoothFollow)
+    }
+
+    rafRef.current = requestAnimationFrame(smoothFollow)
+    window.addEventListener('mousemove', handleMove, { passive: true })
+    return () => {
+      window.removeEventListener('mousemove', handleMove)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [])
+
+  const ringRadius = 10
+  const gapPx = 6
+  const ringThicknessPx = 0.8
+
+  const highlightGradient =
+    variant === 'primary'
+      ? `radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), rgba(99,102,241,1), rgba(99,102,241,0.9) 25%, rgba(99,102,241,0.6) 50%, rgba(255,255,255,0) 70%)`
+      : `radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), rgba(212,212,216,1), rgba(228,228,231,0.9) 25%, rgba(212,212,216,0.6) 50%, rgba(255,255,255,0) 70%)`
+
+  const baseTintGradient =
+    variant === 'primary'
+      ? 'linear-gradient(0deg, rgba(99,102,241,0.3), rgba(99,102,241,0.3))'
+      : 'linear-gradient(0deg, rgba(212,212,216,0.2), rgba(212,212,216,0.2))'
+
+  const hoverSolidGradient =
+    variant === 'primary'
+      ? 'linear-gradient(0deg, rgba(99,102,241,0.9), rgba(99,102,241,0.9))'
+      : 'linear-gradient(0deg, rgba(212,212,216,0.9), rgba(212,212,216,0.9))'
+
+  return (
+    <div
+      ref={wrapperRef}
+      className="relative inline-flex"
+      style={{ borderRadius: `${ringRadius}px` }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          borderRadius: `${ringRadius}px`,
+          padding: `${ringThicknessPx}px`,
+          backgroundImage: isHovered ? hoverSolidGradient : [highlightGradient, baseTintGradient].join(', '),
+          WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+        }}
+      />
+      <div
+        className="relative z-10"
+        style={{
+          borderRadius: `${ringRadius - 2}px`,
+          margin: `${gapPx}px`,
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  )
+}
 
 const DownloadPage = () => {
   const [activeVersion, setActiveVersion] = useState<'stable' | 'beta'>('stable')
@@ -41,6 +155,8 @@ const DownloadPage = () => {
     // 실제 다운로드 로직 구현
   }
 
+  // Spotlight는 부모 요소에 hover/move 이벤트를 자체 바인딩합니다.
+
   return (
     <div className="bg-slate-950">
       <Header />
@@ -50,70 +166,79 @@ const DownloadPage = () => {
           <div className="relative z-10 py-20">
             {/* Header Section */}
             <div className="text-center mb-5">
-              
+              <div className="relative z-10 mx-auto max-w-xs sm:max-w-[500px] -mt-20 sm:-mt-28 sm:-mb-14 -mb-10">
+                <Image
+                  src="/download_asset.svg"
+                  alt="Cutple download showcase"
+                  width={700}
+                  height={700}
+                  priority
+                  className="w-full h-auto"
+                />
+              </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent mb-6">
-                Download Cutple.
+
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent mb-5">
+                Download Cutple
               </h1>
-
-              <p className="text-lg text-gray-200 mb-10 max-w-2xl mx-auto">
-                Mac, Windows에서 사용 가능합니다. Apple Silicon에 최적화되어 있습니다.
-              </p>
-
               {/* Version Toggle */}
-
             </div>
             {/* Primary Download Button - Current OS */}
             {(osType === 'mac' || osType === 'windows') && (
               <div className="relative z-30 text-center mb-16 pointer-events-auto">
                 <div className="inline-flex flex-row flex-nowrap">
-                  <button
-                    onClick={() => handleDownload(osType, currentVersions[osType === 'mac' ? 'macSilicon' : 'windows'].version)}
-                    className="inline-flex items-center gap-2 whitespace-nowrap rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 px-5 py-2.5 sm:px-8 sm:py-3.5 text-white font-semibold shadow-lg ring-2 ring-indigo-500/30 ring-offset-2 ring-offset-slate-950 transition-all hover:opacity-80 text-sm sm:text-lg"
-                  >
-                    <Download className="h-5 w-5 sm:h-6 sm:w-6" />
-                    <span className="font-semibold tracking-tight">Download for {osType === 'mac' ? 'macOS' : 'Windows'}</span>
-                    <span className="ml-2 text-xs sm:text-sm text-white/80">
-                      v{currentVersions[osType === 'mac' ? 'macSilicon' : 'windows'].version}
-                    </span>
-                  </button>
+                  <GlowRingWrapper variant="neutral">
+                    <button
+                      onClick={() => handleDownload(osType, currentVersions[osType === 'mac' ? 'macSilicon' : 'windows'].version)}
+                      className='relative inline-flex items-center gap-2 justify-center whitespace-nowrap rounded-md bg-white dark:bg-black px-5 py-2.5 sm:px-4 sm:py-3.5 text-black dark:text-white font-semibold text-sm sm:text-lg'
+                    >
+                      {osType === 'mac' ? (
+                        <svg className="h-5 w-5 sm:h-6 sm:w-6 text-black dark:text-white fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                        </svg>
+                      ) : (
+                        <svg className="h-5 w-5 sm:h-6 sm:w-6 text-black dark:text-white fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.801" />
+                        </svg>
+                      )}
+                      <span className="font-semibold tracking-tight">Download for {osType === 'mac' ? 'macOS' : 'Windows'}</span>
+                      <span className="text-xs sm:text-sm opacity-70">
+                        v{currentVersions[osType === 'mac' ? 'macSilicon' : 'windows'].version}
+                      </span>
+                    </button>
+                  </GlowRingWrapper>
                 </div>
                 <p className="text-gray-400 text-sm mt-3">
                   {osType === 'mac' ? 'Apple Silicon에 최적화' : 'Windows 10 이상 지원'}
                 </p>
+
               </div>
+
             )}
 
             {/* Download showcase image (plain) */}
-            <div className="relative z-10 mx-auto max-w-lg sm:max-w-xl -mt-44 sm:-mt-52">
-              <Image
-                src="/download_asset.svg"
-                alt="Cutple download showcase"
-                width={700}
-                height={700}
-                priority
-                className="w-full h-auto"
-              />
-            </div>
 
-            {/* Spacer below showcase */}
-            <div className='mt-20 flex justify-center'>
-              <div className="inline-flex  items-center justify-center bg-white/5 rounded-xl p-1 border border-white/10 mb-5">
+
+            {/* Version toggle (smaller, left-aligned) */}
+            <div className='mt-20 sm:mt-12 flex justify-start'>
+              <div className="inline-flex items-center justify-center bg-white/5 rounded-lg p-0.5 border border-white/10 mb-5 sm:mb-8">
                 <button
                   onClick={() => setActiveVersion('stable')}
-                  className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all ${activeVersion === 'stable'
-                    ? 'bg-white/10 text-white shadow-lg'
+                  className={`px-4 py-2 rounded-md text-xs sm:text-sm font-semibold transition-colors ${activeVersion === 'stable'
+                    ? 'bg-white/10 text-white'
                     : 'text-gray-400 hover:text-white'
                     }`}
+                  aria-pressed={activeVersion === 'stable'}
                 >
                   정식 버전
                 </button>
                 <button
                   onClick={() => setActiveVersion('beta')}
-                  className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all ${activeVersion === 'beta'
-                    ? 'bg-white/10 text-white shadow-lg'
+                  className={`px-4 py-2 rounded-md text-xs sm:text-sm font-semibold transition-colors ${activeVersion === 'beta'
+                    ? 'bg-white/10 text-white'
                     : 'text-gray-400 hover:text-white'
                     }`}
+                  aria-pressed={activeVersion === 'beta'}
                 >
                   베타 버전
                 </button>
@@ -122,20 +247,20 @@ const DownloadPage = () => {
 
             {/* Mac Downloads */}
             <div className="mb-16">
-              <div className="mb-8">
+              <div className="sm:mb-8 mb-4">
                 <h2 className="text-2xl font-semibold text-white">
                   Cutple for Mac {activeVersion === 'beta' && 'Beta'}
                 </h2>
               </div>
-              <p className="text-gray-200 mb-8">
+              <p className="text-gray-200 mb-4">
                 {activeVersion === 'stable' ? 'Apple Silicon과 Intel 모두 지원합니다.' : '최신 기능을 먼저 경험해보세요.'}
               </p>
 
               <div className="space-y-4">
                 {/* macOS Apple Silicon */}
-                <div className={`p-6 rounded-xl border transition-all hover:bg-white/5 ${osType === 'mac' ? 'bg-purple-500/10 border-purple-500/30' : 'bg-white/5 border-white/10'
+                <div className={`p-4 sm:p-5 md:p-6 rounded-xl border transition-all hover:bg-white/5 ${osType === 'mac' ? 'bg-purple-500/10 border-purple-500/30' : 'bg-white/5 border-white/10'
                   }`}>
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
                         <svg className="h-6 w-6 text-white fill-current" viewBox="0 0 24 24">
@@ -155,14 +280,14 @@ const DownloadPage = () => {
                         <p className="text-gray-400 text-sm">macOS 11.0 이상</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-6">
-                      <div className="text-center">
+                    <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-6 w-full md:w-auto">
+                      <div className="text-left md:text-center">
                         <p className="text-xs text-gray-400 uppercase tracking-wide">Version</p>
                         <p className="text-sm font-semibold text-white">{currentVersions.macSilicon.version}</p>
                       </div>
                       <button
                         onClick={() => handleDownload('macOS Apple Silicon', currentVersions.macSilicon.version)}
-                        className={`px-6 py-2 rounded-lg font-semibold transition-all ${activeVersion === 'stable'
+                        className={`w-full md:w-auto px-6 py-2 rounded-lg font-semibold transition-all ${activeVersion === 'stable'
                           ? 'bg-white text-gray-900 hover:bg-gray-100'
                           : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
                           }`}
@@ -177,20 +302,20 @@ const DownloadPage = () => {
 
             {/* Windows Downloads */}
             <div className="mb-16">
-              <div className="mb-8">
+              <div className="sm:mb-8 mb-4">
                 <h2 className="text-2xl font-semibold text-white">
                   Cutple for Windows {activeVersion === 'beta' && 'Beta'}
                 </h2>
               </div>
-              <p className="text-gray-200 mb-8">
+              <p className="text-gray-200 mb-4">
                 {activeVersion === 'stable' ? 'Windows 10 이상에서 사용 가능합니다.' : '최신 기능을 먼저 경험해보세요.'}
               </p>
 
               <div className="space-y-4">
                 {/* Windows */}
-                <div className={`p-6 rounded-xl border transition-all hover:bg-white/5 ${osType === 'windows' ? 'bg-purple-500/10 border-purple-500/30' : 'bg-white/5 border-white/10'
+                <div className={`p-4 sm:p-5 md:p-6 rounded-xl border transition-all hover:bg-white/5 ${osType === 'windows' ? 'bg-purple-500/10 border-purple-500/30' : 'bg-white/5 border-white/10'
                   }`}>
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
                         <svg className="h-6 w-6 text-white fill-current" viewBox="0 0 24 24">
@@ -210,14 +335,14 @@ const DownloadPage = () => {
                         <p className="text-gray-400 text-sm">Windows 10 이상</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-6">
-                      <div className="text-center">
+                    <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-6 w-full md:w-auto">
+                      <div className="text-left md:text-center">
                         <p className="text-xs text-gray-400 uppercase tracking-wide">Version</p>
                         <p className="text-sm font-semibold text-white">{currentVersions.windows.version}</p>
                       </div>
                       <button
                         onClick={() => handleDownload('Windows', currentVersions.windows.version)}
-                        className={`px-6 py-2 rounded-lg font-semibold transition-all ${activeVersion === 'stable'
+                        className={`w-full md:w-auto px-6 py-2 rounded-lg font-semibold transition-all ${activeVersion === 'stable'
                           ? 'bg-white text-gray-900 hover:bg-gray-100'
                           : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
                           }`}

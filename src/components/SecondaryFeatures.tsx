@@ -170,21 +170,16 @@ function FeaturesMobile() {
     <div className="-mx-4 mt-20 flex flex-col gap-y-10 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
       {features.map((feature, index) => (
         <div key={feature.summary}>
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-white/10 ring-2 ring-purple-400/40 backdrop-blur-md flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-purple-500/20">
-              {index + 1}
-            </div>
-            <div className="h-px bg-gray-600 flex-1" />
-          </div>
+         
           <Feature feature={feature} className="mx-auto max-w-2xl" isActive />
           <div className="relative mt-10 pb-10">
-            <div className="absolute -inset-x-4 bottom-0 top-8 bg-slate-200 sm:-inset-x-6" />
-            <div className="relative mx-auto w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-gray-200/5 ring-1 ring-slate-500/10">
+            <div className="absolute -inset-x-4 bottom-0 top-8 bg-slate-300 sm:-inset-x-6" />
+            <div className="relative mx-auto w-full overflow-hidden rounded-xl bg-white shadow-lg shadow-gray-200/5 ring-1 ring-slate-500/10">
               <Image
                 className="w-full"
                 src={feature.image}
                 alt=""
-                sizes="52.75rem"
+                sizes="W-auto"
               />
             </div>
           </div>
@@ -254,17 +249,17 @@ export function SecondaryFeatures() {
             className="h-full absolute inset-0 rotate-180 blur-lg"
             style={{
               background:
-                'linear-gradient(143.6deg, rgba(52, 103, 235, 0) 15%, rgba(111,79,249, 0.35) 40%, rgba(111,79,249, 0) 50%)',
+                'linear-gradient(143.6deg, rgba(52, 103, 235, 0) 15%, rgba(111,79,249, 0.2) 40%, rgba(111,79,249, 0) 50%)',
             }}
           ></div>
 
-          <div className="text-center mb-12">
+          <div className="text-center mb-6 sm:mb-8 md:mb-12">
             <h2 className="text-3xl md:text-4xl lg:text-6xl text-white leading-tight mb-6">
               <span className="font-bold bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent">
                 간단한 3단계로
               </span>{' '}<br />              콘텐츠 제작 완성.
             </h2>
-            <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed break-keep">
+            <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed break-keep">
               키워드만 입력하면 AI가 템플릿 추천부터 최종 완성까지
               모든 과정을 도와드립니다.
             </p>

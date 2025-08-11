@@ -59,7 +59,7 @@ export function Faqs() {
           >
             자주 묻는 질문
           </h2>
-          <p className="mt-4 text-base sm:text-lg tracking-tight text-gray-400">
+          <p className="mt-4 text-sm sm:text-base md:text-lg tracking-tight text-gray-400">
             궁금한 점이 해결되지 않으셨다면 고객지원팀에 문의해 주세요.
             빠른 시간 내에 답변드리겠습니다.
           </p>

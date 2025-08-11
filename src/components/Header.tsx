@@ -67,7 +67,7 @@ export function Header() {
             borderRadius: `${isDesktop ? 2 + scrollProgress * 16 : 0}px`,
             backgroundColor: `${isDesktop ? `rgba(0,0,0,${0.4 - scrollProgress * 0.2})` : 'rgba(0,0,0,0.4)'}`,
             transform: `${isDesktop ? `scale(${1 - scrollProgress * 0.02})` : 'none'}`,
-            transition: 'padding 200ms ease-out, border-radius 200ms ease-out, background-color 200ms ease-out, transform 200ms ease-out',
+            transition: 'padding 600ms ease-out, border-radius 600ms ease-out, background-color 600ms ease-out, transform 600ms ease-out',
           }}
         >
           {/* Logo */}

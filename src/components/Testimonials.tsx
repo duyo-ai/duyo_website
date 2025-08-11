@@ -84,14 +84,14 @@ export function Testimonials() {
       className="relative bg-slate-950 z-1 pt-20 "
     >
       <Container>
-        <div className="text-center mb-12">
+        <div className="text-center mb-6 sm:mb-8 md:mb-12">
             <h2 className="text-3xl md:text-4xl lg:text-6xl text-white leading-tight mb-6">
             실제 사용자들의{' '}<br /> 
               <span className="font-bold bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent">
               생생한 후기
               </span>
             </h2>
-            <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed break-keep">
+            <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed break-keep">
             전국의 크리에이터들이 이미 경험하고 있는 변화를 확인해보세요. <br className="hidden sm:block"/>간단한 키워드 입력만으로도 놀라운 결과를 만들어내고 있습니다.
             </p>
           </div>
