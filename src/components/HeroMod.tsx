@@ -100,19 +100,30 @@ function GlowRingWrapper({ children, variant = 'primary' }: GlowRingWrapperProps
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Ring layer (masked to border only) */}
+      {/* Base ring (static) */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          // Apply radius to the ring layer
           borderRadius: `${ringRadius}px`,
           padding: `${ringThicknessPx}px`,
-          // Base tinted ring + pointer highlight on top (color-matched)
-          backgroundImage: isHovered ? hoverSolidGradient : [highlightGradient, baseTintGradient].join(', '),
-          // Mask to show only the ring area (border)
+          backgroundImage: [highlightGradient, baseTintGradient].join(', '),
           WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
           WebkitMaskComposite: 'xor',
           maskComposite: 'exclude',
+        }}
+      />
+      {/* Hover overlay ring (fades in/out) */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          borderRadius: `${ringRadius}px`,
+          padding: `${ringThicknessPx}px`,
+          backgroundImage: hoverSolidGradient,
+          WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+          opacity: isHovered ? 1 : 0,
+          transition: 'opacity 650ms cubic-bezier(0.22, 1, 0.36, 1)',
         }}
       />
 

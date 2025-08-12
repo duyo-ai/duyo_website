@@ -86,22 +86,22 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Navigation Items - 항상 표시 (데스크톱) */}
+          {/* 내비게이션 (데스크톱) */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link href="#features" className="text-gray-300 hover:text-white transition-colors">
-              Features
+            <Link href="/#features" className="text-gray-300 hover:text-white transition-colors">
+              주요 기능
             </Link>
-            <Link href="#solution" className="text-gray-300 hover:text-white transition-colors">
-              Solution
+            <Link href="/#secondary-features" className="text-gray-300 hover:text-white transition-colors">
+              솔루션
             </Link>
-            <Link href="#pricing" className="text-gray-300 hover:text-white transition-colors">
-              Pricing
+            <Link href="/pricing" className="text-gray-300 hover:text-white transition-colors">
+              요금제
             </Link>
             <Link href="/download" className="text-gray-300 hover:text-white transition-colors">
-              Download
+              다운로드
             </Link>
             <Link href="https://slashpage.com/cutple" target="_blank" className="text-gray-300 hover:text-white transition-colors">
-              Docs
+              문서
             </Link>
           </div>
 
@@ -152,33 +152,21 @@ export function Header() {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-2">
             <div className="rounded-2xl border border-white/10 bg-black/20 backdrop-blur-md p-4 space-y-3">
+              <Link href="/#features" className="block text-gray-300 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>주요 기능</Link>
+              <Link href="/#secondary-features" className="block text-gray-300 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>솔루션</Link>
               <Link 
-                href="#features" 
+                href="/pricing" 
                 className="block text-gray-300 hover:text-white transition-colors py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Features
-              </Link>
-              <Link 
-                href="#solution" 
-                className="block text-gray-300 hover:text-white transition-colors py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Solution
-              </Link>
-              <Link 
-                href="#pricing" 
-                className="block text-gray-300 hover:text-white transition-colors py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Pricing
+                요금제
               </Link>
               <Link 
                 href="/download" 
                 className="block text-gray-300 hover:text-white transition-colors py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Download
+                다운로드
               </Link>
               <Link 
                 href="https://slashpage.com/cutple" 
@@ -186,7 +174,7 @@ export function Header() {
                 target="_blank"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Docs
+                문서
               </Link>
             </div>
           </div>

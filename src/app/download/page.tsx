@@ -97,15 +97,30 @@ function GlowRingWrapper({ children, variant = 'neutral' }: GlowRingWrapperProps
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Base ring */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           borderRadius: `${ringRadius}px`,
           padding: `${ringThicknessPx}px`,
-          backgroundImage: isHovered ? hoverSolidGradient : [highlightGradient, baseTintGradient].join(', '),
+          backgroundImage: [highlightGradient, baseTintGradient].join(', '),
           WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
           WebkitMaskComposite: 'xor',
           maskComposite: 'exclude',
+        }}
+      />
+      {/* Hover overlay ring */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          borderRadius: `${ringRadius}px`,
+          padding: `${ringThicknessPx}px`,
+          backgroundImage: hoverSolidGradient,
+          WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+          opacity: isHovered ? 1 : 0,
+          transition: 'opacity 650ms cubic-bezier(0.22, 1, 0.36, 1)',
         }}
       />
       <div
@@ -166,7 +181,7 @@ const DownloadPage = () => {
           <div className="relative z-10 py-20">
             {/* Header Section */}
             <div className="text-center mb-5">
-              <div className="relative z-10 mx-auto max-w-xs sm:max-w-[500px] -mt-20 sm:-mt-28 sm:-mb-14 -mb-10">
+              <div className="relative z-10 mx-auto max-w-xs sm:max-w-[500px] -mt-20 sm:-mt-36 sm:-mb-14 -mb-10">
                 <Image
                   src="/download_asset.svg"
                   alt="Cutple download showcase"

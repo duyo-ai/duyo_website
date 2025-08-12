@@ -129,7 +129,7 @@ function Feature({
         {/* 좌측 원형 숫자 배지 */}
         <div
           className={clsx(
-            'w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-500 flex-shrink-0  shadow-black',
+            'w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-500 flex-shrink-0',
             isActive ? 'bg-white/10' : 'bg-white/5 ',
           )}
         >
