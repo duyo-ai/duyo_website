@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { Container } from '@/components/Container'
@@ -17,6 +17,107 @@ type Plan = {
   href: string
   features: string[]
   highlight?: boolean
+}
+
+// Glow ring wrapper copied from download page style (border-only lamp effect)
+function GlowRingWrapper({ children, variant = 'primary' as 'primary' | 'neutral' }: { children: React.ReactNode; variant?: 'primary' | 'neutral' }) {
+  const wrapperRef = useRef<HTMLDivElement | null>(null)
+  const [isHovered, setIsHovered] = useState(false)
+  const targetXRef = useRef<number>(0)
+  const targetYRef = useRef<number>(0)
+  const currentXRef = useRef<number>(0)
+  const currentYRef = useRef<number>(0)
+  const rafRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    const el = wrapperRef.current
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    targetXRef.current = rect.width / 2
+    targetYRef.current = rect.height / 2
+    currentXRef.current = targetXRef.current
+    currentYRef.current = targetYRef.current
+    el.style.setProperty('--mx', `${currentXRef.current}px`)
+    el.style.setProperty('--my', `${currentYRef.current}px`)
+
+    const handleMove = (e: MouseEvent) => {
+      const r = el.getBoundingClientRect()
+      const mx = e.clientX - r.left
+      const my = e.clientY - r.top
+      targetXRef.current = mx
+      targetYRef.current = my
+    }
+
+    const tick = () => {
+      const lerp = 0.2
+      currentXRef.current += (targetXRef.current - currentXRef.current) * lerp
+      currentYRef.current += (targetYRef.current - currentYRef.current) * lerp
+      el.style.setProperty('--mx', `${currentXRef.current.toFixed(2)}px`)
+      el.style.setProperty('--my', `${currentYRef.current.toFixed(2)}px`)
+      rafRef.current = requestAnimationFrame(tick)
+    }
+
+    rafRef.current = requestAnimationFrame(tick)
+    window.addEventListener('mousemove', handleMove, { passive: true })
+    return () => {
+      window.removeEventListener('mousemove', handleMove)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [])
+
+  const ringRadius = 19 // match rounded-2xl (16px)
+  const gapPx = 5
+  const ringThicknessPx = 1
+  const highlightGradient =
+    variant === 'primary'
+      ? `radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), rgba(99,102,241,0.6), rgba(99,102,241,0.45) 25%, rgba(99,102,241,0.25) 50%, rgba(255,255,255,0) 70%)`
+      : `radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), rgba(212,212,216,0.6), rgba(228,228,231,0.45) 25%, rgba(212,212,216,0.25) 50%, rgba(255,255,255,0) 70%)`
+  const baseTintGradient =
+    variant === 'primary'
+      ? 'linear-gradient(0deg, rgba(99,102,241,0.2), rgba(99,102,241,0.2))'
+      : 'linear-gradient(90deg, rgba(212,212,216,0.18), rgba(228,228,231,0.18))'
+  const hoverSolidGradient =
+    variant === 'primary'
+      ? 'linear-gradient(0deg, rgba(99,102,241,0.55), rgba(99,102,241,0.55))'
+      : 'linear-gradient(0deg, rgba(212,212,216,0.6), rgba(212,212,216,0.6))'
+
+  return (
+    <div
+      ref={wrapperRef}
+      className="relative block w-full"
+      style={{ borderRadius: `${ringRadius}px`, padding: `${gapPx}px` }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          borderRadius: `${ringRadius}px`,
+          padding: `${ringThicknessPx}px`,
+          backgroundImage: [highlightGradient, baseTintGradient].join(', '),
+          WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          borderRadius: `${ringRadius}px`,
+          padding: `${ringThicknessPx}px`,
+          backgroundImage: hoverSolidGradient,
+          WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+          opacity: isHovered ? 1 : 0,
+          transition: 'opacity 650ms cubic-bezier(0.22, 1, 0.36, 1)',
+        }}
+      />
+      <div className="relative z-10" style={{ borderRadius: `${ringRadius - 2}px` }}>
+        {children}
+      </div>
+    </div>
+  )
 }
 
 const PLANS: Plan[] = [
@@ -80,11 +181,10 @@ const PLANS: Plan[] = [
 ]
 
 function BasicButton({ href, children, variant = 'primary' as 'primary' | 'outline' }: { href: string; children: React.ReactNode; variant?: 'primary' | 'outline' }) {
-  const base = 'block w-full rounded-xl px-4 py-2.5 text-center font-semibold transition-colors duration-300 ease-out'
-  const cls =
-    variant === 'primary'
-      ? 'bg-purple-200/10 text-white backdrop-blur-md  hover:bg-white/20'
-      : 'bg-purple-200/10 text-white backdrop-blur-md hover:bg-white/20'
+  const base = 'block w-full rounded-md px-4 py-2 text-sm sm:px-8 sm:py-2 sm:text-lg text-center font-semibold transition-colors duration-300 ease-out tracking-tighter'
+  const cls = variant === 'primary'
+    ? 'bg-white text-gray-900 hover:bg-gray-100'
+    : 'bg-white text-gray-900 hover:bg-gray-100'
   return (
     <a href={href} className={`${base} ${cls}`}>{children}</a>
   )
@@ -118,9 +218,9 @@ export default function PricingPage() {
                 모든 가격은 VAT 별도입니다.
               </p>
 
-              <div className="mt-6 flex items-center justify-center">
+            <div className="mt-6 flex items-center justify-center">
                 <div className="relative inline-flex items-center">
-                  <div className="inline-flex items-center justify-center bg-white/10 rounded-lg p-0.5">
+                  <div className="inline-flex items-center justify-center bg-white/5 rounded-lg p-0.5 border border-white/10">
                     <button
                       onClick={() => setBilling('monthly')}
                       className={clsx(
@@ -153,24 +253,28 @@ export default function PricingPage() {
             </div>
 
             {/* Plan grid */}
-            <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 items-stretch">
               {PLANS.map((plan) => {
                 const priceValue = plan.price[billing]
                 const isFree = priceValue === 0
                 return (
-                  <article
-                    key={plan.id}
-                    className={clsx(
-                      'relative rounded-2xl bg-white/5 backdrop-blur-md p-7 sm:p-8]'
-                      , plan.highlight && ''
-                    )}
-                  >
-                    <div
-                      className="pointer-events-none absolute inset-0 z-0 rounded-2xl"
-                      style={{
-                        background: `rgba(93, 52, 221, 0.05)`,
-                      }}
-                    />
+                  <article key={plan.id} className="relative rounded-2xl h-full">
+                    <GlowRingWrapper variant="primary">
+                      <div className="group rounded-2xl bg-white/5 backdrop-blur-md p-7 sm:p-8 border border-[rgba(93,52,221,0.18)] hover:border-[rgba(93,52,221,0.28)] transition-colors h-full flex flex-col min-h-[30rem] sm:min-h-[28rem]">
+                        <div
+                          className="pointer-events-none absolute inset-0 z-0 rounded-2xl"
+                          style={{
+                            background:
+                              'radial-gradient(ellipse 85% 110% at 50% -15%, rgba(93, 52, 221, 0.18), rgba(93, 52, 221, 0.08) 45%, transparent 80%)',
+                          }}
+                        />
+                        <div
+                          className="pointer-events-none absolute inset-0 z-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                          style={{
+                            background:
+                              'radial-gradient(ellipse 85% 110% at 50% -15%, rgba(93, 52, 221, 0.28), rgba(93, 52, 221, 0.16) 45%, transparent 80%)',
+                          }}
+                        />
                     {/* 추천 배지 제거 */}
 
                     <div className="relative z-[1] space-y-3 bg-">
@@ -188,15 +292,15 @@ export default function PricingPage() {
                       <p className="text-sm text-gray-200 leading-relaxed">{plan.description}</p>
                     </div>
 
-                    <div className="mt-4">
-                      {plan.highlight ? (
-                        <BasicButton href={plan.href} variant="primary">{plan.cta}</BasicButton>
-                      ) : (
-                        <BasicButton href={plan.href} variant="outline">{plan.cta}</BasicButton>
-                      )}
-                    </div>
+                        <div className="order-3 mt-6">
+                          {plan.highlight ? (
+                            <BasicButton href={plan.href} variant="primary">{plan.cta}</BasicButton>
+                          ) : (
+                            <BasicButton href={plan.href} variant="outline">{plan.cta}</BasicButton>
+                          )}
+                        </div>
 
-                    <ul className="mt-5 space-y-2 text-sm text-gray-200">
+                    <ul className="order-2 mt-5 space-y-2 text-sm text-gray-200 flex-1">
                       {plan.features.map((f) => (
                         <li key={f} className="flex items-center gap-3">
                           <svg
@@ -216,7 +320,8 @@ export default function PricingPage() {
                       ))}
                     </ul>
 
-                    
+                      </div>
+                    </GlowRingWrapper>
                   </article>
                 )
               })}
