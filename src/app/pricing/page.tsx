@@ -168,12 +168,12 @@ export default function PricingPage() {
                     <div
                       className="pointer-events-none absolute inset-0 z-0 rounded-2xl"
                       style={{
-                        background: `radial-gradient(ellipse 80% 90% at 50% -20%, rgba(93, 52, 221, ${plan.highlight ? 0.3 : 0.3}), transparent)`,
+                        background: `rgba(93, 52, 221, 0.05)`,
                       }}
                     />
                     {/* 추천 배지 제거 */}
 
-                    <div className="relative z-[1] space-y-3">
+                    <div className="relative z-[1] space-y-3 bg-">
                       <div className="inline-flex items-center gap-2">
                         <span className="text-gray-300 text-sm font-medium">{plan.name}</span>
                       </div>
