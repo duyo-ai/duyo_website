@@ -195,67 +195,65 @@ export default function AdminPage() {
     setUploadStatus('파일 업로드 중...')
 
     try {
-      // 1단계: Presigned Upload URL 요청
-      console.log('🔗 Requesting upload URL...')
-      setUploadStatus('업로드 URL 생성 중...')
-      
-      const urlResponse = await fetch('/api/admin/upload-url', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fileName: file.name,
-          fileType: file.type,
-          platform: version.platform,
-          versionType: version.version_type
-        })
-      })
-
-      if (!urlResponse.ok) {
-        throw new Error(`URL 생성 실패: ${urlResponse.status}`)
-      }
-
-      const urlData = await urlResponse.json()
-      if (!urlData.ok) {
-        throw new Error(urlData.message || 'Upload URL 생성에 실패했습니다.')
-      }
-
-      // 2단계: Presigned URL로 직접 업로드
-      console.log('📁 Starting direct upload to Supabase Storage...')
+      // Supabase 클라이언트에서 직접 업로드 (RLS 인증된 사용자로)
+      console.log('📁 Starting direct Supabase Storage upload...')
       setUploadStatus('파일 업로드 중...')
 
-      // XMLHttpRequest로 진행률 추적
-      const uploadPromise = new Promise<void>((resolve, reject) => {
-        const xhr = new XMLHttpRequest()
-        
-        xhr.upload.addEventListener('progress', (e) => {
-          if (e.lengthComputable) {
-            const progress = Math.round((e.loaded / e.total) * 90) // 90%까지만
-            setUploadProgress(progress)
-          }
+      const { supabase } = await import('@/lib/supabase')
+      
+      // 현재 사용자 확인
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) {
+        throw new Error('로그인이 필요합니다.')
+      }
+
+      console.log('User authenticated:', user.id)
+
+      // 파일 경로
+      const filePath = `releases/${file.name}`
+
+      // 진행률 시뮬레이션 (실제 업로드 진행률 추적은 브라우저 제한으로 어려움)
+      let progress = 0
+      const progressInterval = setInterval(() => {
+        progress += Math.random() * 5
+        if (progress >= 85) {
+          progress = 85
+          clearInterval(progressInterval)
+        }
+        setUploadProgress(Math.floor(progress))
+      }, 300)
+
+      // 기존 파일 삭제 (무시)
+      await supabase.storage.from('app-releases').remove([filePath]).catch(() => {})
+
+      // Supabase Storage에 업로드
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('app-releases')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: true
         })
 
-        xhr.onload = () => {
-          if (xhr.status >= 200 && xhr.status < 300) {
-            resolve()
-          } else {
-            reject(new Error(`Upload failed: ${xhr.status}`))
-          }
-        }
+      clearInterval(progressInterval)
 
-        xhr.onerror = () => reject(new Error('Upload failed'))
+      if (uploadError) {
+        console.error('Supabase upload error:', uploadError)
+        throw new Error(`업로드 실패: ${uploadError.message}`)
+      }
 
-        // Presigned URL로 PUT 요청
-        xhr.open('PUT', urlData.uploadUrl)
-        xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream')
-        xhr.send(file)
-      })
+      setUploadProgress(90)
 
-      await uploadPromise
+      // 공개 URL 생성
+      const { data: urlData } = supabase.storage
+        .from('app-releases')
+        .getPublicUrl(filePath)
 
       setUploadProgress(95)
       setUploadStatus('데이터베이스 업데이트 중...')
 
-      // 3단계: DB 업데이트
+      console.log('Upload successful, updating DB...')
+
+      // DB 업데이트
       await updateVersion({
         id: version.id,
         file_name: file.name,
