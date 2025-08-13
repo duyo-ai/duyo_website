@@ -1,4 +1,6 @@
 import { supabase } from '@/lib/supabase'
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 // 공개 API: 현재 버전 정보 조회 (다운로드 페이지용)
 export async function GET(req: Request) {
@@ -27,7 +29,15 @@ export async function GET(req: Request) {
     }
 
     console.log('✅ [public:versions:get]', { count: versions?.length || 0 })
-    return Response.json({ ok: true, versions: groupedVersions })
+    return new Response(JSON.stringify({ ok: true, versions: groupedVersions }), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        Pragma: 'no-cache',
+        Expires: '0',
+      },
+    })
 
   } catch (error) {
     console.error('❌ [public:versions:get:error]', error)

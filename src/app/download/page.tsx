@@ -182,7 +182,9 @@ const DownloadPage = () => {
   useEffect(() => {
     const loadVersions = async () => {
       try {
-        const response = await fetch('/api/versions')
+        const response = await fetch(`/api/versions?ts=${Date.now()}`, {
+          cache: 'no-store'
+        })
         const data = await response.json()
         if (data.ok) {
           setVersions(data.versions)
