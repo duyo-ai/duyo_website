@@ -155,7 +155,7 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     'testimonials.desc': '전국의 크리에이터들이 이미 경험하고 있는 변화를 확인해보세요. 간단한 키워드 입력만으로도 놀라운 결과를 만들어내고 있습니다.',
 
     // Install link sheet
-    'install.title': '링크 받기',
+    'install.title': '다운로드 링크 받기',
     'install.subtitle.1': '모바일에서는 직접 설치가 어려워요.',
     'install.subtitle.2': '이메일을 남겨주시면 Mac/Windows 설치 링크를 보내드릴게요.',
     'install.placeholder.email': '이메일 주소',
