@@ -1,8 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Send } from 'lucide-react'
+import { Send, Check, X } from 'lucide-react'
 import { useLang } from '@/components/ToolbarProvider'
+import { useAuth } from '@/components/AuthContext'
 import { dictionaries } from '@/i18n/dictionary'
 
 type Props = {
@@ -12,10 +13,19 @@ type Props = {
 
 export default function InstallLinkSheet({ open, onClose }: Props) {
   const { lang } = useLang()
+  const { user } = useAuth()
   const t = dictionaries[lang]
   const [email, setEmail] = useState('')
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
+  const [showToast, setShowToast] = useState(false)
+
+  // 로그인된 사용자의 이메일을 자동으로 설정
+  useEffect(() => {
+    if (user?.email && open) {
+      setEmail(user.email)
+    }
+  }, [user, open])
   const [animateIn, setAnimateIn] = useState(false)
 
   useEffect(() => {
@@ -45,10 +55,40 @@ export default function InstallLinkSheet({ open, onClose }: Props) {
   const submit = async () => {
     if (!email) return
     setSending(true)
-    await new Promise(r => setTimeout(r, 800))
-    setSending(false)
-    setSent(true)
-    // 실제 이메일 발송 API 연동 지점
+    
+    try {
+      // 다운로드 링크 요청 API 호출
+      const response = await fetch('/api/download/request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          email, 
+          platform: 'macOS' // 기본값, 나중에 플랫폼 감지로 개선 가능
+        }),
+      })
+      
+      const data = await response.json()
+      if (data.ok) {
+        setSent(true)
+        setShowToast(true)
+        // 토스트 메시지 3초 후 자동 숨김
+        setTimeout(() => {
+          setShowToast(false)
+          // 토스트 사라진 후 1초 뒤 모달 닫기
+          setTimeout(() => {
+            onClose()
+          }, 1000)
+        }, 3000)
+      } else {
+        console.error('Failed to send download link:', data.error)
+        alert(lang === 'ko' ? '다운로드 요청에 실패했습니다.' : 'Failed to request download link.')
+      }
+    } catch (error) {
+      console.error('Network error:', error)
+      alert(lang === 'ko' ? '네트워크 오류가 발생했습니다.' : 'Network error occurred.')
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -89,6 +129,18 @@ export default function InstallLinkSheet({ open, onClose }: Props) {
           </div>
         </div>
       </div>
+
+      {/* 토스트 메시지 */}
+      {showToast && (
+        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-[80] animate-in slide-in-from-top-4 duration-300">
+          <div className="bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2">
+            <Check className="h-5 w-5" />
+            <span className="font-medium">
+              {lang === 'ko' ? '다운로드 링크 요청이 전송되었습니다!' : 'Download link request sent successfully!'}
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

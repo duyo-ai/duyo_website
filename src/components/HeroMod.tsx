@@ -4,12 +4,13 @@ import { ChevronRight, Download } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { Button } from './Button'
-import AnimatedLogoCloud from './Company'
+
 import TextRotate from '../../components/farmui/RotateText'
 import DashboardDemo from './DashboardShowcase'
 import { AuthModal } from './AuthModal'
 import InstallLinkSheet from '@/components/InstallLinkSheet'
 import { useLang } from './ToolbarProvider'
+import { useAuth } from './AuthContext'
 import { dictionaries } from '@/i18n/dictionary'
 
 type GlowRingWrapperProps = {
@@ -148,6 +149,7 @@ const HeroMod = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
   const [osType, setOsType] = useState<'mac' | 'windows' | 'other'>('other')
   const { lang } = useLang()
+  const { user, loading } = useAuth()
   const t = dictionaries[lang]
   const [isMobile, setIsMobile] = useState(false)
   const [openSheet, setOpenSheet] = useState(false)
@@ -206,16 +208,26 @@ const HeroMod = () => {
             </p>
             
             <div className="flex pt-32 lg:pt-40 flex-row flex-nowrap items-center justify-center gap-5 sm:gap-9 px-3">
-              {/* Primary CTA with glow ring wrapper */}
+              {/* Primary CTA with glow ring wrapper - 로딩 중이거나 로그인 안된 경우만 표시 */}
+              {!loading && !user && (
                 <GlowRingWrapper variant="primary">
-                <button
-                  onClick={() => setIsAuthModalOpen(true)}
-                  className="font-semibold whitespace-nowrap group z-10 relative flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-indigo-400 to-indigo-700 px-4 py-2 text-sm sm:px-8 sm:py-4 text-center sm:text-lg lg:text-xl tracking-tighter text-zinc-50"
-                >
+                  <button
+                    onClick={() => setIsAuthModalOpen(true)}
+                    className="font-semibold whitespace-nowrap group z-10 relative flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-indigo-400 to-indigo-700 px-4 py-2 text-sm sm:px-8 sm:py-4 text-center sm:text-lg lg:text-xl tracking-tighter text-zinc-50"
+                  >
+                    지금 시작하기{' '}
+                    <ChevronRight className="inline-flex items-center justify-center transition-all duration-500 group-hover:translate-x-1 h-4 w-4 sm:h-5 sm:w-5" />
+                  </button>
+                </GlowRingWrapper>
+              )}
+              
+              {/* 로딩 중일 때는 자리 유지를 위한 투명한 placeholder */}
+              {loading && (
+                <div className="font-semibold whitespace-nowrap group z-10 relative flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm sm:px-8 sm:py-4 text-center sm:text-lg lg:text-xl tracking-tighter opacity-0 pointer-events-none">
                   지금 시작하기{' '}
-                  <ChevronRight className="inline-flex items-center justify-center transition-all duration-500 group-hover:translate-x-1 h-4 w-4 sm:h-5 sm:w-5" />
-                </button>
-              </GlowRingWrapper>
+                  <ChevronRight className="inline-flex items-center justify-center h-4 w-4 sm:h-5 sm:w-5" />
+                </div>
+              )}
 
               {(osType === 'mac' || osType === 'windows') && (
                <GlowRingWrapper variant="neutral">
@@ -242,9 +254,7 @@ const HeroMod = () => {
         <div className="relative max-w-full">
           <DashboardDemo />
         </div>
-        <div className="pb-20">
-          <AnimatedLogoCloud />
-        </div>
+
       </section>
       
       <AuthModal 

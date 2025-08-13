@@ -5,6 +5,7 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import '@/styles/tailwind.css'
 import ToolbarProvider from '@/components/ToolbarProvider'
+import { AuthProvider } from '@/components/AuthContext'
 
 
 export const metadata: Metadata = {
@@ -48,9 +49,11 @@ export default function RootLayout({
       )}
     >
       <body className="flex h-full flex-col">
-        <ToolbarProvider>
-          {children}
-        </ToolbarProvider>
+        <AuthProvider>
+          <ToolbarProvider>
+            {children}
+          </ToolbarProvider>
+        </AuthProvider>
       </body>
     </html> 
   )

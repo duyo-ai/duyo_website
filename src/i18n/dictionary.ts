@@ -154,6 +154,18 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     'testimonials.subtitle': '생생한 후기',
     'testimonials.desc': '전국의 크리에이터들이 이미 경험하고 있는 변화를 확인해보세요. 간단한 키워드 입력만으로도 놀라운 결과를 만들어내고 있습니다.',
 
+    // Footer v2 (Cutple)
+    'footer2.customer.title': '고객센터',
+    'footer2.customer.email': '이메일',
+    'footer2.customer.hours': '운영시간',
+    'footer2.company.title': '회사 정보',
+    'footer2.company.company': '상호',
+    'footer2.company.ceo': '대표자',
+    'footer2.company.address': '주소',
+    'footer2.company.business': '사업자등록번호',
+    'footer2.company.privacy': '개인정보보호책임자',
+    'footer2.copyright': '© Cutple. All Rights Reserved.',
+
     // Install link sheet
     'install.title': '다운로드 링크 받기',
     'install.subtitle.1': '모바일에서는 직접 설치가 어려워요.',
@@ -311,6 +323,18 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     'testimonials.title': 'What our users say',
     'testimonials.subtitle': 'Real stories',
     'testimonials.desc': 'See how creators are changing their workflow. Stunning results from just a few keywords.',
+
+    // Footer v2 (Cutple)
+    'footer2.customer.title': 'Customer Support',
+    'footer2.customer.email': 'Email',
+    'footer2.customer.hours': 'Hours',
+    'footer2.company.title': 'Company Info',
+    'footer2.company.company': 'Company',
+    'footer2.company.ceo': 'CEO',
+    'footer2.company.address': 'Address',
+    'footer2.company.business': 'Business Registration No.',
+    'footer2.company.privacy': 'Privacy Officer',
+    'footer2.copyright': '© Cutple. All Rights Reserved.',
 
     // Install link sheet
     'install.title': 'Get Installation Link',

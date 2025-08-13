@@ -10,6 +10,16 @@ import InstallLinkSheet from '@/components/InstallLinkSheet'
 import { useLang } from '@/components/ToolbarProvider'
 import { dictionaries } from '@/i18n/dictionary'
 
+interface VersionInfo {
+  platform: string
+  version_type: string
+  version_number: string
+  file_name: string
+  file_size: number
+  file_url: string
+  download_count: number
+}
+
 type GlowRingWrapperProps = {
   children: React.ReactNode
   variant?: 'primary' | 'neutral'
@@ -146,6 +156,8 @@ const DownloadPage = () => {
   const [osType, setOsType] = useState<'mac' | 'windows' | 'other'>('other')
   const [isMobile, setIsMobile] = useState(false)
   const [openSheet, setOpenSheet] = useState(false)
+  const [versions, setVersions] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const ua = window.navigator.userAgent.toLowerCase()
@@ -166,27 +178,67 @@ const DownloadPage = () => {
     return () => window.removeEventListener('resize', update)
   }, [])
 
-  const stableVersions = {
-    macSilicon: { version: '1.8.2', name: 'macOS (Apple Silicon)' },
-    macIntel: { version: '1.8.2', name: 'macOS (Intel)' },
-    windows: { version: '1.8.2', name: 'Windows 64-bit' }
+  // 버전 정보 로드
+  useEffect(() => {
+    const loadVersions = async () => {
+      try {
+        const response = await fetch('/api/versions')
+        const data = await response.json()
+        if (data.ok) {
+          setVersions(data.versions)
+        } else {
+          console.error('Failed to load versions:', data.error)
+        }
+      } catch (error) {
+        console.error('Error loading versions:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadVersions()
+  }, [])
+
+  // 실제 DB에서 가져온 버전 정보 사용
+  const getVersionInfo = (platform: 'macOS' | 'Windows', type: 'stable' | 'beta') => {
+    if (!versions) return null
+    return versions[platform]?.[type]
   }
 
-  const betaVersions = {
-    macSilicon: { version: '2.0-beta.3', name: 'macOS (Apple Silicon)' },
-    macIntel: { version: '2.0-beta.3', name: 'macOS (Intel)' },
-    windows: { version: '2.0-beta.3', name: 'Windows 64-bit' }
+  const handleDownload = (platform: 'macOS' | 'Windows', type: 'stable' | 'beta') => {
+    const versionInfo = getVersionInfo(platform, type)
+    if (versionInfo && versionInfo.file_url) {
+      // 다운로드 카운트 업데이트 (옵션)
+      fetch('/api/download/count', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ platform, version_type: type })
+      }).catch(console.error)
+
+      // 실제 파일 다운로드
+      window.open(versionInfo.file_url, '_blank')
+    } else {
+      alert('다운로드 링크를 찾을 수 없습니다.')
+    }
   }
 
-  const currentVersions = activeVersion === 'stable' ? stableVersions : betaVersions
-
-  const handleDownload = (platform: string, version: string) => {
+  const handleDownloadClick = (platform: string, version: string) => {
     if (isMobile) {
       setOpenSheet(true)
       return
     }
-    console.log(`Downloading ${platform} - Version ${version}`)
-    // 실제 다운로드 로직 구현
+    
+    // 플랫폼 이름 매핑
+    const platformMap: { [key: string]: 'macOS' | 'Windows' } = {
+      'macOS (Apple Silicon)': 'macOS',
+      'macOS (Intel)': 'macOS', 
+      'Windows 64-bit': 'Windows'
+    }
+    
+    const mappedPlatform = platformMap[platform]
+    if (mappedPlatform) {
+      handleDownload(mappedPlatform, activeVersion)
+    }
   }
 
   // Spotlight는 부모 요소에 hover/move 이벤트를 자체 바인딩합니다.
@@ -223,7 +275,7 @@ const DownloadPage = () => {
                 <div className="inline-flex flex-row flex-nowrap">
                   <GlowRingWrapper variant="neutral">
                     <button
-                      onClick={() => handleDownload(osType, currentVersions[osType === 'mac' ? 'macSilicon' : 'windows'].version)}
+                      onClick={() => handleDownloadClick(osType === 'mac' ? 'macOS (Apple Silicon)' : 'Windows 64-bit', getVersionInfo(osType === 'mac' ? 'macOS' : 'Windows', activeVersion)?.version_number || '')}
                       className='relative inline-flex items-center gap-2 justify-center whitespace-nowrap rounded-md bg-white dark:bg-black px-5 py-2.5 sm:px-4 sm:py-3.5 text-black dark:text-white font-semibold text-sm sm:text-lg'
                     >
                       {osType === 'mac' ? (
@@ -237,7 +289,7 @@ const DownloadPage = () => {
                       )}
                       <span className="font-semibold tracking-tight">Download for {osType === 'mac' ? 'macOS' : 'Windows'}</span>
                        <span className="text-xs sm:text-sm opacity-70">
-                        v{currentVersions[osType === 'mac' ? 'macSilicon' : 'windows'].version}
+                        {loading ? 'v...' : `v${getVersionInfo(osType === 'mac' ? 'macOS' : 'Windows', activeVersion)?.version_number || 'N/A'}`}
                       </span>
                     </button>
                   </GlowRingWrapper>
@@ -317,10 +369,12 @@ const DownloadPage = () => {
                     <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-6 w-full md:w-auto">
                       <div className="text-left md:text-center">
                         <p className="text-xs text-gray-400 uppercase tracking-wide">Version</p>
-                        <p className="text-sm font-semibold text-white">{currentVersions.macSilicon.version}</p>
+                        <p className="text-sm font-semibold text-white">
+                          {loading ? '로딩 중...' : getVersionInfo('macOS', activeVersion)?.version_number || 'N/A'}
+                        </p>
                       </div>
                        <button
-                         onClick={() => handleDownload('macOS Apple Silicon', currentVersions.macSilicon.version)}
+                         onClick={() => handleDownloadClick('macOS (Apple Silicon)', getVersionInfo('macOS', activeVersion)?.version_number || '')}
                         className={`w-full md:w-auto px-6 py-2 rounded-lg font-semibold transition-all ${activeVersion === 'stable'
                           ? 'bg-white text-gray-900 hover:bg-gray-100'
                           : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
@@ -372,10 +426,12 @@ const DownloadPage = () => {
                     <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-6 w-full md:w-auto">
                       <div className="text-left md:text-center">
                         <p className="text-xs text-gray-400 uppercase tracking-wide">Version</p>
-                        <p className="text-sm font-semibold text-white">{currentVersions.windows.version}</p>
+                        <p className="text-sm font-semibold text-white">
+                          {loading ? '로딩 중...' : getVersionInfo('Windows', activeVersion)?.version_number || 'N/A'}
+                        </p>
                       </div>
                        <button
-                         onClick={() => handleDownload('Windows', currentVersions.windows.version)}
+                         onClick={() => handleDownloadClick('Windows 64-bit', getVersionInfo('Windows', activeVersion)?.version_number || '')}
                         className={`w-full md:w-auto px-6 py-2 rounded-lg font-semibold transition-all ${activeVersion === 'stable'
                           ? 'bg-white text-gray-900 hover:bg-gray-100'
                           : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
