@@ -182,12 +182,19 @@ const DownloadPage = () => {
   useEffect(() => {
     const loadVersions = async () => {
       try {
-        const response = await fetch(`/api/versions?ts=${Date.now()}`, {
-          cache: 'no-store'
-        })
+        // 1) 로컬 캐시 즉시 표시
+        const cached = localStorage.getItem('versions_cache')
+        if (cached) {
+          try { setVersions(JSON.parse(cached)) } catch {}
+        }
+
+        // 2) 네트워크로 최신 데이터 요청 (SWR)
+        const response = await fetch('/api/versions', { next: { revalidate: 300 } })
         const data = await response.json()
         if (data.ok) {
           setVersions(data.versions)
+          // 로컬 캐시 업데이트
+          localStorage.setItem('versions_cache', JSON.stringify(data.versions))
         } else {
           console.error('Failed to load versions:', data.error)
         }
