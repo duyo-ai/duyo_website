@@ -147,16 +147,29 @@ export default function AdminPage() {
 
   const updateVersion = async (versionData: Partial<AppVersion>) => {
     try {
+      console.log('Updating version:', versionData)
+      
       const response = await fetch('/api/admin/versions', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(versionData)
       })
       
+      console.log('Response status:', response.status)
+      
+      if (!response.ok) {
+        console.error('HTTP error:', response.status, response.statusText)
+        alert(`HTTP 오류: ${response.status} ${response.statusText}`)
+        return
+      }
+      
       const data = await response.json()
+      console.log('Response data:', data)
+      
       if (data.ok) {
         await loadVersions() // 새로고침
         setEditingVersion(null)
+        alert('버전이 업데이트되었습니다!')
       } else {
         console.error('Failed to update version:', data.error)
         alert('버전 업데이트에 실패했습니다: ' + data.error)
@@ -761,33 +774,7 @@ export default function AdminPage() {
                       className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
                     />
                   </div>
-                  <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">파일명</label>
-                    <input
-                      type="text"
-                      value={editingVersion.file_name}
-                      onChange={(e) => setEditingVersion({...editingVersion, file_name: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">파일 URL</label>
-                    <input
-                      type="url"
-                      value={editingVersion.file_url}
-                      onChange={(e) => setEditingVersion({...editingVersion, file_url: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">파일 크기 (MB)</label>
-                    <input
-                      type="number"
-                      value={Math.round(editingVersion.file_size / 1024 / 1024)}
-                      onChange={(e) => setEditingVersion({...editingVersion, file_size: parseInt(e.target.value) * 1024 * 1024})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-                    />
-                  </div>
+
                   <div className="flex gap-2">
                     <button
                       onClick={() => updateVersion(editingVersion)}

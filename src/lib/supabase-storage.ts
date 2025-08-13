@@ -4,27 +4,15 @@ import { supabaseAdmin } from './supabase-admin'
 // 파일 업로드 함수 (바꿔치기 방식)
 export async function uploadVersionFile(file: File, platform: string, versionType: string) {
   try {
-    // 고정된 파일명 사용 (바꿔치기를 위해)
-    const fileExtension = file.name.split('.').pop()
-    const fileName = `${platform}-${versionType}.${fileExtension}`
+    // 원본 파일명 그대로 사용
+    const fileName = file.name
     const filePath = `releases/${fileName}`
 
-    console.log('📁 [storage] Uploading file (replace mode):', {
-      originalName: file.name,
+    console.log('📁 [storage] Uploading file:', {
       fileName,
       filePath,
       size: `${(file.size / 1024 / 1024).toFixed(1)}MB`
     })
-
-    // 기존 파일이 있다면 삭제
-    const { error: deleteError } = await supabaseAdmin.storage
-      .from('app-releases')
-      .remove([filePath])
-    
-    // 삭제 에러는 무시 (파일이 없을 수도 있음)
-    if (deleteError && !deleteError.message.includes('not found')) {
-      console.warn('⚠️ [storage] Delete warning:', deleteError.message)
-    }
 
     // Supabase Storage에 파일 업로드 (덮어쓰기)
     const { data, error } = await supabaseAdmin.storage
@@ -59,7 +47,7 @@ export async function uploadVersionFile(file: File, platform: string, versionTyp
 
     return {
       success: true,
-      fileName,
+      fileName: file.name, // 원본 파일명 반환
       filePath: data.path,
       publicUrl: urlData.publicUrl,
       fileSize: file.size

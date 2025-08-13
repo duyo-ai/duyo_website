@@ -25,8 +25,13 @@ export async function GET(req: Request) {
 
 // 버전 정보 수정만 가능 (추가/삭제 불가)
 export async function PUT(req: Request) {
+  console.log('📝 [PUT] /api/admin/versions called')
+  console.log('📝 [PUT] Request method:', req.method)
+  console.log('📝 [PUT] Request headers:', Object.fromEntries(req.headers.entries()))
+  
   try {
     const body = await req.json()
+    console.log('📝 [PUT] Request body:', body)
     const { id, version_number, file_name, file_size, file_url } = body
 
     if (!id) {
@@ -63,4 +68,23 @@ export async function PUT(req: Request) {
     console.error('❌ [admin:versions:put:error]', error)
     return Response.json({ ok: false, error: 'UNEXPECTED' }, { status: 500 })
   }
+}
+
+// 지원하지 않는 HTTP 메서드에 대한 응답
+export async function POST(req: Request) {
+  console.log('❌ [POST] /api/admin/versions - Method not allowed')
+  return Response.json({ 
+    ok: false, 
+    error: 'METHOD_NOT_ALLOWED',
+    message: 'POST method is not supported. Use PUT to update versions.' 
+  }, { status: 405 })
+}
+
+export async function DELETE(req: Request) {
+  console.log('❌ [DELETE] /api/admin/versions - Method not allowed')
+  return Response.json({ 
+    ok: false, 
+    error: 'METHOD_NOT_ALLOWED',
+    message: 'DELETE method is not supported.' 
+  }, { status: 405 })
 }
