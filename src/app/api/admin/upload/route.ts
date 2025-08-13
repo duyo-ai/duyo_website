@@ -20,15 +20,15 @@ export async function POST(req: Request) {
       }, { status: 400 })
     }
 
-    // Supabase Storage 파일 크기 제한 (무료: 50MB, 유료: 5GB)
-    const MAX_FILE_SIZE = 50 * 1024 * 1024 // 50MB in bytes
+    // Supabase Storage 파일 크기 제한 (Pro 플랜: 5GB)
+    const MAX_FILE_SIZE = 5 * 1024 * 1024 * 1024 // 5GB in bytes
     if (file.size > MAX_FILE_SIZE) {
       return Response.json({ 
         ok: false, 
         error: 'FILE_TOO_LARGE',
-        maxSize: '50MB (Supabase 무료 플랜 제한)',
+        maxSize: '5GB (Supabase Pro 플랜)',
         fileSize: `${(file.size / 1024 / 1024).toFixed(1)}MB`,
-        message: 'Supabase 무료 플랜은 50MB까지만 업로드 가능합니다. 유료 플랜으로 업그레이드하면 5GB까지 업로드할 수 있습니다.'
+        message: 'Supabase Pro 플랜은 5GB까지 업로드 가능합니다. 파일이 너무 큽니다.'
       }, { status: 400 })
     }
 

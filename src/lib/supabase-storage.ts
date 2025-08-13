@@ -27,7 +27,7 @@ export async function uploadVersionFile(file: File, platform: string, versionTyp
       
       // Supabase Storage 특정 에러 처리
       if (error.message.includes('exceeded the maximum allowed size')) {
-        throw new Error('파일 크기가 Supabase Storage 제한(50MB)을 초과했습니다. 더 작은 파일을 업로드하거나 Supabase Pro 플랜으로 업그레이드해주세요.')
+        throw new Error('파일 크기가 Supabase Storage 제한(5GB)을 초과했습니다. 파일 크기를 줄여서 다시 시도해주세요.')
       } else if (error.message.includes('Invalid file type')) {
         throw new Error('지원하지 않는 파일 형식입니다. .dmg, .exe, .msi, .pkg, .zip 파일만 업로드 가능합니다.')
       } else {

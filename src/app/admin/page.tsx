@@ -183,10 +183,10 @@ export default function AdminPage() {
   const handleFileUpload = async (version: AppVersion, file: File) => {
     if (!file) return
 
-    // 파일 크기 사전 체크 (50MB = 52,428,800 bytes)
-    const MAX_FILE_SIZE = 50 * 1024 * 1024
+    // 파일 크기 사전 체크 (5GB = 5,368,709,120 bytes)
+    const MAX_FILE_SIZE = 5 * 1024 * 1024 * 1024
     if (file.size > MAX_FILE_SIZE) {
-      alert(`파일 크기가 너무 큽니다!\n\n파일 크기: ${(file.size / 1024 / 1024).toFixed(1)}MB\n최대 허용: 50MB (Supabase 무료 플랜)\n\n더 작은 파일을 업로드하거나 Supabase Pro 플랜으로 업그레이드해주세요.`)
+      alert(`파일 크기가 너무 큽니다!\n\n파일 크기: ${(file.size / 1024 / 1024).toFixed(1)}MB\n최대 허용: 5GB (Supabase Pro 플랜)\n\n파일 크기를 줄여서 다시 시도해주세요.`)
       return
     }
 
