@@ -97,11 +97,5 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// 파일 크기 제한 비활성화 (Next.js API 라우트용)
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: false,
-    },
-  },
-}
+// Note: In App Router, body size limits are handled differently
+// and this config is not needed/supported
