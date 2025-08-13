@@ -351,7 +351,7 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     // Install link sheet
     'install.title': 'Get Installation Link',
     'install.subtitle.1': 'Direct install is not supported on mobile.',
-    'install.subtitle.2': 'Leave your email and we'll send the Mac/Windows install link.',
+    'install.subtitle.2': 'Leave your email and we will send the Mac/Windows install link.',
     'install.placeholder.email': 'Your email',
     'install.toast.sent': 'Installation link sent to your email!',
 
