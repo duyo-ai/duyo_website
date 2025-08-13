@@ -195,65 +195,75 @@ export default function AdminPage() {
     setUploadStatus('파일 업로드 중...')
 
     try {
-      const formData = new FormData()
-      formData.append('file', file)
-      formData.append('platform', version.platform)
-      formData.append('versionType', version.version_type)
-
-      // XMLHttpRequest를 사용해서 업로드 진행률 추적
-      const xhr = new XMLHttpRequest()
+      // 직접 Supabase Storage에 업로드 (Vercel API 제한 우회)
+      const { supabase } = await import('@/lib/supabase')
       
-      xhr.upload.addEventListener('progress', (e) => {
-        if (e.lengthComputable) {
-          const progress = Math.round((e.loaded / e.total) * 100)
-          setUploadProgress(progress)
+      // 파일명: 원본 파일명 그대로 사용
+      const filePath = `releases/${file.name}`
+
+      // 기존 파일이 있다면 삭제 (선택사항)
+      await supabase.storage.from('app-releases').remove([filePath])
+
+      // 진행률 시뮬레이션 (실제 업로드 진행률 추적은 복잡함)
+      let uploadProgress = 0
+      const progressInterval = setInterval(() => {
+        uploadProgress += Math.random() * 10
+        if (uploadProgress >= 90) {
+          uploadProgress = 90
+          clearInterval(progressInterval)
         }
-      })
+        setUploadProgress(Math.floor(uploadProgress))
+      }, 200)
 
-      const uploadPromise = new Promise<any>((resolve, reject) => {
-        xhr.onload = () => {
-          if (xhr.status === 200) {
-            resolve(JSON.parse(xhr.responseText))
-          } else {
-            reject(new Error(`Upload failed: ${xhr.status}`))
-          }
-        }
-        xhr.onerror = () => reject(new Error('Upload failed'))
-      })
-
-      xhr.open('POST', '/api/admin/upload')
-      xhr.send(formData)
-
-      const uploadResult = await uploadPromise
-
-      if (uploadResult.ok) {
-        // 업로드 완료, DB 업데이트 시작
-        setUploadStatus('데이터베이스 업데이트 중...')
-        setUploadProgress(100) // 업로드는 완료, DB 업데이트 중 표시
-        
-        await updateVersion({
-          id: version.id,
-          file_name: uploadResult.file.name,
-          file_url: uploadResult.file.url,
-          file_size: uploadResult.file.size
+      // Supabase Storage에 직접 업로드
+      const { data, error } = await supabase.storage
+        .from('app-releases')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: true // 덮어쓰기 허용
         })
-        
-        setUploadStatus('완료!')
-        
-        // 잠깐 완료 상태 보여주고 닫기
-        setTimeout(() => {
-          setUploadingVersion(null)
-          setUploadProgress(0)
-          setUploadStatus('')
-        }, 1000)
-        
-        alert('파일 업로드가 완료되었습니다!')
-      } else {
-        alert('파일 업로드에 실패했습니다: ' + uploadResult.message)
+
+      clearInterval(progressInterval)
+
+      if (error) {
+        console.error('Supabase upload error:', error)
+        if (error.message.includes('exceeded the maximum allowed size')) {
+          throw new Error('파일 크기가 Supabase Storage 제한(5GB)을 초과했습니다.')
+        } else {
+          throw new Error(`업로드 실패: ${error.message}`)
+        }
       }
+
+      // 공개 URL 가져오기
+      const { data: urlData } = supabase.storage
+        .from('app-releases')
+        .getPublicUrl(filePath)
+
+      setUploadProgress(95)
+      setUploadStatus('데이터베이스 업데이트 중...')
+
+      // DB 업데이트
+      await updateVersion({
+        id: version.id,
+        file_name: file.name,
+        file_url: urlData.publicUrl,
+        file_size: file.size
+      })
+
+      setUploadProgress(100)
+      setUploadStatus('완료!')
+
+      // 잠깐 완료 상태 보여주고 닫기
+      setTimeout(() => {
+        setUploadingVersion(null)
+        setUploadProgress(0)
+        setUploadStatus('')
+      }, 1000)
+
+      alert('파일 업로드가 완료되었습니다!')
     } catch (error) {
       console.error('Upload error:', error)
-      alert('파일 업로드 중 오류가 발생했습니다.')
+      alert(`파일 업로드 중 오류가 발생했습니다: ${error instanceof Error ? error.message : '알 수 없는 오류'}`)
       setUploadingVersion(null)
       setUploadProgress(0)
       setUploadStatus('')
