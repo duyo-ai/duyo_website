@@ -5,6 +5,8 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { Container } from '@/components/Container'
 import clsx from 'clsx'
+import { useLang } from '@/components/ToolbarProvider'
+import { dictionaries } from '@/i18n/dictionary'
 
 type BillingCycle = 'monthly' | 'yearly'
 
@@ -192,8 +194,9 @@ function BasicButton({ href, children, variant = 'primary' as 'primary' | 'outli
 
 export default function PricingPage() {
   const [billing, setBilling] = useState<BillingCycle>('monthly')
-
-  const badgeText = '연간 결제 2개월 할인'
+  const { lang } = useLang()
+  const t = dictionaries[lang]
+  const badgeText = t['pricing.badge.yearlyDiscount']
 
   return (
     <>
@@ -212,11 +215,9 @@ export default function PricingPage() {
           <Container className="pt-20 sm:pt-36">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl sm:text-4xl md:text-4xl font-semibold tracking-tight text-white">
-                간결한 요금제, 팀의 성장에 맞춰 확장됩니다
+                {t['pricing.title']}
               </h1>
-              <p className="mt-4 text-sm sm:text-base text-gray-400">
-                모든 가격은 VAT 별도입니다.
-              </p>
+              <p className="mt-4 text-sm sm:text-base text-gray-400">{t['pricing.vat']}</p>
 
             <div className="mt-6 flex items-center justify-center">
                 <div className="relative inline-flex items-center">
@@ -228,7 +229,7 @@ export default function PricingPage() {
                         billing === 'monthly' ? 'bg-white/15 text-white' : 'text-gray-300 hover:text-white'
                       )}
                     >
-                      월간
+                      {t['pricing.toggle.monthly']}
                     </button>
                     <button
                       onClick={() => setBilling('yearly')}
@@ -237,7 +238,7 @@ export default function PricingPage() {
                         billing === 'yearly' ? 'bg-white/15 text-white' : 'text-gray-300 hover:text-white'
                       )}
                     >
-                      연간
+                      {t['pricing.toggle.yearly']}
                     </button>
                   </div>
                   <span className="absolute left-full ml-2 top-1/2 -translate-y-1/2 hidden sm:inline-flex items-center rounded-lg bg-white/10 px-3 py-1.5 text-xs text-gray-200 whitespace-nowrap">
@@ -279,7 +280,12 @@ export default function PricingPage() {
 
                     <div className="relative z-[1] space-y-3 bg-">
                       <div className="inline-flex items-center gap-2">
-                        <span className="text-gray-300 text-sm font-medium">{plan.name}</span>
+                        <span className="text-gray-300 text-sm font-medium">{
+                          plan.id==='free'? t['plan.free']:
+                          plan.id==='lite'? t['plan.lite']:
+                          plan.id==='standard'? t['plan.standard']:
+                          t['plan.business']
+                        }</span>
                       </div>
                       <div className="flex items-baseline gap-2">
                         <span className="text-2xl sm:text-3xl font-semibold text-white tracking-tight">
@@ -289,20 +295,25 @@ export default function PricingPage() {
                           <span className="text-base text-gray-400">/mo</span>
                         )}
                       </div>
-                      <p className="text-sm text-gray-200 leading-relaxed">{plan.description}</p>
+                       <p className="text-sm text-gray-200 leading-relaxed">{
+                         plan.id==='free'? t['pricing.desc.free']:
+                         plan.id==='lite'? t['pricing.desc.lite']:
+                         plan.id==='standard'? t['pricing.desc.standard']:
+                         t['pricing.desc.business']
+                       }</p>
                     </div>
 
                         <div className="order-3 mt-6">
                           {plan.highlight ? (
-                            <BasicButton href={plan.href} variant="primary">{plan.cta}</BasicButton>
+                            <BasicButton href={plan.href} variant="primary">{plan.id==='free'? t['plan.cta.free'] : t['plan.cta.start']}</BasicButton>
                           ) : (
-                            <BasicButton href={plan.href} variant="outline">{plan.cta}</BasicButton>
+                            <BasicButton href={plan.href} variant="outline">{plan.id==='business'? t['plan.cta.contact'] : t['plan.cta.start']}</BasicButton>
                           )}
                         </div>
 
                     <ul className="order-2 mt-5 space-y-2 text-sm text-gray-200 flex-1">
-                      {plan.features.map((f) => (
-                        <li key={f} className="flex items-center gap-3">
+                       {plan.features.map((f, idx) => (
+                         <li key={f} className="flex items-center gap-3">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
@@ -315,7 +326,10 @@ export default function PricingPage() {
                               clipRule="evenodd"
                             />
                           </svg>
-                          {f}
+                           {plan.id==='free' && t[`pricing.feature.free.${idx+1}`] ||
+                            plan.id==='lite' && t[`pricing.feature.lite.${idx+1}`] ||
+                            plan.id==='standard' && t[`pricing.feature.standard.${idx+1}`] ||
+                            t[`pricing.feature.business.${idx+1}`]}
                         </li>
                       ))}
                     </ul>

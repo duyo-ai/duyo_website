@@ -1,30 +1,45 @@
 'use client'
 
-import { useEffect } from 'react'
+import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
 
-export default function ToolbarProvider() {
+type Lang = 'ko' | 'en'
+
+const LangContext = createContext<{ lang: Lang; setLang: (l: Lang) => void }>({ lang: 'ko', setLang: () => {} })
+export const useLang = () => useContext(LangContext)
+
+export default function ToolbarProvider({ children }: { children?: React.ReactNode }) {
+  const [lang, setLang] = useState<Lang>('ko')
+
   useEffect(() => {
     // 개발 환경에서만 툴바 초기화
     if (process.env.NODE_ENV === 'development') {
       const initializeToolbar = async () => {
         try {
           const { initToolbar } = await import('@21st-extension/toolbar')
-          
-          const stagewiseConfig = {
-            plugins: [],
-          }
-          
+          const stagewiseConfig = { plugins: [] }
           initToolbar(stagewiseConfig)
-          console.log('🚀 21st Extension Toolbar initialized successfully!')
-        } catch (error) {
-          console.warn('Failed to initialize 21st Extension Toolbar:', error)
+        } catch {
+          // ignore
         }
       }
-      
       initializeToolbar()
     }
   }, [])
 
-  // 개발 환경이 아니거나 툴바가 필요하지 않을 때는 아무것도 렌더링하지 않음
-  return null
-} 
+  useEffect(() => {
+    try {
+      const navLang = (navigator.languages?.[0] || navigator.language || 'ko').toLowerCase()
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''
+      const isKorean = navLang.startsWith('ko') || tz.includes('Seoul')
+      const stored = typeof window !== 'undefined' ? (localStorage.getItem('cutple.lang') as Lang | null) : null
+      setLang(stored || (isKorean ? 'ko' : 'en'))
+    } catch {}
+  }, [])
+
+  useEffect(() => {
+    try { localStorage.setItem('cutple.lang', lang) } catch {}
+  }, [lang])
+
+  const value = useMemo(() => ({ lang, setLang }), [lang])
+  return <LangContext.Provider value={value}>{children}</LangContext.Provider>
+}

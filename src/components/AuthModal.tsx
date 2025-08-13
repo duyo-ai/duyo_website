@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useLang } from '@/components/ToolbarProvider'
+import { dictionaries } from '@/i18n/dictionary'
 import { X, Mail, Lock, User, Eye, EyeOff } from 'lucide-react'
 import Image from 'next/image'
 
@@ -10,6 +12,8 @@ interface AuthModalProps {
 }
 
 export function AuthModal({ isOpen, onClose }: AuthModalProps) {
+  const { lang } = useLang()
+  const t = dictionaries[lang]
   const [isLogin, setIsLogin] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -83,12 +87,12 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
           {/* 헤더 */}
           <div className="mb-8 text-center">
             <h2 className="text-2xl font-semibold text-white mb-2">
-              {isLogin ? 'Cutple에 로그인' : 'Cutple 회원가입'}
+              {isLogin ? (lang==='ko' ? 'Cutple에 로그인' : 'Log in to Cutple') : (lang==='ko' ? 'Cutple 회원가입' : 'Create a Cutple account')}
             </h2>
             <p className="text-gray-400 text-sm">
               {isLogin 
-                ? '계정에 로그인하여 영상 제작을 시작하세요'
-                : '새 계정을 만들어 영상 제작을 시작하세요'
+                ? (lang==='ko' ? '계정에 로그인하여 영상 제작을 시작하세요' : 'Sign in to start creating videos')
+                : (lang==='ko' ? '새 계정을 만들어 영상 제작을 시작하세요' : 'Create an account to start creating videos')
               }
             </p>
           </div>
@@ -109,9 +113,9 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
           </button>
 
           {/* 구분선 */}
-          <div className="relative flex items-center justify-center my-6">
+            <div className="relative flex items-center justify-center my-6">
             <div className="border-t border-white/10 w-full"></div>
-            <span className="px-0 w-full text-center text-gray-400 text-sm">또는</span>
+              <span className="px-0 w-full text-center text-gray-400 text-sm">{lang==='ko' ? '또는' : 'or'}</span>
             <div className="border-t border-white/10 w-full"></div>
           </div>
 
@@ -123,7 +127,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 <input
                   type="text"
                   name="name"
-                  placeholder="이름"
+                  placeholder={lang==='ko' ? '이름' : 'Name'}
                   value={formData.name}
                   onChange={handleInputChange}
                   className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
@@ -137,7 +141,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
               <input
                 type="email"
                 name="email"
-                placeholder="이메일"
+                placeholder={lang==='ko' ? '이메일' : 'Email'}
                 value={formData.email}
                 onChange={handleInputChange}
                 className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
@@ -150,7 +154,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
-                placeholder="비밀번호"
+                placeholder={lang==='ko' ? '비밀번호' : 'Password'}
                 value={formData.password}
                 onChange={handleInputChange}
                 className="w-full pl-12 pr-12 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
@@ -171,7 +175,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="confirmPassword"
-                  placeholder="비밀번호 확인"
+                  placeholder={lang==='ko' ? '비밀번호 확인' : 'Confirm password'}
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
                   className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
@@ -186,7 +190,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   type="button"
                   className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
                 >
-                  비밀번호를 잊으셨나요?
+                  {lang==='ko' ? '비밀번호를 잊으셨나요?' : 'Forgot your password?'}
                 </button>
               </div>
             )}
@@ -196,20 +200,20 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
               disabled={isLoading}
               className="w-full py-3 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-xl font-semibold hover:from-purple-600 hover:to-indigo-700 transition-all transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
-              {isLoading ? '처리 중...' : (isLogin ? '로그인' : '회원가입')}
+              {isLoading ? (lang==='ko' ? '처리 중...' : 'Processing...') : (isLogin ? (lang==='ko' ? '로그인' : 'Log in') : (lang==='ko' ? '회원가입' : 'Sign up'))}
             </button>
           </form>
 
           {/* 로그인/회원가입 전환 */}
           <div className="mt-6 text-center">
             <p className="text-gray-400 text-sm">
-              {isLogin ? '계정이 없으신가요?' : '이미 계정이 있으신가요?'}
+              {isLogin ? (lang==='ko' ? '계정이 없으신가요?' : "Don't have an account?") : (lang==='ko' ? '이미 계정이 있으신가요?' : 'Already have an account?')}
               {' '}
               <button
                 onClick={() => setIsLogin(!isLogin)}
                 className="text-purple-400 hover:text-purple-300 transition-colors font-medium"
               >
-                {isLogin ? '회원가입' : '로그인'}
+                {isLogin ? (lang==='ko' ? '회원가입' : 'Sign up') : (lang==='ko' ? '로그인' : 'Log in')}
               </button>
             </p>
           </div>

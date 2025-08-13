@@ -5,6 +5,8 @@ import Image, { type ImageProps } from 'next/image'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
+import { useLang } from '@/components/ToolbarProvider'
+import { dictionaries } from '@/i18n/dictionary'
 import screenshotContacts from '@/images/usage/text-adjust.gif'
 import screenshotInventory from '@/images/usage/script-generation.gif'
 import screenshotProfitLoss from '@/images/usage/original-story.gif'
@@ -17,11 +19,9 @@ interface Feature {
   icon: React.ComponentType
 }
 
-const features: Array<Feature> = [
+const featuresData: Array<{key: string, image: ImageProps['src'], icon: React.ComponentType}> = [
   {
-    name: '키워드 입력',
-    summary: '원하는 콘텐츠의 키워드를 간단히 입력하세요.',
-    description: '',
+    key: 'step1',
     image: screenshotProfitLoss,
     icon: function KeywordIcon() {
       let id = useId()
@@ -52,9 +52,7 @@ const features: Array<Feature> = [
     },
   },
   {
-    name: '템플릿 선택',
-    summary: '음성, 이미지를 포함한 템플릿을 선택하세요.',
-    description: '',
+    key: 'step2',
     image: screenshotProfitLoss,
     icon: function TemplateIcon() {
       return (
@@ -78,9 +76,7 @@ const features: Array<Feature> = [
     },
   },
   {
-    name: '90% 초안에서 최종 수정',
-    summary: '거의 완성된 초안을 검토하고 세부 수정하세요.',
-    description: '',
+    key: 'step3',
     image: screenshotProfitLoss,
     icon: function EditIcon() {
       return (
@@ -110,10 +106,12 @@ function Feature({
   onClick,
   ...props
 }: React.ComponentPropsWithoutRef<'div'> & {
-  feature: Feature
+  feature: {key: string, image: ImageProps['src'], icon: React.ComponentType}
   isActive: boolean
   onClick?: () => void
 }) {
+  const { lang } = useLang()
+  const t = dictionaries[lang]
   return (
     <div
       className={clsx(
@@ -134,7 +132,7 @@ function Feature({
           )}
         >
           <span className="text-white font-semibold text-lg">
-            {features.findIndex(f => f === feature) + 1}
+            {featuresData.findIndex(f => f === feature) + 1}
           </span>
         </div>
 
@@ -146,13 +144,13 @@ function Feature({
               isActive ? 'text-purple-400' : 'text-gray-400',
             )}
           >
-            {feature.name}
+            {t[`features.${feature.key}.title`]}
           </h3>
           <p className={clsx(
             'mt-2 font-display text-sm transition-colors duration-500 leading-relaxed',
             isActive ? 'text-gray-100' : 'text-gray-400'
           )}>
-            {feature.summary}
+            {t[`features.${feature.key}.desc`]}
           </p>
         </div>
       </div>
@@ -166,10 +164,11 @@ function Feature({
 
 
 function FeaturesMobile() {
+  const { lang } = useLang()
   return (
     <div className="-mx-4 mt-20 flex flex-col gap-y-10 overflow-hidden px-4 sm:-mx-6 sm:px-6 lg:hidden">
-      {features.map((feature, index) => (
-        <div key={feature.summary}>
+            {featuresData.map((feature, index) => (
+        <div key={feature.key}>
          
           <Feature feature={feature} className="mx-auto max-w-2xl" isActive />
           <div className="relative mt-10 pb-10">
@@ -191,6 +190,7 @@ function FeaturesMobile() {
 
 function FeaturesDesktop() {
   const [currentStep, setCurrentStep] = useState(0)
+  const { lang } = useLang()
 
   const handleStepClick = (stepIndex: number) => {
     setCurrentStep(stepIndex)
@@ -203,9 +203,9 @@ function FeaturesDesktop() {
           {/* 버튼 영역 */}
           <div className="pb-12">
             <div className="grid grid-cols-3 gap-x-8">
-              {features.map((feature, featureIndex) => (
+            {featuresData.map((feature, featureIndex) => (
                 <Feature
-                  key={feature.summary}
+                  key={feature.key}
                   feature={feature}
                   isActive={featureIndex === currentStep}
                   onClick={() => handleStepClick(featureIndex)}
@@ -221,7 +221,7 @@ function FeaturesDesktop() {
               <div className="w-full overflow-hidden rounded-xl bg-white shadow-lg shadow-gray-200/5 ring-1 ring-slate-500/10">
                 <Image
                   className="w-full transition-all duration-500 rounded-2xl"
-                  src={features[currentStep].image}
+                  src={featuresData[currentStep].image}
                   alt=""
                   sizes="52.75rem"
                 />
@@ -236,6 +236,8 @@ function FeaturesDesktop() {
 }
 
 export function SecondaryFeatures() {
+  const { lang } = useLang()
+  const t = dictionaries[lang]
   return (
     <section
       id="secondary-features"
@@ -256,12 +258,12 @@ export function SecondaryFeatures() {
           <div className="text-center mb-6 sm:mb-8 md:mb-12">
             <h2 className="text-3xl md:text-4xl lg:text-6xl text-white leading-tight mb-6">
               <span className="font-bold bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent">
-                간단한 3단계로
-              </span>{' '}<br />              콘텐츠 제작 완성.
+                {t['features.steps.title']}
+              </span>{' '}<br />
+              {t['features.steps.subtitle']}
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed break-keep">
-              키워드만 입력하면 AI가 템플릿 추천부터 최종 완성까지
-              모든 과정을 도와드립니다.
+              {t['features.steps.desc']}
             </p>
           </div>
           <FeaturesMobile />

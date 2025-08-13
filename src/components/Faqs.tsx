@@ -3,8 +3,10 @@
 import { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import { Container } from '@/components/Container'
+import { useLang } from '@/components/ToolbarProvider'
+import { dictionaries } from '@/i18n/dictionary'
 
-const faqs = [
+const faqs_ko = [
   {
     question: 'Cutple로 얼마나 빨리 영상을 만들 수 있나요?',
     answer:
@@ -38,6 +40,34 @@ const faqs = [
 
 export function Faqs() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const { lang } = useLang()
+  const t = dictionaries[lang]
+  const faqs = lang==='ko' ? faqs_ko : [
+    {
+      question: 'How fast can I make a video with Cutple?',
+      answer: 'From keywords to a finished video in under 5 minutes on average. Scripting, voiceover, and image layout are automated.'
+    },
+    {
+      question: 'Which platforms can I upload to?',
+      answer: 'Currently YouTube Shorts. Instagram Reels and TikTok are coming soon.'
+    },
+    {
+      question: 'Can I use it without editing experience?',
+      answer: 'Absolutely. Cutple is optimized to produce videos quickly with just your idea.'
+    },
+    {
+      question: 'What AI voices are supported?',
+      answer: 'Typecast and VALL-E today, with ElevenLabs and more coming next.'
+    },
+    {
+      question: 'What is the quality of generated videos?',
+      answer: 'Cutple can produce videos capable of 1M+ views, built on proven viral structures and fast effects for instant publishing.'
+    },
+    {
+      question: 'Any copyright concerns?',
+      answer: 'All AI-generated content (scripts, images, voices) can be used commercially without copyright issues.'
+    },
+  ]
 
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
@@ -57,11 +87,10 @@ export function Faqs() {
             id="faq-title"
             className="font-display text-3xl tracking-tight text-gray-200 sm:text-4xl md:text-5xl"
           >
-            자주 묻는 질문
+            {lang==='ko' ? '자주 묻는 질문' : 'Frequently asked questions'}
           </h2>
           <p className="mt-4 text-sm sm:text-base md:text-lg tracking-tight text-gray-400">
-            궁금한 점이 해결되지 않으셨다면 고객지원팀에 문의해 주세요.
-            빠른 시간 내에 답변드리겠습니다.
+            {lang==='ko' ? '궁금한 점이 해결되지 않으셨다면 고객지원팀에 문의해 주세요. 빠른 시간 내에 답변드리겠습니다.' : 'Didn\'t find what you need? Contact support and we\'ll get back to you shortly.'}
           </p>
         </div>
         

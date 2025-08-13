@@ -8,6 +8,9 @@ import AnimatedLogoCloud from './Company'
 import TextRotate from '../../components/farmui/RotateText'
 import DashboardDemo from './DashboardShowcase'
 import { AuthModal } from './AuthModal'
+import InstallLinkSheet from '@/components/InstallLinkSheet'
+import { useLang } from './ToolbarProvider'
+import { dictionaries } from '@/i18n/dictionary'
 
 type GlowRingWrapperProps = {
   children: React.ReactNode
@@ -144,20 +147,36 @@ function GlowRingWrapper({ children, variant = 'primary' }: GlowRingWrapperProps
 const HeroMod = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
   const [osType, setOsType] = useState<'mac' | 'windows' | 'other'>('other')
+  const { lang } = useLang()
+  const t = dictionaries[lang]
+  const [isMobile, setIsMobile] = useState(false)
+  const [openSheet, setOpenSheet] = useState(false)
 
+  // OS 타입은 UA로 한번만 판단
   useEffect(() => {
-    const userAgent = window.navigator.userAgent.toLowerCase()
-    if (userAgent.includes('mac')) {
+    const ua = window.navigator.userAgent.toLowerCase()
+    if (ua.includes('mac') && !/iphone|ipad|ipod/.test(ua)) {
       setOsType('mac')
-    } else if (userAgent.includes('win')) {
+    } else if (ua.includes('win')) {
       setOsType('windows')
     } else {
       setOsType('other')
     }
   }, [])
 
+  // 모바일 여부는 뷰포트 폭 기준(md < 768px)
+  useEffect(() => {
+    const update = () => setIsMobile(window.innerWidth < 768)
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+
   const handleDownload = () => {
-    // 다운로드 페이지로 이동
+    if (isMobile) {
+      setOpenSheet(true)
+      return
+    }
     window.location.href = '/download'
   }
   return (
@@ -173,17 +192,17 @@ const HeroMod = () => {
           <div className="leading-0 mx-auto max-w-6xl space-y-2 sm:space-y-3 px-4 sm:px-6 lg:px-10 text-center lg:leading-5">
 
             <h2 className="sm:mt-36 mt-32 font-semibold mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] bg-clip-text text-3xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tighter text-transparent mb-2 sm:mb-3 leading-[1.15] ">
-
-              텍스트 한
-              줄로 만드는 바이럴 숏폼{' '}<br />
+              {lang==='en' ? 'Make viral shorts from a single line' : '텍스트 한 줄로 만드는 바이럴 숏폼'}{' '}<br />
               <span className="bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent block mt-1 sm:mt-2">
-                대본, 목소리, 이미지까지,<br className="sm:hidden" />
-                클릭 몇 번으로 쉽게.
+                {lang==='en' ? 'Script, voice, and images in a few clicks.' : '대본, 목소리, 이미지까지,'}<br className="sm:hidden" />
+                {lang==='en' ? 'Even scene spacing auto-optimized.' : '클릭 몇 번으로 쉽게.'}
               </span>
             </h2>
 
-            <p className="text-sm sm:text-base md:text-lg mx-auto max-w-[32rem] sm:max-w-2xl text-gray-300 px-4 sm:px-0   break-keep">
-              키워드를 입력하면 대본이 나오고, 목소리가 입혀지고, 이미지가 배치됩니다. <br className="hidden sm:block" />심지어 장면 간의 간격까지 AI가 조절합니다.
+            <p className="text-sm sm:text-base md:text-lg mx-auto max-w-[32rem] sm:max-w-2xl text-gray-300 px-4 sm:px-0 break-keep">
+              {lang==='en' ? 'Type keywords to get a script; AI voice and images are laid out. ' : '키워드를 입력하면 대본이 나오고, 목소리가 입혀지고, 이미지가 배치됩니다. '}
+              <br className="hidden sm:block" />
+              {lang==='en' ? 'Even scene spacing is optimized by AI.' : '심지어 장면 간의 간격까지 AI가 조절합니다.'}
             </p>
             
             <div className="flex pt-32 lg:pt-40 flex-row flex-nowrap items-center justify-center gap-5 sm:gap-9 px-3">
@@ -199,7 +218,7 @@ const HeroMod = () => {
               </GlowRingWrapper>
 
               {(osType === 'mac' || osType === 'windows') && (
-                <GlowRingWrapper variant="neutral">
+               <GlowRingWrapper variant="neutral">
                   <button
                     onClick={handleDownload}
                     className="font-semibold whitespace-nowrap group z-10 relative flex items-center justify-center gap-2 rounded-md bg-white text-gray-900 px-4 py-2 text-sm sm:px-8 sm:py-4 text-center sm:text-lg lg:text-xl tracking-tighter transition-colors hover:bg-gray-100"
@@ -213,9 +232,9 @@ const HeroMod = () => {
                         <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.801" />
                       </svg>
                     )}
-                    Download for {osType === 'mac' ? 'Mac' : 'Windows'}
+                    Download for {osType === 'mac' ? 'macOS' : 'Windows'}
                   </button>
-                </GlowRingWrapper>
+                 </GlowRingWrapper>
               )}
             </div>
           </div>
@@ -232,6 +251,7 @@ const HeroMod = () => {
         isOpen={isAuthModalOpen} 
         onClose={() => setIsAuthModalOpen(false)} 
       />
+      <InstallLinkSheet open={openSheet} onClose={() => setOpenSheet(false)} />
     </>
   )
 }

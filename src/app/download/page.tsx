@@ -6,6 +6,9 @@ import { Monitor, Smartphone, Laptop, Computer } from 'lucide-react'
 import { Container } from '@/components/Container'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import InstallLinkSheet from '@/components/InstallLinkSheet'
+import { useLang } from '@/components/ToolbarProvider'
+import { dictionaries } from '@/i18n/dictionary'
 
 type GlowRingWrapperProps = {
   children: React.ReactNode
@@ -137,18 +140,30 @@ function GlowRingWrapper({ children, variant = 'neutral' }: GlowRingWrapperProps
 }
 
 const DownloadPage = () => {
+  const { lang } = useLang()
+  const t = dictionaries[lang]
   const [activeVersion, setActiveVersion] = useState<'stable' | 'beta'>('stable')
   const [osType, setOsType] = useState<'mac' | 'windows' | 'other'>('other')
+  const [isMobile, setIsMobile] = useState(false)
+  const [openSheet, setOpenSheet] = useState(false)
 
   useEffect(() => {
-    const userAgent = window.navigator.userAgent.toLowerCase()
-    if (userAgent.includes('mac')) {
+    const ua = window.navigator.userAgent.toLowerCase()
+    if (ua.includes('mac') && !/iphone|ipad|ipod/.test(ua)) {
       setOsType('mac')
-    } else if (userAgent.includes('win')) {
+    } else if (ua.includes('win')) {
       setOsType('windows')
     } else {
       setOsType('other')
     }
+  }, [])
+
+  // 모바일 여부는 뷰포트 폭 기준(md < 768px)
+  useEffect(() => {
+    const update = () => setIsMobile(window.innerWidth < 768)
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
   }, [])
 
   const stableVersions = {
@@ -166,6 +181,10 @@ const DownloadPage = () => {
   const currentVersions = activeVersion === 'stable' ? stableVersions : betaVersions
 
   const handleDownload = (platform: string, version: string) => {
+    if (isMobile) {
+      setOpenSheet(true)
+      return
+    }
     console.log(`Downloading ${platform} - Version ${version}`)
     // 실제 다운로드 로직 구현
   }
@@ -194,7 +213,7 @@ const DownloadPage = () => {
 
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent mb-5">
-                Download Cutple
+                {t['download.title']}
               </h1>
               {/* Version Toggle */}
             </div>
@@ -217,14 +236,14 @@ const DownloadPage = () => {
                         </svg>
                       )}
                       <span className="font-semibold tracking-tight">Download for {osType === 'mac' ? 'macOS' : 'Windows'}</span>
-                      <span className="text-xs sm:text-sm opacity-70">
+                       <span className="text-xs sm:text-sm opacity-70">
                         v{currentVersions[osType === 'mac' ? 'macSilicon' : 'windows'].version}
                       </span>
                     </button>
                   </GlowRingWrapper>
                 </div>
                 <p className="text-gray-400 text-sm mt-3">
-                  {osType === 'mac' ? 'Apple Silicon에 최적화' : 'Windows 10 이상 지원'}
+                  {osType === 'mac' ? t['download.mac.optimized'] : t['download.windows.support']}
                 </p>
 
               </div>
@@ -245,7 +264,7 @@ const DownloadPage = () => {
                     }`}
                   aria-pressed={activeVersion === 'stable'}
                 >
-                  정식 버전
+                  {t['download.toggle.stable']}
                 </button>
                 <button
                   onClick={() => setActiveVersion('beta')}
@@ -255,7 +274,7 @@ const DownloadPage = () => {
                     }`}
                   aria-pressed={activeVersion === 'beta'}
                 >
-                  베타 버전
+                  {t['download.toggle.beta']}
                 </button>
               </div>
             </div>
@@ -264,11 +283,11 @@ const DownloadPage = () => {
             <div className="mb-16">
               <div className="sm:mb-8 mb-4">
                 <h2 className="text-2xl font-semibold text-white">
-                  Cutple for Mac {activeVersion === 'beta' && 'Beta'}
+                  {activeVersion === 'stable' ? t['download.mac.title'] : t['download.mac.beta']}
                 </h2>
               </div>
               <p className="text-gray-200 mb-4">
-                {activeVersion === 'stable' ? 'Apple Silicon과 Intel 모두 지원합니다.' : '최신 기능을 먼저 경험해보세요.'}
+                {activeVersion === 'stable' ? t['download.mac.desc.stable'] : t['download.mac.desc.beta']}
               </p>
 
               <div className="space-y-4">
@@ -300,8 +319,8 @@ const DownloadPage = () => {
                         <p className="text-xs text-gray-400 uppercase tracking-wide">Version</p>
                         <p className="text-sm font-semibold text-white">{currentVersions.macSilicon.version}</p>
                       </div>
-                      <button
-                        onClick={() => handleDownload('macOS Apple Silicon', currentVersions.macSilicon.version)}
+                       <button
+                         onClick={() => handleDownload('macOS Apple Silicon', currentVersions.macSilicon.version)}
                         className={`w-full md:w-auto px-6 py-2 rounded-lg font-semibold transition-all ${activeVersion === 'stable'
                           ? 'bg-white text-gray-900 hover:bg-gray-100'
                           : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
@@ -319,11 +338,11 @@ const DownloadPage = () => {
             <div className="mb-16">
               <div className="sm:mb-8 mb-4">
                 <h2 className="text-2xl font-semibold text-white">
-                  Cutple for Windows {activeVersion === 'beta' && 'Beta'}
+                  {activeVersion === 'stable' ? t['download.windows.title'] : t['download.windows.beta']}
                 </h2>
               </div>
               <p className="text-gray-200 mb-4">
-                {activeVersion === 'stable' ? 'Windows 10 이상에서 사용 가능합니다.' : '최신 기능을 먼저 경험해보세요.'}
+                {activeVersion === 'stable' ? t['download.windows.desc.stable'] : t['download.windows.desc.beta']}
               </p>
 
               <div className="space-y-4">
@@ -355,8 +374,8 @@ const DownloadPage = () => {
                         <p className="text-xs text-gray-400 uppercase tracking-wide">Version</p>
                         <p className="text-sm font-semibold text-white">{currentVersions.windows.version}</p>
                       </div>
-                      <button
-                        onClick={() => handleDownload('Windows', currentVersions.windows.version)}
+                       <button
+                         onClick={() => handleDownload('Windows', currentVersions.windows.version)}
                         className={`w-full md:w-auto px-6 py-2 rounded-lg font-semibold transition-all ${activeVersion === 'stable'
                           ? 'bg-white text-gray-900 hover:bg-gray-100'
                           : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
@@ -375,11 +394,11 @@ const DownloadPage = () => {
             {/* Footer Note */}
             <div className="text-center mt-16 pt-8 border-t border-white/10">
               <p className="text-gray-400 text-sm">
-                시스템 요구사항 및 자세한 정보는{' '}
+                {t['download.footer.note']}{' '}
                 <a href="https://slashpage.com/cutple" className="text-purple-400 hover:text-purple-300 transition-colors">
-                  문서
+                  {t['download.footer.docs']}
                 </a>
-                를 참고하세요.
+                {t['download.footer.reference']}
               </p>
             </div>
           </div>
@@ -387,6 +406,7 @@ const DownloadPage = () => {
       </main>
 
       <Footer />
+      <InstallLinkSheet open={openSheet} onClose={() => setOpenSheet(false)} />
     </div>
   )
 }

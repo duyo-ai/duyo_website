@@ -1,11 +1,14 @@
+"use client"
 import { Container } from '@/components/Container'
+import { useLang } from '@/components/ToolbarProvider'
+import { dictionaries } from '@/i18n/dictionary'
 import avatarImage1 from '@/images/avatars/avatar-1.png'
 import avatarImage2 from '@/images/avatars/avatar-2.png'
 import avatarImage3 from '@/images/avatars/avatar-3.png'
 import avatarImage4 from '@/images/avatars/avatar-4.png'
 import avatarImage5 from '@/images/avatars/avatar-5.png'
 
-const testimonials = [
+const testimonialsKo = [
   [
     {
       content:
@@ -68,6 +71,69 @@ const testimonials = [
   ],
 ]
 
+const testimonialsEn = [
+  [
+    {
+      content:
+        "I was skeptical at first, but I got a polished video in just 5 minutes. Compared to the time I used to spend editing, it feels like I gained an extra day. The script generation is especially impressive—it learns my style and produces natural storytelling. Now, as long as I have an idea, I can turn it into a video right away, and my production speed has increased tenfold.",
+      author: {
+        name: 'Taehyun Kim',
+        role: '80K-subscriber storytelling YouTuber',
+        image: avatarImage1,
+      },
+    },
+    {
+      content:
+        "It's hard to believe the images are AI-generated—they capture emotion and mood with precision. Most of all, it keeps our brand tone consistent, which is incredibly satisfying. The back-and-forth with designers for revisions has practically disappeared. It’s perfect for high-volume short-form marketing campaigns, and the quality satisfies even the most demanding clients.",
+      author: {
+        name: 'Sooyoung Jung',
+        role: 'Brand Marketing Director',
+        image: avatarImage4,
+      },
+    },
+  ],
+  [
+    {
+      content:
+        "What amazes me most is that images automatically match the context. Even with just text, it lays out visuals that follow the story flow and even reflects emotional dynamics, which greatly boosts viewer immersion. I used to spend a lot of time hunting for stock images, but now I can focus purely on creating. It even expresses abstract ideas surprisingly well.",
+      author: {
+        name: 'Minsu Kim',
+        role: 'Educational content creator',
+        image: avatarImage5,
+      },
+    },
+    {
+      content:
+        "I’m a complete beginner who started YouTube three months ago, and thanks to this tool I can easily produce three videos a day. I was overwhelmed by scriptwriting at first, but I learned a lot from the suggested story structures. It even adjusts voice tone and speed automatically, like a professional narrator. I’ve already passed 5,000 subscribers, and the quality gets praised in the comments—so rewarding.",
+      author: {
+        name: 'Jiwon Lee',
+        role: 'New YouTuber',
+        image: avatarImage2,
+      },
+    },
+  ],
+  [
+    {
+      content:
+        "It’s incredibly convenient that I can start without planning and still get a high-quality video. It’s especially useful when our team needs a quick promo. With just a few keywords, it automatically creates everything from storyboard to final video, dramatically speeding up our campaigns. It’s also excellent for quickly generating variants for A/B testing.",
+      author: {
+        name: 'Jiyoung Park',
+        role: 'Marketing Manager',
+        image: avatarImage3,
+      },
+    },
+    {
+      content:
+        "I was shocked that the scripts were even more natural and engaging than ones I commissioned from paid writers. Because the AI considers the latest trends and viral factors, our average views more than tripled. It excels at crafting emotionally immersive stories. Now we can invest the writer budget elsewhere, giving us more flexibility in running the channel.",
+      author: {
+        name: 'Hyunsoo Lee',
+        role: 'YouTube channel operator (150K subs)',
+        image: avatarImage1,
+      },
+    },
+  ],
+]
+
 function QuoteIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg aria-hidden="true" width={105} height={78} {...props}>
@@ -77,6 +143,9 @@ function QuoteIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 }
 
 export function Testimonials() {
+  const { lang } = useLang()
+  const isKo = lang === 'ko'
+  const t = dictionaries[lang]
   return (
     <section
       id="testimonials"
@@ -86,20 +155,20 @@ export function Testimonials() {
       <Container>
         <div className="text-center mb-6 sm:mb-8 md:mb-12">
             <h2 className="text-3xl md:text-4xl lg:text-6xl text-white leading-tight mb-6">
-            실제 사용자들의{' '}<br /> 
+              {t['testimonials.title']}{' '}<br /> 
               <span className="font-bold bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent">
-              생생한 후기
+                {t['testimonials.subtitle']}
               </span>
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed break-keep">
-            전국의 크리에이터들이 이미 경험하고 있는 변화를 확인해보세요. <br className="hidden sm:block"/>간단한 키워드 입력만으로도 놀라운 결과를 만들어내고 있습니다.
+              {t['testimonials.desc']}
             </p>
           </div>
         <ul
           role="list"
           className="mx-auto mt-8 sm:mt-16 lg:mt-20 grid max-w-2xl grid-cols-1 gap-4 sm:gap-6 lg:gap-8 lg:max-w-none lg:grid-cols-3"
         >
-          {testimonials.map((column, columnIndex) => (
+          {(isKo ? testimonialsKo : testimonialsEn).map((column, columnIndex) => (
             <li key={columnIndex}>
               <ul role="list" className="flex flex-col gap-y-4 sm:gap-y-6 lg:gap-y-8">
                 {column.map((testimonial, testimonialIndex) => (

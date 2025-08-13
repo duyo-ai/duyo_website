@@ -48,9 +48,9 @@ export default function RootLayout({
       )}
     >
       <body className="flex h-full flex-col">
-
-        {children}
-        <ToolbarProvider />
+        <ToolbarProvider>
+          {children}
+        </ToolbarProvider>
       </body>
     </html> 
   )

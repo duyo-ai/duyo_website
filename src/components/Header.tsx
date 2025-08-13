@@ -6,8 +6,12 @@ import { Button } from '@/components/Button'
 import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import { AuthModal } from './AuthModal'
+import { useLang } from '@/components/ToolbarProvider'
+import { dictionaries } from '@/i18n/dictionary'
 
 export function Header() {
+  const { lang, setLang } = useLang()
+  const t = dictionaries[lang]
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -89,19 +93,19 @@ export function Header() {
           {/* 내비게이션 (데스크톱) */}
           <div className="hidden md:flex items-center space-x-6">
             <Link href="/#features" className="text-gray-300 hover:text-white transition-colors">
-              주요 기능
+              {t['nav.features']}
             </Link>
             <Link href="/#secondary-features" className="text-gray-300 hover:text-white transition-colors">
-              솔루션
+              {t['nav.solutions']}
             </Link>
             <Link href="/pricing" className="text-gray-300 hover:text-white transition-colors">
-              요금제
+              {t['nav.pricing']}
             </Link>
             <Link href="/download" className="text-gray-300 hover:text-white transition-colors">
-              다운로드
+              {t['nav.download']}
             </Link>
             <Link href="https://slashpage.com/cutple" target="_blank" className="text-gray-300 hover:text-white transition-colors">
-              문서
+              {t['nav.docs']}
             </Link>
           </div>
 
@@ -110,17 +114,32 @@ export function Header() {
             className="hidden md:flex items-center gap-4 transform-gpu"
             style={{ transform: `translate3d(${-scrollProgress * 12}px, 0, 0)` }}
           >
+            {/* Language Toggle */}
+            <div className="inline-flex items-center gap-1 rounded-lg border border-white/10 bg-black/20 backdrop-blur px-2 py-1 text-xs text-gray-200">
+              <button 
+                className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${lang === 'ko' ? 'bg-white/10 text-white' : 'text-gray-300 hover:text-white'}`} 
+                onClick={() => setLang('ko')}
+              >
+                KO
+              </button>
+              <button 
+                className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${lang === 'en' ? 'bg-white/10 text-white' : 'text-gray-300 hover:text-white'}`} 
+                onClick={() => setLang('en')}
+              >
+                EN
+              </button>
+            </div>
             <button
               onClick={() => setIsAuthModalOpen(true)}
               className="text-gray-300 hover:text-white transition-colors text-sm font-semibold"
             >
-              로그인
+              {t['nav.login']}
             </button>
             <button
               onClick={() => setIsAuthModalOpen(true)}
               className="inline-flex items-center justify-center rounded-3xl bg-purple-200/10 backdrop-blur-md border border-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/20 hover:border-white/30 transition-all shadow-lg"
             >
-              지금 시작하기
+              {t['nav.getStarted']}
             </button>
           </div>
 
@@ -129,11 +148,26 @@ export function Header() {
             className="md:hidden flex items-center space-x-2 transform-gpu"
             style={{ transform: 'none' }}
           >
+            {/* Mobile Language Toggle */}
+            <div className="inline-flex items-center gap-1 rounded-lg border border-white/10 bg-black/20 backdrop-blur px-1.5 py-1 text-xs text-gray-200">
+              <button 
+                className={`px-1.5 py-0.5 rounded text-xs font-medium transition-colors ${lang === 'ko' ? 'bg-white/10 text-white' : 'text-gray-300 hover:text-white'}`} 
+                onClick={() => setLang('ko')}
+              >
+                KO
+              </button>
+              <button 
+                className={`px-1.5 py-0.5 rounded text-xs font-medium transition-colors ${lang === 'en' ? 'bg-white/10 text-white' : 'text-gray-300 hover:text-white'}`} 
+                onClick={() => setLang('en')}
+              >
+                EN
+              </button>
+            </div>
             <button
               onClick={() => setIsAuthModalOpen(true)}
               className="inline-flex items-center justify-center rounded-2xl bg-purple-200/10 backdrop-blur-md border border-white/10 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/20 hover:border-white/30 transition-all shadow-lg"
             >
-              지금 시작하기
+              {t['nav.getStarted']}
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -152,21 +186,21 @@ export function Header() {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-2">
             <div className="rounded-2xl border border-white/10 bg-black/20 backdrop-blur-md p-4 space-y-3">
-              <Link href="/#features" className="block text-gray-300 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>주요 기능</Link>
-              <Link href="/#secondary-features" className="block text-gray-300 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>솔루션</Link>
+              <Link href="/#features" className="block text-gray-300 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>{t['nav.features']}</Link>
+              <Link href="/#secondary-features" className="block text-gray-300 hover:text-white transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>{t['nav.solutions']}</Link>
               <Link 
                 href="/pricing" 
                 className="block text-gray-300 hover:text-white transition-colors py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                요금제
+                {t['nav.pricing']}
               </Link>
               <Link 
                 href="/download" 
                 className="block text-gray-300 hover:text-white transition-colors py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                다운로드
+                {t['nav.download']}
               </Link>
               <Link 
                 href="https://slashpage.com/cutple" 
@@ -174,8 +208,19 @@ export function Header() {
                 target="_blank"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                문서
+                {t['nav.docs']}
               </Link>
+              <div className="border-t border-white/10 pt-3 mt-3">
+                <button
+                  onClick={() => {
+                    setIsAuthModalOpen(true)
+                    setIsMobileMenuOpen(false)
+                  }}
+                  className="block w-full text-left text-gray-300 hover:text-white transition-colors py-2"
+                >
+                  {t['nav.login']}
+                </button>
+              </div>
             </div>
           </div>
         )}
