@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     }
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: redirectTo || `${process.env.NEXT_PUBLIC_SITE_URL}/auth/reset`
+      redirectTo: redirectTo || `${process.env.NEXT_PUBLIC_SITE_URL || 'https://duyo-website.vercel.app'}/auth/reset`
     })
 
     if (error) {

@@ -74,7 +74,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
     switch (name) {
       case 'email':
         if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-          errorMsg = lang === 'ko' ? '올바른 이메일 형식을 입력해주세요.' : 'Please enter a valid email format.'
+          errorMsg = t['auth.error.email.invalid']
         }
         break
       
@@ -87,9 +87,9 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
       case 'password':
         if (mode !== 'forgot' && value) {
           if (value.length < 8) {
-            errorMsg = lang === 'ko' ? '비밀번호는 8자 이상이어야 합니다.' : 'Password must be at least 8 characters.'
+            errorMsg = t['auth.error.password.minLength']
           } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
-            errorMsg = lang === 'ko' ? '비밀번호에 특수문자가 하나 이상 포함되어야 합니다.' : 'Password must contain at least one special character.'
+            errorMsg = t['auth.error.password.specialChar']
           }
         }
         break
@@ -110,6 +110,40 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const handleFieldBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     validateField(name, value)
+  }
+
+  // Supabase 에러를 사용자 친화적인 메시지로 변환
+  const getErrorMessage = (error: any): string => {
+    if (!error) return t['auth.error.unknown']
+    
+    const errorMessage = error.message?.toLowerCase() || ''
+    
+    if (errorMessage.includes('invalid login credentials') || 
+        errorMessage.includes('invalid email or password')) {
+      return t['auth.error.invalidCredentials']
+    }
+    if (errorMessage.includes('user not found') || 
+        errorMessage.includes('no user found')) {
+      return t['auth.error.userNotFound']
+    }
+    if (errorMessage.includes('email already exists') || 
+        errorMessage.includes('user already registered')) {
+      return t['auth.error.emailAlreadyExists']
+    }
+    if (errorMessage.includes('password is too weak') || 
+        errorMessage.includes('weak password')) {
+      return t['auth.error.weakPassword']
+    }
+    if (errorMessage.includes('too many requests') || 
+        errorMessage.includes('rate limit')) {
+      return t['auth.error.tooManyRequests']
+    }
+    if (errorMessage.includes('network') || 
+        errorMessage.includes('fetch')) {
+      return t['auth.error.networkError']
+    }
+    
+    return t['auth.error.unknown']
   }
 
   const validateForm = () => {
@@ -161,7 +195,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
         })
 
         if (error) {
-          setError(error.message || (lang === 'ko' ? '로그인에 실패했습니다.' : 'Login failed.'))
+          setError(getErrorMessage(error))
           return
         }
 
@@ -221,7 +255,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
       if (error) {
         console.error('Google login error:', error)
-        setError(error.message || (lang === 'ko' ? 'Google 로그인에 실패했습니다.' : 'Google login failed.'))
+        setError(getErrorMessage(error))
       }
       // OAuth는 리디렉션되므로 여기서 onClose() 호출하지 않음
     } catch (error) {

@@ -172,6 +172,18 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     'install.subtitle.2': '이메일을 남겨주시면 Mac/Windows 설치 링크를 보내드릴게요.',
     'install.placeholder.email': '이메일 주소',
     'install.toast.sent': '이메일로 설치 링크를 보냈어요!',
+
+    // Auth validation messages
+    'auth.error.email.invalid': '올바른 이메일 주소를 입력해주세요',
+    'auth.error.password.minLength': '비밀번호는 최소 8자 이상이어야 합니다',
+    'auth.error.password.specialChar': '비밀번호에 특수문자가 포함되어야 합니다',
+    'auth.error.invalidCredentials': '이메일 또는 비밀번호가 올바르지 않습니다',
+    'auth.error.userNotFound': '등록되지 않은 이메일입니다',
+    'auth.error.emailAlreadyExists': '이미 등록된 이메일입니다',
+    'auth.error.weakPassword': '비밀번호가 너무 약합니다',
+    'auth.error.tooManyRequests': '너무 많은 요청이 발생했습니다. 잠시 후 다시 시도해주세요',
+    'auth.error.networkError': '네트워크 오류가 발생했습니다. 인터넷 연결을 확인해주세요',
+    'auth.error.unknown': '알 수 없는 오류가 발생했습니다',
   },
   en: {
     'nav.features': 'Features',
@@ -339,9 +351,21 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     // Install link sheet
     'install.title': 'Get Installation Link',
     'install.subtitle.1': 'Direct install is not supported on mobile.',
-    'install.subtitle.2': 'Leave your email and we’ll send the Mac/Windows install link.',
+    'install.subtitle.2': 'Leave your email and we'll send the Mac/Windows install link.',
     'install.placeholder.email': 'Your email',
     'install.toast.sent': 'Installation link sent to your email!',
+
+    // Auth validation messages
+    'auth.error.email.invalid': 'Please enter a valid email address',
+    'auth.error.password.minLength': 'Password must be at least 8 characters long',
+    'auth.error.password.specialChar': 'Password must contain at least one special character',
+    'auth.error.invalidCredentials': 'Invalid email or password',
+    'auth.error.userNotFound': 'No account found with this email',
+    'auth.error.emailAlreadyExists': 'An account with this email already exists',
+    'auth.error.weakPassword': 'Password is too weak',
+    'auth.error.tooManyRequests': 'Too many requests. Please try again later',
+    'auth.error.networkError': 'Network error. Please check your internet connection',
+    'auth.error.unknown': 'An unexpected error occurred',
   },
 }
 
