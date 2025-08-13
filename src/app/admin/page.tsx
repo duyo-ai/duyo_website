@@ -195,53 +195,72 @@ export default function AdminPage() {
     setUploadStatus('파일 업로드 중...')
 
     try {
-      // 서버사이드 Storage API를 통한 업로드 (RLS 우회)
-      const formData = new FormData()
-      formData.append('file', file)
-      formData.append('platform', version.platform)
-      formData.append('versionType', version.version_type)
-
-      // 진행률 시뮬레이션
-      let uploadProgress = 0
-      const progressInterval = setInterval(() => {
-        uploadProgress += Math.random() * 8
-        if (uploadProgress >= 90) {
-          uploadProgress = 90
-          clearInterval(progressInterval)
-        }
-        setUploadProgress(Math.floor(uploadProgress))
-      }, 300)
-
-      console.log('📁 Starting upload to /api/admin/storage-upload')
-
-      // 새로운 Storage API 사용
-      const response = await fetch('/api/admin/storage-upload', {
+      // 1단계: Presigned Upload URL 요청
+      console.log('🔗 Requesting upload URL...')
+      setUploadStatus('업로드 URL 생성 중...')
+      
+      const urlResponse = await fetch('/api/admin/upload-url', {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fileName: file.name,
+          fileType: file.type,
+          platform: version.platform,
+          versionType: version.version_type
+        })
       })
 
-      clearInterval(progressInterval)
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ message: `HTTP ${response.status}` }))
-        throw new Error(errorData.message || `업로드 실패: ${response.status}`)
+      if (!urlResponse.ok) {
+        throw new Error(`URL 생성 실패: ${urlResponse.status}`)
       }
 
-      const uploadResult = await response.json()
-
-      if (!uploadResult.ok) {
-        throw new Error(uploadResult.message || '업로드에 실패했습니다.')
+      const urlData = await urlResponse.json()
+      if (!urlData.ok) {
+        throw new Error(urlData.message || 'Upload URL 생성에 실패했습니다.')
       }
+
+      // 2단계: Presigned URL로 직접 업로드
+      console.log('📁 Starting direct upload to Supabase Storage...')
+      setUploadStatus('파일 업로드 중...')
+
+      // XMLHttpRequest로 진행률 추적
+      const uploadPromise = new Promise<void>((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
+        
+        xhr.upload.addEventListener('progress', (e) => {
+          if (e.lengthComputable) {
+            const progress = Math.round((e.loaded / e.total) * 90) // 90%까지만
+            setUploadProgress(progress)
+          }
+        })
+
+        xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            resolve()
+          } else {
+            reject(new Error(`Upload failed: ${xhr.status}`))
+          }
+        }
+
+        xhr.onerror = () => reject(new Error('Upload failed'))
+
+        // Presigned URL로 PUT 요청
+        xhr.open('PUT', urlData.uploadUrl)
+        xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream')
+        xhr.send(file)
+      })
+
+      await uploadPromise
 
       setUploadProgress(95)
       setUploadStatus('데이터베이스 업데이트 중...')
 
-      // DB 업데이트
+      // 3단계: DB 업데이트
       await updateVersion({
         id: version.id,
-        file_name: uploadResult.file.name,
-        file_url: uploadResult.file.url,
-        file_size: uploadResult.file.size
+        file_name: file.name,
+        file_url: urlData.publicUrl,
+        file_size: file.size
       })
 
       setUploadProgress(100)
