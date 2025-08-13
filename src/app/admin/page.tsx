@@ -212,33 +212,31 @@ export default function AdminPage() {
       const urlJson = await urlRes.json()
       if (!urlJson.ok) throw new Error(urlJson.message || 'Upload URL 생성 실패')
 
-      // 2) signed URL로 업로드 (uploadToSignedUrl 규약 사용)
-      console.log('📤 Uploading via signed URL...')
+      // 2) signed URL로 업로드 (supabase-js가 Authorization 헤더 자동 처리)
+      console.log('📤 Uploading via signed URL (supabase-js)...')
       setUploadStatus('파일 업로드 중...')
-      const form = new FormData()
-      form.append('file', file)
-      form.append('token', urlJson.token || '')
-      // Supabase는 PUT file 본문 또는 multipart 모두 지원. multipart 권장
-      const xhr = new XMLHttpRequest()
-      const uploadPromise = new Promise<void>((resolve, reject) => {
-        xhr.upload.addEventListener('progress', (e) => {
-          if (e.lengthComputable) {
-            const p = Math.round((e.loaded / e.total) * 90)
-            setUploadProgress(p)
-          }
+
+      const { supabase } = await import('@/lib/supabase')
+
+      // 진행률 시뮬레이션 (supabase-js는 진행률 콜백을 제공하지 않음)
+      let pseudo = 0
+      const tick = setInterval(() => {
+        pseudo = Math.min(90, pseudo + Math.random() * 8)
+        setUploadProgress(Math.floor(pseudo))
+      }, 300)
+
+      const { error: signedErr } = await supabase.storage
+        .from('app-releases')
+        .uploadToSignedUrl(urlJson.path, urlJson.token, file, {
+          contentType: file.type || 'application/octet-stream',
+          upsert: true,
         })
-        xhr.onload = () => {
-          if (xhr.status >= 200 && xhr.status < 300) resolve()
-          else {
-            console.error('Signed upload failed:', xhr.status, xhr.responseText)
-            reject(new Error(`Upload failed: ${xhr.status}`))
-          }
-        }
-        xhr.onerror = () => reject(new Error('Upload network error'))
-        xhr.open('POST', urlJson.uploadUrl)
-        xhr.send(form)
-      })
-      await uploadPromise
+
+      clearInterval(tick)
+      if (signedErr) {
+        console.error('Signed upload error:', signedErr)
+        throw new Error(signedErr.message || 'Signed upload failed')
+      }
 
       // 3) DB 업데이트
       setUploadProgress(95)
