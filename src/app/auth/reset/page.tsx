@@ -20,21 +20,34 @@ export default function PasswordResetPage() {
   useEffect(() => {
     const process = async () => {
       // URL 해시에서 토큰 추출 후 세션 설정
+      const url = new URL(window.location.href)
       const hash = window.location.hash.replace(/^#/, '')
-      const params = new URLSearchParams(hash)
-      const accessToken = params.get('access_token')
-      const refreshToken = params.get('refresh_token')
-      if (!accessToken || !refreshToken) {
-        setValidToken(false)
-        setError(lang === 'ko' ? '비밀번호 재설정 링크가 유효하지 않거나 만료되었습니다.' : 'Invalid or expired reset link. Please request a new password reset.')
-        return
-      }
+      const hashParams = new URLSearchParams(hash)
+      const accessToken = hashParams.get('access_token')
+      const refreshToken = hashParams.get('refresh_token')
+      const code = url.searchParams.get('code')
+      const type = url.searchParams.get('type')
 
       try {
         const { supabase } = await import('@/lib/supabase')
-        await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken })
+
+        if (code) {
+          // 새 형식(쿼리스트링 code) 지원
+          const { error } = await supabase.auth.exchangeCodeForSession(code)
+          if (error) throw error
+        } else if (accessToken && refreshToken) {
+          // 구 형식(해시 토큰) 지원
+          const { error } = await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken })
+          if (error) throw error
+        } else {
+          setValidToken(false)
+          setError(lang === 'ko' ? '비밀번호 재설정 링크가 유효하지 않거나 만료되었습니다.' : 'Invalid or expired reset link. Please request a new password reset.')
+          return
+        }
       } catch (e) {
-        console.error('setSession error:', e)
+        console.error('reset/session error:', e)
+        setValidToken(false)
+        setError(lang === 'ko' ? '비밀번호 재설정 링크가 유효하지 않거나 만료되었습니다.' : 'Invalid or expired reset link. Please request a new password reset.')
       }
     }
     process()

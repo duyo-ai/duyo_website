@@ -215,7 +215,7 @@ const HeroMod = () => {
                     onClick={() => setIsAuthModalOpen(true)}
                     className="font-semibold whitespace-nowrap group z-10 relative flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-indigo-400 to-indigo-700 px-4 py-2 text-sm sm:px-8 sm:py-4 text-center sm:text-lg lg:text-xl tracking-tighter text-zinc-50"
                   >
-                    지금 시작하기{' '}
+                    {lang === 'ko' ? '지금 시작하기' : 'Get started'}{' '}
                     <ChevronRight className="inline-flex items-center justify-center transition-all duration-500 group-hover:translate-x-1 h-4 w-4 sm:h-5 sm:w-5" />
                   </button>
                 </GlowRingWrapper>

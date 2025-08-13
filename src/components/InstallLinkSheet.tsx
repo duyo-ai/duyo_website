@@ -117,7 +117,7 @@ export default function InstallLinkSheet({ open, onClose }: Props) {
               <button
                 onClick={submit}
                 disabled={sending || !email}
-                className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-9 w-9 rounded-lg bg-white/20 text-gray-900 hover:bg-white/80 disabled:opacity-50"
+                className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-9 w-9 rounded-lg bg-white text-gray-900 hover:bg-white disabled:opacity-50"
                 aria-label="send"
               >
                 <Send className="h-4 w-4" />

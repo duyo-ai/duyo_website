@@ -403,7 +403,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
           )}
 
           {/* 이메일 로그인 폼 */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} noValidate className="space-y-4">
             {mode === 'signup' && (
               <div className="space-y-1">
                 <div className="relative">
@@ -415,6 +415,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                     value={formData.name}
                     onChange={handleInputChange}
                     onBlur={handleFieldBlur}
+                    onInvalid={(e)=> e.preventDefault()}
                     className={`w-full pl-12 pr-4 py-3 bg-white/5 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all ${
                       fieldErrors.name 
                         ? 'border-red-500 focus:ring-red-500' 
@@ -439,6 +440,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   value={formData.email}
                   onChange={handleInputChange}
                   onBlur={handleFieldBlur}
+                  onInvalid={(e)=> e.preventDefault()}
                   className={`w-full pl-12 pr-4 py-3 bg-white/5 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all ${
                     fieldErrors.email 
                       ? 'border-red-500 focus:ring-red-500' 
@@ -463,6 +465,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                     value={formData.password}
                     onChange={handleInputChange}
                     onBlur={handleFieldBlur}
+                    onInvalid={(e)=> e.preventDefault()}
                     className={`w-full pl-12 pr-12 py-3 bg-white/5 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all ${
                       fieldErrors.password 
                         ? 'border-red-500 focus:ring-red-500' 
@@ -495,6 +498,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
                     onBlur={handleFieldBlur}
+                    onInvalid={(e)=> e.preventDefault()}
                     className={`w-full pl-12 pr-4 py-3 bg-white/5 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all ${
                       fieldErrors.confirmPassword 
                         ? 'border-red-500 focus:ring-red-500' 
