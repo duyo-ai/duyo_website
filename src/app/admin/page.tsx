@@ -195,69 +195,58 @@ export default function AdminPage() {
     setUploadStatus('파일 업로드 중...')
 
     try {
-      // Supabase 클라이언트에서 직접 업로드 (RLS 인증된 사용자로)
-      console.log('📁 Starting direct Supabase Storage upload...')
-      setUploadStatus('파일 업로드 중...')
-
-      const { supabase } = await import('@/lib/supabase')
-      
-      // 현재 사용자 확인
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) {
-        throw new Error('로그인이 필요합니다.')
-      }
-
-      console.log('User authenticated:', user.id)
-
-      // 파일 경로
-      const filePath = `releases/${file.name}`
-
-      // 진행률 시뮬레이션 (실제 업로드 진행률 추적은 브라우저 제한으로 어려움)
-      let progress = 0
-      const progressInterval = setInterval(() => {
-        progress += Math.random() * 5
-        if (progress >= 85) {
-          progress = 85
-          clearInterval(progressInterval)
-        }
-        setUploadProgress(Math.floor(progress))
-      }, 300)
-
-      // 기존 파일 삭제 (무시)
-      await supabase.storage.from('app-releases').remove([filePath]).catch(() => {})
-
-      // Supabase Storage에 업로드
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('app-releases')
-        .upload(filePath, file, {
-          cacheControl: '3600',
-          upsert: true
+      // 1) 업로드 URL 발급
+      console.log('🔗 Requesting signed upload URL...')
+      setUploadStatus('업로드 URL 생성 중...')
+      const urlRes = await fetch('/api/admin/upload-url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fileName: file.name,
+          fileType: file.type,
+          platform: version.platform,
+          versionType: version.version_type
         })
+      })
+      if (!urlRes.ok) throw new Error(`URL 생성 실패: ${urlRes.status}`)
+      const urlJson = await urlRes.json()
+      if (!urlJson.ok) throw new Error(urlJson.message || 'Upload URL 생성 실패')
 
-      clearInterval(progressInterval)
+      // 2) signed URL로 업로드 (uploadToSignedUrl 규약 사용)
+      console.log('📤 Uploading via signed URL...')
+      setUploadStatus('파일 업로드 중...')
+      const form = new FormData()
+      form.append('file', file)
+      form.append('token', urlJson.token || '')
+      // Supabase는 PUT file 본문 또는 multipart 모두 지원. multipart 권장
+      const xhr = new XMLHttpRequest()
+      const uploadPromise = new Promise<void>((resolve, reject) => {
+        xhr.upload.addEventListener('progress', (e) => {
+          if (e.lengthComputable) {
+            const p = Math.round((e.loaded / e.total) * 90)
+            setUploadProgress(p)
+          }
+        })
+        xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) resolve()
+          else {
+            console.error('Signed upload failed:', xhr.status, xhr.responseText)
+            reject(new Error(`Upload failed: ${xhr.status}`))
+          }
+        }
+        xhr.onerror = () => reject(new Error('Upload network error'))
+        xhr.open('POST', urlJson.uploadUrl)
+        xhr.send(form)
+      })
+      await uploadPromise
 
-      if (uploadError) {
-        console.error('Supabase upload error:', uploadError)
-        throw new Error(`업로드 실패: ${uploadError.message}`)
-      }
-
-      setUploadProgress(90)
-
-      // 공개 URL 생성
-      const { data: urlData } = supabase.storage
-        .from('app-releases')
-        .getPublicUrl(filePath)
-
+      // 3) DB 업데이트
       setUploadProgress(95)
       setUploadStatus('데이터베이스 업데이트 중...')
-
-      console.log('Upload successful, updating DB...')
-
-      // DB 업데이트
       await updateVersion({
         id: version.id,
         file_name: file.name,
-        file_url: urlData.publicUrl,
+        file_url: urlJson.publicUrl,
         file_size: file.size
       })
 

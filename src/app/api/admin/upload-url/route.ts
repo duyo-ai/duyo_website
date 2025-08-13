@@ -50,7 +50,9 @@ export async function POST(request: Request) {
       return Response.json({
         ok: true,
         uploadUrl: data.signedUrl,
+        token: (data as any).token,
         publicUrl: publicUrlData.publicUrl,
+        path: filePath,
         filePath,
         fileName,
         platform,
