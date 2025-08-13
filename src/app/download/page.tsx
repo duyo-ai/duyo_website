@@ -7,6 +7,7 @@ import { Container } from '@/components/Container'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import InstallLinkSheet from '@/components/InstallLinkSheet'
+import InstallGuideModal from '@/components/InstallGuideModal'
 import { useLang } from '@/components/ToolbarProvider'
 import { dictionaries } from '@/i18n/dictionary'
 
@@ -156,6 +157,7 @@ const DownloadPage = () => {
   const [osType, setOsType] = useState<'mac' | 'windows' | 'other'>('other')
   const [isMobile, setIsMobile] = useState(false)
   const [openSheet, setOpenSheet] = useState(false)
+  const [showGuide, setShowGuide] = useState<null | 'mac' | 'windows'>(null)
   const [versions, setVersions] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
@@ -225,7 +227,10 @@ const DownloadPage = () => {
       }).catch(console.error)
 
       // 실제 파일 다운로드
+      // 실제 파일 다운로드 시작
       window.open(versionInfo.file_url, '_blank')
+      // 플랫폼별 설치 안내 모달 노출
+      setShowGuide(platform === 'macOS' ? 'mac' : 'windows')
     } else {
       alert('다운로드 링크를 찾을 수 없습니다.')
     }
@@ -589,6 +594,9 @@ const DownloadPage = () => {
 
       <Footer />
       <InstallLinkSheet open={openSheet} onClose={() => setOpenSheet(false)} />
+      {showGuide && (
+        <InstallGuideModal open={!!showGuide} os={showGuide} onClose={() => setShowGuide(null)} />
+      )}
     </div>
   )
 }

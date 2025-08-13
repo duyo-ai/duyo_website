@@ -119,10 +119,7 @@ export function Header() {
             <Link href="https://slashpage.com/cutple" target="_blank" className="text-gray-300 hover:text-white transition-colors">
               {t['nav.docs']}
             </Link>
-            {/* 개발용 관리자 링크 */}
-            <Link href="/admin" className="text-orange-400 hover:text-orange-300 transition-colors text-sm">
-              🔧 {lang === 'ko' ? '관리자' : 'Admin'}
-            </Link>
+            {/* 관리자 메뉴 제거 */}
           </div>
 
           {/* Desktop Auth Buttons */}
@@ -256,13 +253,7 @@ export function Header() {
                 {t['nav.docs']}
               </Link>
               {/* 개발용 관리자 링크 */}
-              <Link 
-                href="/admin" 
-                className="block text-orange-400 hover:text-orange-300 transition-colors py-2 text-sm"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                🔧 {lang === 'ko' ? '관리자' : 'Admin'}
-              </Link>
+              {/* 관리자 메뉴 제거 (모바일) */}
               <div className="border-t border-white/10 pt-3 mt-3">
                 {user ? (
                   <div className="space-y-2">

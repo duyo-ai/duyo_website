@@ -26,11 +26,13 @@ export function Footer() {
 
           <div className="space-y-4">
             <h3 className="font-semibold">{t['footer2.company.title']}</h3>
-            <p className="text-sm">{t['footer2.company.company']}&nbsp; 두요</p>
-            <p className="text-sm">{t['footer2.company.ceo']}&nbsp; 김진우</p>
-            <p className="text-sm">{t['footer2.company.address']}&nbsp; 서울 동작구 상도로55길 6 304-2호</p>
-            <p className="text-sm">{t['footer2.company.business']}&nbsp; 826-08-02196</p>
-            <p className="text-sm">{t['footer2.company.privacy']}&nbsp; 김진우</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1">
+              <p className="text-sm">{t['footer2.company.company']}&nbsp; 두요</p>
+              <p className="text-sm">{t['footer2.company.ceo']}&nbsp; 김진우</p>
+              <p className="text-sm">{t['footer2.company.address']}&nbsp; 서울 동작구 상도로55길 6 304-2호</p>
+              <p className="text-sm">{t['footer2.company.business']}&nbsp; 826-08-02196</p>
+              <p className="text-sm">{t['footer2.company.privacy']}&nbsp; 김진우</p>
+            </div>
           </div>
         </div>
 

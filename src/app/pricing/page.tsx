@@ -346,39 +346,39 @@ export default function PricingPage() {
           <Container className="pb-20 sm:pb-36">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="rounded-2xl bg-white/5 p-6 backdrop-blur-md [box-shadow:0_-20px_80px_-20px_#8686f01f_inset]">
-                <h3 className="text-white text-xl font-semibold">같이 쓰는 순간, 팀 협업이 쉬워집니다</h3>
+                <h3 className="text-white text-xl font-semibold">{lang==='en' ? 'Collaboration gets easier the moment you start working together' : '같이 쓰는 순간, 팀 협업이 쉬워집니다'}</h3>
                 <p className="mt-2 text-sm text-gray-400">
-                  프로젝트 공유, 승인 워크플로우까지. 스탠다드 이상에서 팀 협업 기능을 모두 활용해 보세요.
+                  {lang==='en' ? 'From project sharing to approval workflows. Unlock full team features starting from Standard plan.' : '프로젝트 공유, 승인 워크플로우까지. 스탠다드 이상에서 팀 협업 기능을 모두 활용해 보세요.'}
                 </p>
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-200">
                   <div className="space-y-2">
-                    <p>• 역할/권한 · 멤버 초대</p>
-                    <p>• 템플릿 잠금 및 가이드</p>
-                    <p>• 변경 이력 · 버전 복원</p>
+                    <p>• {lang==='en' ? 'Roles/Permissions · Invite members' : '역할/권한 · 멤버 초대'}</p>
+                    <p>• {lang==='en' ? 'Template lock & guides' : '템플릿 잠금 및 가이드'}</p>
+                    <p>• {lang==='en' ? 'Change history · Version restore' : '변경 이력 · 버전 복원'}</p>
                   </div>
                   <div className="space-y-2">
-                    <p>• 댓글 · 멘션 · 알림</p>
-                    <p>• 승인/배포 워크플로우</p>
-                    <p>• 기본 보안/감사 로그</p>
+                    <p>• {lang==='en' ? 'Comments · Mentions · Notifications' : '댓글 · 멘션 · 알림'}</p>
+                    <p>• {lang==='en' ? 'Approval/Release workflow' : '승인/배포 워크플로우'}</p>
+                    <p>• {lang==='en' ? 'Baseline security/Audit logs' : '기본 보안/감사 로그'}</p>
                   </div>
                 </div>
                 <div className="mt-5">
-                  <BasicButton href="/#signup" variant="primary">2주 무료로 시작</BasicButton>
+                  <BasicButton href="/#signup" variant="primary">{lang==='en' ? 'Start free for 2 weeks' : '2주 무료로 시작'}</BasicButton>
                 </div>
               </div>
 
               <div id="contact" className="rounded-2xl bg-white/5 p-6 backdrop-blur-md [box-shadow:0_-20px_80px_-20px_#8686f01f_inset]">
-                <h3 className="text-white text-xl font-semibold">엔터프라이즈</h3>
+                <h3 className="text-white text-xl font-semibold">{lang==='en' ? 'Enterprise' : '엔터프라이즈'}</h3>
                 <p className="mt-2 text-sm text-gray-400">
-                  대규모 조직, 규제 산업을 위한 확장 보안과 전용 지원을 제공합니다.
+                  {lang==='en' ? 'Advanced security and dedicated support for large organizations and regulated industries.' : '대규모 조직, 규제 산업을 위한 확장 보안과 전용 지원을 제공합니다.'}
                 </p>
                 <ul className="mt-4 space-y-2 text-sm text-gray-200">
-                  <li>• 전용 SLA, 기술지원 채널</li>
-                  <li>• SSO, 사용자 프로비저닝(SCIM)</li>
-                  <li>• 데이터 보존 정책, 컴플라이언스</li>
+                  <li>• {lang==='en' ? 'Dedicated SLA and support channels' : '전용 SLA, 기술지원 채널'}</li>
+                  <li>• {lang==='en' ? 'SSO, user provisioning (SCIM)' : 'SSO, 사용자 프로비저닝(SCIM)'}</li>
+                  <li>• {lang==='en' ? 'Data retention policy, compliance' : '데이터 보존 정책, 컴플라이언스'}</li>
                 </ul>
                 <div className="mt-5">
-                  <BasicButton href="mailto:contact@duyo.ai" variant="outline">영업팀에 문의하기</BasicButton>
+                  <BasicButton href="mailto:contact@duyo.ai" variant="outline">{lang==='en' ? 'Contact Sales' : '영업팀에 문의하기'}</BasicButton>
                 </div>
               </div>
             </div>
