@@ -146,7 +146,7 @@ export function Header() {
               </button>
             </div>
             {loading ? (
-              <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+              null
             ) : user ? (
               <div className="flex items-center gap-3">
                 <span className="text-sm text-gray-300">
@@ -198,7 +198,7 @@ export function Header() {
               </button>
             </div>
             {loading ? (
-              <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+              null
             ) : user ? (
               <button
                 onClick={handleSignOut}

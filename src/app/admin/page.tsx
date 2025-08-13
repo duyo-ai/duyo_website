@@ -1,8 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useLang } from '@/components/ToolbarProvider'
-import { dictionaries } from '@/i18n/dictionary'
+// Admin page is fixed in Korean; no i18n needed here
 import { 
   Users, 
   Download, 
@@ -64,8 +63,7 @@ const sidebarItems = [
 ]
 
 export default function AdminPage() {
-  const { lang } = useLang()
-  const t = dictionaries[lang]
+  const lang = 'ko'
   const [activePage, setActivePage] = useState<PageType>('users')
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [loginForm, setLoginForm] = useState({ username: '', password: '' })

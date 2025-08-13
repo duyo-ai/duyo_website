@@ -202,6 +202,26 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
         // 성공 시 모달 닫기 (인증 상태가 변경되면서 헤더도 업데이트됨)
         onClose()
       } else if (mode === 'signup') {
+        // 이메일 존재/공급자 확인 선행
+        try {
+          const checkRes = await fetch('/api/auth/check-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: formData.email })
+          })
+          const check = await checkRes.json().catch(()=>({}))
+          if (check?.ok && check.exists) {
+            const providers: string[] = check.providers || []
+            if (providers.includes('google')) {
+              setError(lang==='ko' ? '이미 구글로 가입된 이메일입니다. 상단의 Google로 계속하기 버튼을 사용해주세요.' : 'This email is already registered with Google. Please use "Continue with Google" above.')
+              return
+            } else {
+              setError(lang==='ko' ? '이미 가입된 이메일입니다. 로그인으로 이동해주세요.' : 'This email is already registered. Please sign in instead.')
+              return
+            }
+          }
+        } catch (_) {}
+
         const response = await fetch('/api/auth/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

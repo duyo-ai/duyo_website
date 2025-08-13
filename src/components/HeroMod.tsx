@@ -221,13 +221,7 @@ const HeroMod = () => {
                 </GlowRingWrapper>
               )}
               
-              {/* 로딩 중일 때는 자리 유지를 위한 투명한 placeholder */}
-              {loading && (
-                <div className="font-semibold whitespace-nowrap group z-10 relative flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm sm:px-8 sm:py-4 text-center sm:text-lg lg:text-xl tracking-tighter opacity-0 pointer-events-none">
-                  지금 시작하기{' '}
-                  <ChevronRight className="inline-flex items-center justify-center h-4 w-4 sm:h-5 sm:w-5" />
-                </div>
-              )}
+              {/* 로딩 중에는 아무것도 표시하지 않음 (플레이스홀더 제거) */}
 
               {(osType === 'mac' || osType === 'windows') && (
                <GlowRingWrapper variant="neutral">
