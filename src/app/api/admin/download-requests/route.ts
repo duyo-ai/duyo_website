@@ -1,6 +1,11 @@
 import { getAdminDownloadRequests, updateAdminDownloadRequestStatus } from '@/lib/supabase-admin'
 
 export async function GET(req: Request) {
+  const { verifyAdminRequest } = await import('@/lib/admin-auth')
+  const auth = verifyAdminRequest()
+  if (!auth.ok) {
+    return Response.json({ ok: false, error: 'UNAUTHORIZED' }, { status: 401 })
+  }
   try {
     const downloadRequests = await getAdminDownloadRequests()
     
@@ -27,6 +32,11 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  const { verifyAdminRequest } = await import('@/lib/admin-auth')
+  const auth = verifyAdminRequest()
+  if (!auth.ok) {
+    return Response.json({ ok: false, error: 'UNAUTHORIZED' }, { status: 401 })
+  }
   try {
     const body = await req.json().catch(() => ({})) as any
     const { id, sent } = body || {}

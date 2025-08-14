@@ -1,6 +1,11 @@
 import { getAdminUsers } from '@/lib/supabase-admin'
+import { verifyAdminRequest } from '@/lib/admin-auth'
 
 export async function GET(req: Request) {
+  const auth = verifyAdminRequest()
+  if (!auth.ok) {
+    return Response.json({ ok: false, error: 'UNAUTHORIZED' }, { status: 401 })
+  }
   try {
     console.log('🚀 [admin:users] Fetching users with admin client...')
     const users = await getAdminUsers()

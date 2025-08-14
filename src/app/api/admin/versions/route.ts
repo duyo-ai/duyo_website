@@ -1,7 +1,12 @@
 import { supabaseAdmin } from '@/lib/supabase-admin'
+import { verifyAdminRequest } from '@/lib/admin-auth'
 
 // 4개 고정 버전 조회 (macOS/Windows × stable/beta)
 export async function GET(req: Request) {
+  const auth = verifyAdminRequest()
+  if (!auth.ok) {
+    return Response.json({ ok: false, error: 'UNAUTHORIZED' }, { status: 401 })
+  }
   try {
     const { data: versions, error } = await supabaseAdmin
       .from('app_versions')
@@ -25,6 +30,10 @@ export async function GET(req: Request) {
 
 // 버전 정보 수정만 가능 (추가/삭제 불가)
 export async function PUT(req: Request) {
+  const auth = verifyAdminRequest()
+  if (!auth.ok) {
+    return Response.json({ ok: false, error: 'UNAUTHORIZED' }, { status: 401 })
+  }
   console.log('📝 [PUT] /api/admin/versions called')
   console.log('📝 [PUT] Request method:', req.method)
   console.log('📝 [PUT] Request headers:', Object.fromEntries(req.headers.entries()))

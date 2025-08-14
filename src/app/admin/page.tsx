@@ -335,20 +335,39 @@ export default function AdminPage() {
     }
   }
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    // 임시 하드코딩 자격 증명 복원 (admin / cutple2024)
-    if (loginForm.username === 'admin' && loginForm.password === 'cutple2024') {
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(loginForm)
+      })
+      const json = await res.json()
+      if (!res.ok || !json.ok) throw new Error(json.error || 'LOGIN_FAILED')
       setIsLoggedIn(true)
-    } else {
+    } catch (err) {
       alert(lang === 'ko' ? '로그인 정보가 올바르지 않습니다.' : 'Invalid login credentials.')
     }
   }
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await fetch('/api/admin/logout', { method: 'POST' })
     setIsLoggedIn(false)
     setLoginForm({ username: '', password: '' })
   }
+
+  // 초기 세션 확인
+  useEffect(() => {
+    const check = async () => {
+      try {
+        const r = await fetch('/api/admin/session', { cache: 'no-store' })
+        const j = await r.json()
+        if (j.loggedIn) setIsLoggedIn(true)
+      } catch {}
+    }
+    check()
+  }, [])
 
   // 로그인하지 않은 경우 로그인 페이지 표시
   if (!isLoggedIn) {
