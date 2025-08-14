@@ -11,11 +11,11 @@ type Props = {
 }
 
 export default function InstallGuideModal({ open, os, onClose }: Props) {
-  if (!open) return null
-
   const helpUrl = process.env.NEXT_PUBLIC_RUN_HELP_URL || 'https://slashpage.com/cutple'
   const { lang } = useLang()
   const t = dictionaries[lang]
+
+  if (!open) return null
 
   const steps = os === 'windows'
     ? [
