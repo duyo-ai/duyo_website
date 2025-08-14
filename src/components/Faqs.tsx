@@ -39,7 +39,7 @@ const faqs_ko = [
 ]
 
 export function Faqs() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [openIndex, setOpenIndex] = useState<number | null>(0)
   const { lang } = useLang()
   const t = dictionaries[lang]
   const faqs = lang==='ko' ? faqs_ko : [
@@ -85,11 +85,11 @@ export function Faqs() {
         <div className="mx-auto max-w-3xl text-center">
           <h2
             id="faq-title"
-            className="font-display text-3xl tracking-tight text-gray-200 sm:text-4xl md:text-5xl"
+            className="font-extrabold text-3xl tracking-tight text-gray-200 sm:text-4xl md:text-5xl"
           >
             {lang==='ko' ? '자주 묻는 질문' : 'Frequently asked questions'}
           </h2>
-          <p className="mt-4 text-sm sm:text-base md:text-lg tracking-tight text-gray-400">
+          <p className="mt-4 text-sm sm:text-base md:text-lg tracking-tight text-gray-500">
             {lang==='ko' ? '궁금한 점이 해결되지 않으셨다면 고객지원팀에 문의해 주세요. 빠른 시간 내에 답변드리겠습니다.' : 'Didn\'t find what you need? Contact support and we\'ll get back to you shortly.'}
           </p>
         </div>
@@ -106,7 +106,9 @@ export function Faqs() {
                   className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-white/5 transition-colors"
                   aria-expanded={openIndex === index}
                 >
-                  <h3 className="font-display text-base sm:text-lg leading-7 text-gray-200 pr-4">
+                  <h3
+                    className={`font-display text-base sm:text-lg leading-7 text-gray-200 pr-4 ${openIndex === index ? 'font-bold' : ''}`}
+                  >
                     {faq.question}
                   </h3>
                   <ChevronDownIcon

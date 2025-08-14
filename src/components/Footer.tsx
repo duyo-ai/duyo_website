@@ -12,11 +12,20 @@ export function Footer() {
   return (
     <footer className="relative rounded-xs border-t border-white/10">
       <Container>
-        <div className="py-8 sm:py-12 lg:py-16" />
+        <div className="py-5 sm:py-5 lg:py-" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 text-gray-200">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 text-gray-200 lg:items-end">
           <div className="space-y-6">
-            <Logo />
+            {/* 가벼운 정적 로고 (모바일 최적화) */}
+            <img
+              src="/logo_white.svg"
+              alt="Cutple"
+              width={120}
+              height={32}
+              loading="lazy"
+              decoding="async"
+              className="h-12 w-auto sm:h-14"
+            />
             <div>
               <h3 className="font-semibold mb-2">{lang==='ko' ? t['footer2.customer.title'] : t['footer2.customer.title']}</h3>
               <p className="text-sm">{t['footer2.customer.email']}&nbsp;&nbsp; contact@cutple.ai</p>
@@ -24,7 +33,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 self-end flex flex-col justify-end">
             <h3 className="font-semibold">{t['footer2.company.title']}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1">
               <p className="text-sm">{t['footer2.company.company']}&nbsp; 두요</p>

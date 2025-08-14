@@ -193,27 +193,27 @@ const HeroMod = () => {
         <div className="relative z-10 mx-auto max-w-screen-xl gap-6 px-4 py-6 sm:py-10 text-gray-600 md:px-8">
           <div className="leading-0 mx-auto max-w-6xl space-y-2 sm:space-y-3 px-4 sm:px-6 lg:px-10 text-center lg:leading-5">
 
-            <h2 className="sm:mt-36 mt-32 font-semibold mx-auto bg-[linear-gradient(180deg,_#FFF_0%,_rgba(255,_255,_255,_0.00)_202.08%)] bg-clip-text text-3xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tighter text-transparent mb-2 sm:mb-3 leading-[1.15] ">
+            <h2 className="sm:mt-28 mt-20 font-extrabold mx-auto bg-white bg-clip-text text-3xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tighter text-transparent mb-2 sm:mb-3 leading-[1.15] ">
               {lang==='en' ? 'Make viral shorts from a single line' : '텍스트 한 줄로 만드는 바이럴 숏폼'}{' '}<br />
-              <span className="bg-gradient-to-r from-purple-300 to-blue-200 bg-clip-text text-transparent block mt-1 sm:mt-2">
+              <span className="bg-white bg-clip-text text-transparent block mt-5 sm:mt-9">
                 {lang==='en' ? 'Script, voice, and images in a few clicks.' : '대본, 목소리, 이미지까지,'}<br className="sm:hidden" />
-                {lang==='en' ? 'Even scene spacing auto-optimized.' : '클릭 몇 번으로 쉽게.'}
+                {lang==='en' ? 'Even scene spacing auto-optimized.' : ' 클릭 몇 번으로 쉽게.'}
               </span>
             </h2>
 
-            <p className="text-sm sm:text-base md:text-lg mx-auto max-w-[32rem] sm:max-w-2xl text-gray-300 px-4 sm:px-0 break-keep">
+            <p className="pt-10 sm:pt-18 text-sm sm:text-base md:text-lg mx-auto max-w-[32rem] sm:max-w-2xl text-gray-500 px-4 sm:px-0 break-keep">
               {lang==='en' ? 'Type keywords to get a script; AI voice and images are laid out. ' : '키워드를 입력하면 대본이 나오고, 목소리가 입혀지고, 이미지가 배치됩니다. '}
               <br className="hidden sm:block" />
               {lang==='en' ? 'Even scene spacing is optimized by AI.' : '심지어 장면 간의 간격까지 AI가 조절합니다.'}
             </p>
             
-            <div className="flex pt-32 lg:pt-40 flex-row flex-nowrap items-center justify-center gap-5 sm:gap-9 px-3">
+            <div className="flex pt-10 lg:pt-16 flex-row flex-nowrap items-center justify-center gap-5 sm:gap-9 px-3">
               {/* Primary CTA with glow ring wrapper - 로딩 중이거나 로그인 안된 경우만 표시 */}
               {!loading && !user && (
                 <GlowRingWrapper variant="primary">
                   <button
                     onClick={() => setIsAuthModalOpen(true)}
-                    className="font-semibold whitespace-nowrap group z-10 relative flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-indigo-400 to-indigo-700 px-4 py-2 text-sm sm:px-8 sm:py-4 text-center sm:text-lg lg:text-xl tracking-tighter text-zinc-50"
+                    className="font-semibold whitespace-nowrap group z-10 relative flex items-center justify-center gap-2 rounded-md bg-[linear-gradient(135deg,#6A14FF_0%,#00A0FF_100%)] px-4 py-2 text-sm sm:px-8 sm:py-4 text-center sm:text-lg lg:text-xl tracking-tighter text-zinc-50"
                   >
                     {lang === 'ko' ? '지금 시작하기' : 'Get started'}{' '}
                     <ChevronRight className="inline-flex items-center justify-center transition-all duration-500 group-hover:translate-x-1 h-4 w-4 sm:h-5 sm:w-5" />
@@ -245,7 +245,7 @@ const HeroMod = () => {
             </div>
           </div>
         </div>
-        <div className="relative max-w-full">
+        <div className="relative mt-10 sm:mt-24 max-w-full">
           <DashboardDemo />
         </div>
 

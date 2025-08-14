@@ -5,6 +5,7 @@ import { useLang } from '@/components/ToolbarProvider'
 import { supabase } from '@/lib/supabase'
 import { dictionaries } from '@/i18n/dictionary'
 import { X, Mail, Lock, User, Eye, EyeOff, AlertCircle, ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
 import Image from 'next/image'
 
 interface AuthModalProps {
@@ -29,6 +30,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
     name: '',
     confirmPassword: ''
   })
+  const [agreeTerms, setAgreeTerms] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -173,6 +175,10 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
       const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/
       if (!specialCharRegex.test(formData.password)) {
         setError(lang === 'ko' ? '비밀번호에 특수문자가 하나 이상 포함되어야 합니다.' : 'Password must contain at least one special character.')
+        return false
+      }
+      if (!agreeTerms) {
+        setError(lang === 'ko' ? '약관에 동의해 주세요.' : 'You must agree to the terms.')
         return false
       }
     }
@@ -378,14 +384,6 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 </svg>
                 {googleLoading ? (
                   <span className="inline-flex items-center gap-2">
-                    <svg className="h-4 w-4 text-gray-700" viewBox="0 0 24 24" aria-hidden="true">
-                      {/* 바깥 고정 원(트랙) */}
-                      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="3" className="opacity-25" fill="none" />
-                      {/* 회전하는 호(프로그레스) */}
-                      <g className="origin-center animate-spin">
-                        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="3" strokeLinecap="round" fill="none" strokeDasharray="56 200" strokeDashoffset="0" />
-                      </g>
-                    </svg>
                     {lang === 'ko' ? '로그인 중...' : 'Signing in...'}
                   </span>
                 ) : (
@@ -510,6 +508,25 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 {fieldErrors.confirmPassword && (
                   <p className="text-red-400 text-xs">{fieldErrors.confirmPassword}</p>
                 )}
+              </div>
+            )}
+
+            {mode === 'signup' && (
+              <div className="flex items-start gap-3 text-xs text-gray-300 pt-1">
+                <input
+                  id="agreeTerms"
+                  type="checkbox"
+                  checked={agreeTerms}
+                  onChange={(e)=> setAgreeTerms(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-white/20 bg-transparent"
+                />
+                <label htmlFor="agreeTerms" className="leading-5">
+                  {lang==='ko' ? '서비스 이용약관과 개인정보 처리방침에 동의합니다.' : 'I agree to the Terms of Service and Privacy Policy.'}
+                  {' '}
+                  <Link href="/terms" className="underline underline-offset-2 hover:text-white">{lang==='ko' ? '이용약관' : 'Terms'}</Link>
+                  {' · '}
+                  <Link href="/privacy" className="underline underline-offset-2 hover:text-white">{lang==='ko' ? '개인정보 처리방침' : 'Privacy'}</Link>
+                </label>
               </div>
             )}
 
