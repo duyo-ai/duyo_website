@@ -12,60 +12,79 @@ const testimonialsKo = [
   [
     {
       content:
-        '처음에는 반신반의했는데, 정말 5분 만에 완성도 높은 영상이 나왔습니다. 기존에 편집하던 시간을 생각하면 하루가 48시간이 된 기분이에요. 특히 대본 생성 기능이 정말 놀라워서, 제가 쓰던 스타일까지 학습해서 자연스러운 썰을 만들어줍니다. 이제 아이디어만 있으면 바로 영상으로 만들 수 있어서 콘텐츠 제작 속도가 10배는 빨라졌어요.',
+        '가격대가 좀 나가는 편이다 보니 오래 고민하고 구매했습니다! 그동안 가격도 약간 변동이 있었네요 ㅎㅅㅎ..! 아직은 제 마음처럼 뚝딱 만들긴 어렵지만, 기능들도 너무 신박하고, 만드는 재미도 있어서 얼른 적응해서 하루에 여러 개 뽑을 수 있게 연습해보려고 해요! 친절하게 알려주셔서 감사합니다! 앞으로도 잘 부탁드려요~!',
       author: {
-        name: '김태현',
-        role: '구독자 8만 썰 유튜버',
+        name: 'DailyHaon',
+        role: '유튜버',
         image: avatarImage1,
       },
     },
     {
       content:
-        'AI가 생성한 이미지라고는 믿기 힘들 정도로 감정과 분위기를 정확히 담아냅니다. 특히 브랜드 톤앤매너에 맞는 이미지를 일관성 있게 만들어주는 게 가장 만족스러워요. 기존에 디자이너와 커뮤니케이션하며 수정 요청하던 시간이 완전히 사라졌습니다. 마케팅 캠페인용 숏폼을 대량으로 제작할 때 특히 유용하고, 퀄리티도 전혀 떨어지지 않아서 클라이언트들도 매우 만족해합니다.',
+        '유튜브를 운영하실 분들이라면 이 프로그램을 놓치신다면 정말 땅을 치고 후회할 것입니다. 정말 혼자만 알고 싶고 알려주고 싶지 않지만 이 프로그램은 주변 사람들에게 꼭 알려주고 싶습니다 (제 경쟁사만 빼고..ㅎㅎ). 친절한 상담과 신속한 대응, 이해가 쏙쏙 되는 설명과 직관적인 프로그램 너무 감사드리고, 정말 큰 회사 되시길 바랍니다. 감사합니다.',
       author: {
-        name: '정수영',
-        role: '브랜드 마케팅 디렉터',
+        name: 'CreatorJin',
+        role: '유튜버',
         image: avatarImage4,
+      },
+    },
+    {
+      content:
+        '프로그램을 보면서 감탄이 나왔습니다. 아주 잘 활용할 수 있어 좋습니다. 열공해서 최고의 성과를 얻도록 하겠습니다. 좋은 프로그램 대단히 감사합니다.',
+      author: {
+        name: '영상장인 꾸리',
+        role: '유튜버',
+        image: avatarImage1,
       },
     },
   ],
   [
     {
       content:
-        '가장 놀라운 건 이미지가 자동으로 맥락을 맞춰준다는 점입니다. 텍스트만 입력해도 스토리 흐름에 맞는 적절한 이미지를 배치해주고, 감정의 기복까지 시각적으로 표현해줘서 시청자들의 몰입도가 확실히 높아졌어요. 예전에는 스톡 이미지 찾느라 시간을 많이 썼는데, 이제는 그런 고민 없이 창작에만 집중할 수 있게 되었습니다. 특히 추상적인 개념도 이미지로 잘 표현해주는 게 신기해요.',
+        '우선 빠른 피드백과 구매 후 응대, 그리고 추후에 구매자들의 의견을 반영한 프로그램 업데이트만 보더라도, 구매 후 연락이 느리고 처음과 다른 답변을 하는 곳들과는 다릅니다. 프로그램도 당연히 사용자의 의견을 반영해 업데이트하고 있으니 사용하기 편리하고, 이후에 더 좋아질 것 같다는 생각이 강하게 듭니다. 여긴 리뷰 이벤트도 없었던 것 같은데, 내돈내산 리뷰네요ㅎㅎ 수익만 잘 나고 성과만 잘 난다면, 그때 다시 수정해서 추가 리뷰를 남겨보겠습니다.',
       author: {
-        name: '김민수',
-        role: '교육 콘텐츠 크리에이터',
+        name: 'Shin’s Media Lab',
+        role: '유튜버',
+        image: avatarImage2,
+      },
+    },
+    {
+      content:
+        '신속하고 친절한 답변에 정말 감사드립니다. 늦은 시간까지 많은 부분을 세심하게 공유해 주신 덕분에 궁금했던 점들을 명확하게 해결할 수 있었습니다. 앞으로도 궁금한 점에 대해 피드백을 주신다고 하니 큰 기대가 됩니다. 덕분에 더욱 열심히 노력해야겠다는 생각이 듭니다. 다시 한 번 감사드리며, 앞으로도 많은 도움 부탁드립니다.',
+      author: {
+        name: '하루기록소',
+        role: '유튜버',
+        image: avatarImage3,
+      },
+    },
+    
+  ],
+  [
+    {
+      content:
+        '쇼츠는 소재가 더 중요하다고 생각해요. 영상 편집에 들어가는 시간을 이 프로그램을 통해 획기적으로 줄일 수 있어 넘 만족합니다. 대응도 친절하고, 앞으로의 발전 계획과 방향성도 너무 훌륭한 것 같아요.',
+      author: {
+        name: '유튜버 ‘리얼크리에이트’',
+        role: '고객 리뷰',
+        image: avatarImage4,
+      },
+    },
+    {
+      content:
+        '저는 영상 제작을 할 줄 아는 사람인데, 빠른 숏츠 제작을 위하여 구매하게 되었습니다. 프로그램도 깔끔하고, 덕분에 제작 시간이 상당히 줄어들었습니다. 감사합니다.',
+      author: {
+        name: '유튜버 ‘Min Film’',
+        role: '고객 리뷰',
         image: avatarImage5,
       },
     },
     {
       content:
-        '유튜브 시작한 지 3개월 된 완전 초보인데, 이 툴 덕분에 하루에 3편씩도 무리 없이 제작하고 있어요. 처음에는 대본 쓰는 것부터 막막했는데, AI가 제안해주는 스토리 구조를 보고 많이 배웠습니다. 목소리 톤이나 속도도 자동으로 조절해줘서 마치 성우가 읽어주는 것 같아요. 구독자도 벌써 5천 명을 넘어서고, 댓글에서 퀄리티를 칭찬해주는 분들이 많아서 정말 뿌듯합니다.',
+        '처음에는 어느 정도의 프로그램인지 고민을 많이 한 끝에 결제를 진행하였는데, 늦은 시간에도 친절한 설명과 안내를 받게 되었습니다. 이 프로그램은 쉬운 인터페이스 덕분에 초보자들도 복잡한 과정 없이 고퀄리티 콘텐츠를 쉽게 제작할 수 있을 것 같습니다. 안내를 받을 때 다양한 아이디어도 얻고, 피드백도 가능하셔서 그 점 또한 매우 마음에 드는 부분입니다. 전반적으로, 이 프로그램은 유튜브 쇼츠를 시작하고자 하는 누구에게나 강력히 추천할 만한 유용한 프로그램입니다.',
       author: {
-        name: '이지원',
-        role: '신입 유튜버',
-        image: avatarImage2,
-      },
-    },
-  ],
-  [
-    {
-      content:
-        '기획 단계 없이 바로 시작해도 완성도 높은 영상이 나오는 게 제일 편합니다. 회사에서 급하게 프로모션 영상이 필요할 때 정말 유용해요. 키워드 몇 개만 입력하면 스토리보드부터 최종 영상까지 자동으로 완성되니까, 마케팅 캠페인의 속도가 완전히 달라졌습니다. 특히 A/B 테스트용으로 여러 버전을 빠르게 만들 수 있어서 데이터 기반 마케팅을 할 때 정말 도움이 많이 됩니다.',
-      author: {
-        name: '박지영',
-        role: '마케팅 매니저',
-        image: avatarImage3,
-      },
-    },
-    {
-      content:
-        '기존에 유료 작가에게 맡겼던 대본보다 훨씬 더 자연스럽고 매력적인 스토리가 나와서 깜짝 놀랐어요. AI가 최신 트렌드와 바이럴 요소까지 고려해서 대본을 짜주니까, 조회수도 이전보다 평균 3배 이상 늘었습니다. 특히 감정적인 몰입도가 높은 스토리를 만들어주는 능력이 정말 뛰어나요. 이제는 작가비 예산을 다른 곳에 투자할 수 있게 되어서 채널 운영에 여유가 생겼습니다.',
-      author: {
-        name: '이현수',
-        role: '유튜브 채널 운영자 (구독자 15만)',
-        image: avatarImage1,
+        name: '소소한쇼츠',
+        role: '유튜버',
+        image: avatarImage5,
       },
     },
   ],
@@ -75,60 +94,78 @@ const testimonialsEn = [
   [
     {
       content:
-        "I was skeptical at first, but I got a polished video in just 5 minutes. Compared to the time I used to spend editing, it feels like I gained an extra day. The script generation is especially impressive—it learns my style and produces natural storytelling. Now, as long as I have an idea, I can turn it into a video right away, and my production speed has increased tenfold.",
+        'I hesitated for a while because of the price, but finally decided to purchase. It’s not a one-click magic yet, but the features are genuinely innovative and fun to use. I’ll practice to pump out multiple Shorts a day soon. Thanks for the kind guidance—looking forward to using it more!',
       author: {
-        name: 'Taehyun Kim',
-        role: '80K-subscriber storytelling YouTuber',
+        name: 'DailyHaon',
+        role: 'YouTuber',
         image: avatarImage1,
       },
     },
     {
       content:
-        "It's hard to believe the images are AI-generated—they capture emotion and mood with precision. Most of all, it keeps our brand tone consistent, which is incredibly satisfying. The back-and-forth with designers for revisions has practically disappeared. It’s perfect for high-volume short-form marketing campaigns, and the quality satisfies even the most demanding clients.",
+        'If you plan to run a YouTube channel, you would regret missing this program. Honestly I want to keep it to myself, but I still recommend it to people around me (except my competitors 😄). Thanks for the friendly support, quick responses, clear explanations, and an intuitive product. Wishing you massive growth—thank you!',
       author: {
-        name: 'Sooyoung Jung',
-        role: 'Brand Marketing Director',
+        name: 'CreatorJin',
+        role: 'YouTuber',
         image: avatarImage4,
+      },
+    },
+    {
+      content:
+        'I was amazed while using the program. It’s incredibly practical. I’ll study hard and aim for the best results. Thank you for building such a great product.',
+      author: {
+        name: 'Video Artisan Kkuri',
+        role: 'YouTuber',
+        image: avatarImage1,
       },
     },
   ],
   [
     {
       content:
-        "What amazes me most is that images automatically match the context. Even with just text, it lays out visuals that follow the story flow and even reflects emotional dynamics, which greatly boosts viewer immersion. I used to spend a lot of time hunting for stock images, but now I can focus purely on creating. It even expresses abstract ideas surprisingly well.",
+        'Fast feedback, responsible support after purchase, and updates that reflect user feedback—this team is different. The product is already convenient and will only get better. This is a genuine review without any event. If my results go well, I’ll come back with an updated review.',
       author: {
-        name: 'Minsu Kim',
-        role: 'Educational content creator',
+        name: 'Shin’s Media Lab',
+        role: 'YouTuber',
+        image: avatarImage2,
+      },
+    },
+    {
+      content:
+        'Thank you for the quick and kind responses. Even late at night, you shared details thoroughly and cleared up my questions. I look forward to continued feedback and support—it motivates me to work harder. Thanks again and please keep helping!',
+      author: {
+        name: 'Haru Records',
+        role: 'YouTuber',
+        image: avatarImage3,
+      },
+    },
+  ],
+  [
+    {
+      content:
+        'In Shorts, the topic matters most. This program drastically reduces editing time, which I love. Support is friendly, and the roadmap and direction look excellent.',
+      author: {
+        name: 'RealCreate',
+        role: 'YouTuber',
+        image: avatarImage4,
+      },
+    },
+    {
+      content:
+        'I already know video production, and I bought this for fast Shorts creation. The app is clean, and my production time has dropped significantly. Thank you!',
+      author: {
+        name: 'Min Film',
+        role: 'YouTuber',
         image: avatarImage5,
       },
     },
     {
       content:
-        "I’m a complete beginner who started YouTube three months ago, and thanks to this tool I can easily produce three videos a day. I was overwhelmed by scriptwriting at first, but I learned a lot from the suggested story structures. It even adjusts voice tone and speed automatically, like a professional narrator. I’ve already passed 5,000 subscribers, and the quality gets praised in the comments—so rewarding.",
+        'After much consideration, I purchased—and received kind guidance even late at night. Thanks to the simple UI, even beginners can create high-quality content without complex steps. I also got lots of ideas and feedback during guidance. Overall, I highly recommend it to anyone starting YouTube Shorts.',
       author: {
-        name: 'Jiwon Lee',
-        role: 'New YouTuber',
-        image: avatarImage2,
-      },
-    },
-  ],
-  [
-    {
-      content:
-        "It’s incredibly convenient that I can start without planning and still get a high-quality video. It’s especially useful when our team needs a quick promo. With just a few keywords, it automatically creates everything from storyboard to final video, dramatically speeding up our campaigns. It’s also excellent for quickly generating variants for A/B testing.",
-      author: {
-        name: 'Jiyoung Park',
-        role: 'Marketing Manager',
-        image: avatarImage3,
-      },
-    },
-    {
-      content:
-        "I was shocked that the scripts were even more natural and engaging than ones I commissioned from paid writers. Because the AI considers the latest trends and viral factors, our average views more than tripled. It excels at crafting emotionally immersive stories. Now we can invest the writer budget elsewhere, giving us more flexibility in running the channel.",
-      author: {
-        name: 'Hyunsoo Lee',
-        role: 'YouTube channel operator (150K subs)',
-        image: avatarImage1,
+        name: 'Sosohan Shorts',
+        role: 'YouTuber',
+        image: avatarImage5,
       },
     },
   ],
