@@ -37,6 +37,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
     name: '',
     confirmPassword: ''
   })
+  const [emailCheck, setEmailCheck] = useState<null | { exists: boolean; providers: string[] }>(null)
 
   useEffect(() => {
     if (isOpen) {
@@ -68,6 +69,9 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
         ...prev,
         [name]: ''
       }))
+    }
+    if (name === 'email') {
+      setEmailCheck(null)
     }
   }
 
@@ -113,6 +117,30 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const handleFieldBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     validateField(name, value)
+    if (name === 'email') {
+      const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+      if (isValidEmail) {
+        ;(async () => {
+          try {
+            const res = await fetch('/api/auth/check-email', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: value })
+            })
+            const json = await res.json().catch(() => ({}))
+            if (json?.ok) {
+              setEmailCheck({ exists: !!json.exists, providers: Array.isArray(json.providers) ? json.providers : [] })
+            } else {
+              setEmailCheck(null)
+            }
+          } catch (_) {
+            setEmailCheck(null)
+          }
+        })()
+      } else {
+        setEmailCheck(null)
+      }
+    }
   }
 
   // Supabase 에러를 사용자 친화적인 메시지로 변환
@@ -195,6 +223,32 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
     try {
       if (mode === 'login') {
+        // 이메일 공급자 확인 (Google 전용 계정은 비밀번호 로그인 불가 안내)
+        try {
+          let info = emailCheck
+          if (!info) {
+            const res = await fetch('/api/auth/check-email', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: formData.email })
+            })
+            const json = await res.json().catch(() => ({}))
+            if (json?.ok) {
+              info = { exists: !!json.exists, providers: Array.isArray(json.providers) ? json.providers : [] }
+              setEmailCheck(info)
+            }
+          }
+          const isGoogleOnly = !!info?.exists && info.providers.length > 0 && info.providers.every((p: string) => p.toLowerCase() === 'google')
+          if (isGoogleOnly) {
+            setError(lang === 'ko' 
+              ? '이 이메일은 Google로 가입되어 비밀번호가 없습니다. 상단의 "Google로 계속하기" 버튼을 사용해 로그인해 주세요.'
+              : 'This email is registered with Google (no password). Please use "Continue with Google" above.'
+            )
+            return
+          }
+        } catch (_) {
+          // 무시하고 일반 로그인 시도
+        }
         // Supabase 로그인
         const { data, error } = await supabase.auth.signInWithPassword({
           email: formData.email,
@@ -480,6 +534,13 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
               </div>
               {fieldErrors.email && (
                 <p className="text-red-400 text-xs">{fieldErrors.email}</p>
+              )}
+              {!fieldErrors.email && emailCheck && emailCheck.exists && emailCheck.providers.length > 0 && emailCheck.providers.every(p => p.toLowerCase() === 'google') && (
+                <p className="text-xs mt-1 text-yellow-300">
+                  {lang === 'ko' 
+                    ? '이 이메일은 Google 계정으로 가입되었습니다. 위의 "Google로 계속하기"를 사용해 로그인하세요.'
+                    : 'This email is registered with Google. Please use "Continue with Google" above.'}
+                </p>
               )}
             </div>
 

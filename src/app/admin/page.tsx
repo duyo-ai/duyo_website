@@ -337,12 +337,9 @@ export default function AdminPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
-    // 간단한 로그인 로직 (실제로는 API 호출)
-    if (loginForm.username === 'admin' && loginForm.password === 'cutple2024') {
-      setIsLoggedIn(true)
-    } else {
-      alert(lang === 'ko' ? '로그인 정보가 올바르지 않습니다.' : 'Invalid login credentials.')
-    }
+    // TODO: 실제 관리자 인증 API 연동 필요
+    // 임시 하드코딩 자격 증명 제거: 항상 실패 처리
+    alert(lang === 'ko' ? '로그인 정보가 올바르지 않습니다.' : 'Invalid login credentials.')
   }
 
   const handleLogout = () => {

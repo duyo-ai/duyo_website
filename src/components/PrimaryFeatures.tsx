@@ -15,7 +15,19 @@ import usageDragDrop from '@/images/usage/drag-drop.gif'
 import usageTextAdjust from '@/images/usage/text-adjust.gif'
 import usageSpacing from '@/images/usage/spacing-adjust.gif'
 
-// AI features - titles and descriptions will be handled via dictionary
+// mp4 비디오 매핑 (public/mp4 내 파일명). 없는 항목은 GIF로 대체
+const featureVideoMap: Record<string, string | undefined> = {
+  // AI 섹션
+  voice: 'AI목소리.mp4',
+  script: '대본생성_최종.mp4',
+  image: 'AI 이미지생성_최종 (1).mp4',
+  // Edit 섹션
+  drag: '드래그앤드롭_최종.mp4',
+  spacing: undefined,
+  sound: '효과음추가_최종.mp4',
+}
+
+const buildVideoSrc = (fileName: string) => encodeURI(`/mp4/${fileName}`)
 const aiFeatures = [
   {
     key: 'voice',
@@ -70,11 +82,23 @@ function AISection() {
         {aiFeatures.map((feature, index) => (
           <div key={feature.key} className="relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-md">
             <div className="aspect-video relative overflow-hidden">
-              <Image
-                src={feature.image}
-                alt={t[`features.ai.${feature.key}.title`]}
-                className="w-full h-full object-cover"
-              />
+              {featureVideoMap[feature.key]
+                ? (
+                  <video
+                    src={buildVideoSrc(featureVideoMap[feature.key] as string)}
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <Image
+                    src={feature.image}
+                    alt={t[`features.ai.${feature.key}.title`]}
+                    className="w-full h-full object-cover"
+                  />
+                )}
               <div className="absolute inset-0" />
             </div>
             <div className="p-8">
@@ -117,11 +141,23 @@ function EditSection() {
           </div>
           <div className="flex-1">
             <div className="relative overflow-hidden rounded-2xl">
-              <Image
-                src={editFeatures[0].image}
-                alt={t[`features.edit.${editFeatures[0].key}.title`]}
-                className="w-full h-auto"
-              />
+              {featureVideoMap[editFeatures[0].key]
+                ? (
+                  <video
+                    src={buildVideoSrc(featureVideoMap[editFeatures[0].key] as string)}
+                    className="w-full h-auto"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <Image
+                    src={editFeatures[0].image}
+                    alt={t[`features.edit.${editFeatures[0].key}.title`]}
+                    className="w-full h-auto"
+                  />
+                )}
             </div>
           </div>
         </div>
@@ -132,11 +168,23 @@ function EditSection() {
         {editFeatures.slice(1).map((feature, index) => (
           <div key={feature.key} className="relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-md">
             <div className="aspect-video relative overflow-hidden">
-              <Image
-                src={feature.image}
-                alt={t[`features.edit.${feature.key}.title`]}
-                className="w-full h-full object-cover"
-              />
+              {featureVideoMap[feature.key]
+                ? (
+                  <video
+                    src={buildVideoSrc(featureVideoMap[feature.key] as string)}
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <Image
+                    src={feature.image}
+                    alt={t[`features.edit.${feature.key}.title`]}
+                    className="w-full h-full object-cover"
+                  />
+                )}
               <div className="absolute inset-0 " />
             </div>
             <div className="p-8">
