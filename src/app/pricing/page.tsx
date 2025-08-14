@@ -192,7 +192,7 @@ const PLANS: Plan[] = [
 function BasicButton({ href, children, variant = 'primary' as 'primary' | 'outline' }: { href: string; children: React.ReactNode; variant?: 'primary' | 'outline' }) {
   const base = 'font-geist block w-full rounded-md px-4 py-2 text-sm sm:px-8 sm:py-2 sm:text-lg text-center font-semibold transition-colors duration-300 ease-out tracking-tighter'
   const cls = variant === 'primary'
-    ? 'bg-white text-gray-900 hover:bg-gray-100'
+    ? 'text-white bg-[linear-gradient(90deg,rgba(99,102,241,0.9),rgba(0,160,255,0.9))] hover:opacity-90'
     : 'bg-white text-gray-900 hover:bg-gray-100'
   return (
     <a href={href} className={`${base} ${cls}`}>{children}</a>
@@ -283,7 +283,7 @@ export default function PricingPage() {
                       <div className={clsx(
                         "group rounded-2xl backdrop-blur-md p-7 sm:p-8 border transition-colors h-full flex flex-col min-h-[30rem] sm:min-h-[28rem]",
                         plan.highlight
-                          ? "bg-white/10 border-[rgba(93,52,221,0.6)] shadow-[0_12px_48px_-12px_rgba(93,52,221,0.45)] ring-1 ring-[rgba(93,52,221,0.5)] transform-gpu scale-[1.02] sm:scale-[1.04]"
+                          ? "bg-white/10 border-[3px] border-[rgba(99,102,241,0.9)] shadow-[0_12px_48px_-12px_rgba(93,52,221,0.45)] ring-1 ring-[rgba(93,52,221,0.5)] transform-gpu scale-[1.02] sm:scale-[1.04]"
                           : "bg-white/5 border-[rgba(93,52,221,0.18)] hover:border-[rgba(93,52,221,0.28)]"
                       )}>
                         <div
@@ -293,13 +293,13 @@ export default function PricingPage() {
                               'radial-gradient(ellipse 85% 110% at 50% -15%, rgba(93, 52, 221, 0.18), rgba(93, 52, 221, 0.08) 45%, transparent 80%)',
                           }}
                         />
-                        <div
-                          className="pointer-events-none absolute inset-0 z-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                          style={{
-                            background:
-                              'radial-gradient(ellipse 85% 110% at 50% -15%, rgba(93, 52, 221, 0.28), rgba(93, 52, 221, 0.16) 45%, transparent 80%)',
-                          }}
-                        />
+                          <div
+                            className="pointer-events-none absolute inset-0 z-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                            style={{
+                              background:
+                                'radial-gradient(ellipse 85% 110% at 50% -15%, rgba(93, 52, 221, 0.28), rgba(93, 52, 221, 0.16) 45%, transparent 80%)',
+                            }}
+                          />
                     {/* 추천 배지 제거 */}
 
                     <div className="relative z-[1] space-y-3 bg-">
