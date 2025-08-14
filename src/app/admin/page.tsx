@@ -390,9 +390,6 @@ export default function AdminPage() {
               {lang === 'ko' ? '로그인' : 'Login'}
             </button>
           </form>
-          <p className="text-xs text-gray-500 mt-4 text-center">
-            {lang === 'ko' ? '개발용: admin / cutple2024' : 'Dev: admin / cutple2024'}
-          </p>
         </div>
       </div>
     )
