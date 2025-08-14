@@ -5,8 +5,17 @@ export async function POST(req: Request) {
     const body = await req.json().catch(() => ({})) as any
     const { email, platform } = body || {}
 
-    if (!email) {
-      return Response.json({ ok: false, error: 'MISSING_EMAIL' }, { status: 400 })
+    // 이메일 형식 검증
+    const isValidEmail = (v: unknown) => {
+      if (typeof v !== 'string') return false
+      const value = v.trim()
+      if (!value || value.length > 254) return false
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+      return re.test(value)
+    }
+
+    if (!isValidEmail(email)) {
+      return Response.json({ ok: false, error: 'INVALID_EMAIL' }, { status: 400 })
     }
 
     if (!platform) {
@@ -23,7 +32,7 @@ export async function POST(req: Request) {
     
     const { data, error } = await supabaseAdmin
       .from('download_requests')
-      .insert([{ email, platform, sent: false }])
+      .insert([{ email: String(email).trim().toLowerCase(), platform, sent: false }])
       .select()
     
     if (error) {

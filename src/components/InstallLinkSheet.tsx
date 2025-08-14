@@ -19,6 +19,7 @@ export default function InstallLinkSheet({ open, onClose }: Props) {
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
   const [showToast, setShowToast] = useState(false)
+  const [emailError, setEmailError] = useState('')
 
   // 로그인된 사용자의 이메일을 자동으로 설정
   useEffect(() => {
@@ -33,6 +34,7 @@ export default function InstallLinkSheet({ open, onClose }: Props) {
       setEmail('')
       setSending(false)
       setSent(false)
+      setEmailError('')
       setAnimateIn(false)
       return
     }
@@ -52,8 +54,22 @@ export default function InstallLinkSheet({ open, onClose }: Props) {
     setTimeout(() => onClose(), 250)
   }
 
+  const isValidEmail = (value: string) => {
+    const v = value.trim()
+    if (v.length > 254) return false
+    // 간단하고 안전한 형식 검사
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+    return re.test(v)
+  }
+
+  const canSend = !sending && isValidEmail(email)
+
   const submit = async () => {
-    if (!email) return
+    if (!isValidEmail(email)) {
+      setEmailError(lang === 'ko' ? '올바른 이메일 형식을 입력해주세요.' : 'Please enter a valid email address.')
+      return
+    }
+    setEmailError('')
     setSending(true)
     
     try {
@@ -62,7 +78,7 @@ export default function InstallLinkSheet({ open, onClose }: Props) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          email, 
+          email: email.trim().toLowerCase(), 
           platform: 'macOS' // 기본값, 나중에 플랫폼 감지로 개선 가능
         }),
       })
@@ -110,19 +126,32 @@ export default function InstallLinkSheet({ open, onClose }: Props) {
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  const v = e.target.value
+                  setEmail(v)
+                  if (!v) {
+                    setEmailError('')
+                  } else if (!isValidEmail(v)) {
+                    setEmailError(lang === 'ko' ? '올바른 이메일 형식을 입력해주세요.' : 'Please enter a valid email address.')
+                  } else {
+                    setEmailError('')
+                  }
+                }}
                 placeholder={t['install.placeholder.email']}
                 className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 pr-12 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
               <button
                 onClick={submit}
-                disabled={sending || !email}
+                disabled={!canSend}
                 className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-9 w-9 rounded-lg bg-white text-gray-900 hover:bg-white disabled:opacity-50"
                 aria-label="send"
               >
                 <Send className="h-4 w-4" />
               </button>
             </div>
+            {emailError && (
+              <p className="mt-2 text-sm text-red-300">{emailError}</p>
+            )}
             {sent && (
               <p className="mt-2 text-sm text-green-300">{t['install.toast.sent']}</p>
             )}
