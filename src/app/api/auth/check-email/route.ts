@@ -8,28 +8,23 @@ export async function POST(req: Request) {
       return Response.json({ ok: false, error: 'MISSING_EMAIL' }, { status: 400 })
     }
 
-    // 우선 auth.users를 직접 조회 (service role이므로 허용)
-    const { data, error } = await supabaseAdmin
-      .from('auth.users')
-      .select('id, email, identities')
-      .eq('email', email)
-      .limit(1)
-
-    if (error) {
-      console.error('[check-email] auth.users query error:', error)
-      return Response.json({ ok: false, error: 'QUERY_FAILED', details: error.message }, { status: 500 })
+    // Admin API로 사용자 목록 조회 후 이메일 존재 여부 확인
+    const { data: listData, error: listError } = await supabaseAdmin.auth.admin.listUsers()
+    if (listError) {
+      console.error('[check-email] listUsers error:', listError)
+      return Response.json({ ok: false, error: 'QUERY_FAILED', details: (listError as any).message || String(listError) }, { status: 500 })
     }
 
-    const exists = !!(data && data.length > 0)
-    let providers: string[] = []
-    if (exists) {
-      try {
-        const identities = (data![0] as any).identities as any[] | null
-        if (Array.isArray(identities)) {
-          providers = identities.map((i: any) => i?.provider || i?.identity_provider).filter(Boolean)
-        }
-      } catch (_) {}
-    }
+    const users = listData?.users || []
+    const user = users.find((u: any) => (u.email || '').toLowerCase() === email.toLowerCase())
+    const exists = !!user
+    const providers: string[] = exists
+      ? (Array.isArray((user as any).identities)
+          ? (user as any).identities
+              .map((i: any) => i?.provider || i?.identity_provider)
+              .filter(Boolean)
+          : [])
+      : []
 
     return Response.json({ ok: true, exists, providers })
   } catch (err) {

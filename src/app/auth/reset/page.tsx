@@ -3,13 +3,13 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLang } from '@/components/ToolbarProvider'
+import { Logo } from '@/components/Logo'
 import { dictionaries } from '@/i18n/dictionary'
 
 export default function PasswordResetPage() {
   const { lang } = useLang()
   const t = dictionaries[lang]
   const [password, setPassword] = useState('')
-  const [email, setEmail] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [done, setDone] = useState(false)
@@ -77,12 +77,7 @@ export default function PasswordResetPage() {
       const { supabase } = await import('@/lib/supabase')
       
       // 비밀번호 업데이트
-      const updateData: any = { password }
-      if (email) {
-        updateData.email = email
-      }
-
-      const { error } = await supabase.auth.updateUser(updateData)
+      const { error } = await supabase.auth.updateUser({ password })
 
       if (error) {
         setError(error.message || (lang === 'ko' ? '비밀번호 변경에 실패했습니다' : 'Failed to update password'))
@@ -138,6 +133,9 @@ export default function PasswordResetPage() {
   return (
     <div className="min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900">
       <div className="w-full max-w-md rounded-xl border border-white/10 bg-white/5 p-6 text-white">
+        <div className="flex items-center justify-center mb-4">
+          <Logo className="h-6 w-auto text-white" />
+        </div>
         <h1 className="text-xl font-semibold mb-4">{lang === 'ko' ? '비밀번호 재설정' : 'Reset password'}</h1>
         
         {error && (
@@ -166,16 +164,7 @@ export default function PasswordResetPage() {
             className="w-full rounded-lg bg-white/10 border border-white/20 px-4 py-2" 
           />
           
-          <div>
-            <input 
-              value={email} 
-              onChange={e=>setEmail(e.target.value)} 
-              type="email" 
-              placeholder={lang === 'ko' ? '(선택) 이메일 변경' : '(Optional) Change email'} 
-              className="w-full rounded-lg bg-white/10 border border-white/20 px-4 py-2" 
-            />
-            <p className="text-xs text-gray-400 mt-1">{lang === 'ko' ? '현재 이메일 유지 시 비워두세요' : 'Leave empty to keep current email'}</p>
-          </div>
+          {/* 이메일 변경 기능 제거 */}
           
           <button 
             onClick={submit} 

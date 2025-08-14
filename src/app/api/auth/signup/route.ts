@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabase-admin'
 
 export async function POST(req: Request) {
   try {
@@ -9,7 +10,17 @@ export async function POST(req: Request) {
       return Response.json({ ok: false, error: 'MISSING_FIELDS' }, { status: 400 })
     }
 
-    // Supabase 회원가입
+    // 1) 이미 가입된 이메일인지 선조회 (관리자 권한)
+    const { data: listData, error: listError } = await supabaseAdmin.auth.admin.listUsers()
+    if (listError) {
+      console.error('[signup:precheck:listUsers:error]', listError)
+    }
+    const exists = (listData?.users || []).some((u: any) => (u.email || '').toLowerCase() === String(email).toLowerCase())
+    if (exists) {
+      return Response.json({ ok: false, error: 'EMAIL_ALREADY_EXISTS' }, { status: 400 })
+    }
+
+    // 2) Supabase 회원가입 (인증 메일 전송)
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -29,11 +40,7 @@ export async function POST(req: Request) {
       }, { status: 400 })
     }
 
-    return Response.json({ 
-      ok: true, 
-      message: 'Verification email sent. Please check your email.',
-      user: data.user 
-    })
+    return Response.json({ ok: true, message: 'VERIFICATION_EMAIL_SENT', user: data.user })
   } catch (err) {
     console.error('[signup:unexpected]', err)
     return Response.json({ ok: false, error: 'UNEXPECTED' }, { status: 500 })

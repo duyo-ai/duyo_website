@@ -244,9 +244,40 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
         if (data.ok) {
           setSuccess(lang === 'ko' ? '확인 이메일이 발송되었습니다. 이메일을 확인해주세요.' : 'Verification email sent. Please check your email.')
         } else {
-          setError(data.error || (lang === 'ko' ? '회원가입에 실패했습니다.' : 'Signup failed.'))
+          if (data.error === 'EMAIL_ALREADY_EXISTS') {
+            setError(lang==='ko' ? '이미 가입된 이메일입니다. 로그인으로 이동해주세요.' : 'This email is already registered. Please sign in instead.')
+          } else {
+            setError(data.error || (lang === 'ko' ? '회원가입에 실패했습니다.' : 'Signup failed.'))
+          }
         }
       } else if (mode === 'forgot') {
+        // 1) 가입 여부 및 공급자 확인
+        try {
+          const checkRes = await fetch('/api/auth/check-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: formData.email })
+          })
+          const check = await checkRes.json().catch(() => ({}))
+          if (!check?.ok) {
+            setError(lang === 'ko' ? '이메일 확인 중 오류가 발생했습니다.' : 'Failed to verify email status.')
+            return
+          }
+          if (!check.exists) {
+            setError(lang === 'ko' ? '등록되지 않은 이메일입니다. 가입 후 이용해 주세요.' : 'No account found with this email.')
+            return
+          }
+          const providers: string[] = check.providers || []
+          // Google로만 가입된 계정은 비밀번호가 없음
+          if (providers.length > 0 && providers.every((p: string) => p.toLowerCase() === 'google')) {
+            setError(lang === 'ko' 
+              ? '이 이메일은 Google로 가입되어 비밀번호가 없습니다. 상단의 "Google로 계속하기" 버튼을 사용해 로그인해 주세요.'
+              : 'This email is registered with Google (no password). Please use "Continue with Google" above.'
+            )
+            return
+          }
+        } catch (_) { /* ignore and continue best-effort */ }
+
         const response = await fetch('/api/auth/password/reset-request', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
