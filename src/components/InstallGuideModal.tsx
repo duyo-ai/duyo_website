@@ -36,7 +36,7 @@ export default function InstallGuideModal({ open, os, onClose }: Props) {
 
       {/* Modal */}
       <div className="relative mx-auto max-w-7xl w-full">
-        <div className="rounded-2xl border border-white/10 bg-[#0b0b10] p-10 sm:p-12 shadow-2xl">
+        <div className="rounded-2xl border-2 border-white/30 bg-[#0b0b10] p-10 sm:p-12 shadow-2xl">
           <div className="mb-8 text-center">
             <h3 className="text-white text-3xl sm:text-4xl font-semibold">
               {os === 'windows' ? (lang==='ko' ? 'Windows 설치 안내' : 'Windows Installation Guide') : (lang==='ko' ? 'macOS 설치 안내' : 'macOS Installation Guide')}

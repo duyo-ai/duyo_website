@@ -114,7 +114,7 @@ export default function InstallLinkSheet({ open, onClose }: Props) {
 
       {/* bottom sheet */}
       <div className="absolute inset-x-0 bottom-0">
-        <div className={`mx-auto max-w-xl rounded-t-2xl border border-white/10 backdrop-blur-xl p-8 pb-14 shadow-2xl transform-gpu transition-transform duration-300 ease-out ${animateIn ? 'translate-y-0' : 'translate-y-full'} bg-[rgba(10,10,14,0.94)]`}>
+        <div className={`mx-auto max-w-xl rounded-t-2xl border-2 border-white/30 backdrop-blur-xl p-8 pb-14 shadow-2xl transform-gpu transition-transform duration-300 ease-out ${animateIn ? 'translate-y-0' : 'translate-y-full'} bg-[rgba(10,10,14,0.94)]`}>
           <div>
             <h3 className="text-2xl font-semibold text-white">{t['install.title']}</h3>
             <p className="text-gray-300 text-sm mt-2">{t['install.subtitle.1']}</p>
