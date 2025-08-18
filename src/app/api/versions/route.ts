@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabase'
-export const revalidate = 300 // 5분 TTL, CDN 캐시 허용
+export const revalidate = 0
+export const dynamic = 'force-dynamic'
 
 // 공개 API: 현재 버전 정보 조회 (다운로드 페이지용)
 export async function GET(req: Request) {
@@ -32,8 +33,9 @@ export async function GET(req: Request) {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        // CDN: 5분 동안 신선, 그 후에는 오래된 응답을 즉시 제공하고 백그라운드 재검증
-        'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=86400',
+        // 즉시 반영을 위해 캐시 비활성화
+        'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+        'Pragma': 'no-cache',
       },
     })
 

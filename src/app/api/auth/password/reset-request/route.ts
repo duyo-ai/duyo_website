@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabase-admin'
 
 export async function POST(req: Request) {
   try {
@@ -14,6 +15,36 @@ export async function POST(req: Request) {
     const host = req.headers.get('host') || undefined
     const computedOrigin = (forwardedProto && host) ? `${forwardedProto}://${host}` : undefined
     const origin = req.headers.get('origin') || computedOrigin || process.env.NEXT_PUBLIC_SITE_URL || 'https://www.cutple.com'
+
+    // 1) 해당 이메일이 소셜 전용 계정인지 확인 (email/password 미보유시 차단)
+    try {
+      const { data: listData, error: listError } = await supabaseAdmin.auth.admin.listUsers()
+      if (listError) {
+        console.error('[reset-request:listUsers:error]', listError)
+      }
+      const authUsers = (listData?.users || []) as any[]
+      const found = authUsers.find((u) => String(u.email || '').toLowerCase() === String(email).toLowerCase())
+      if (found) {
+        const providers: string[] = Array.isArray(found?.app_metadata?.providers)
+          ? found.app_metadata.providers
+          : (Array.isArray(found?.identities) ? found.identities.map((i: any) => i?.provider).filter(Boolean) : [])
+
+        const hasEmailPassword = providers.includes('email') || providers.includes('password')
+        if (!hasEmailPassword) {
+          const acceptLang = (req.headers.get('accept-language') || '').toLowerCase()
+          const isKo = acceptLang.includes('ko')
+          return Response.json({
+            ok: false,
+            error: isKo 
+              ? '해당 계정은 Google 등 소셜 로그인 전용입니다.' 
+              : 'This account uses social login (e.g., Google) only.'
+          }, { status: 400 })
+        }
+      }
+    } catch (checkError) {
+      console.error('[reset-request:provider-check:error]', checkError)
+      // 체크 실패 시에는 계속 진행 (침묵 복구)
+    }
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: redirectTo || `${origin}/auth/reset`
