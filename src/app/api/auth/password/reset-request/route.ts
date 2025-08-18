@@ -9,8 +9,14 @@ export async function POST(req: Request) {
       return Response.json({ ok: false, error: 'MISSING_EMAIL' }, { status: 400 })
     }
 
+    // 요청 환경을 기준으로 안전한 기본 리다이렉트 기준 URL 계산
+    const forwardedProto = req.headers.get('x-forwarded-proto') || undefined
+    const host = req.headers.get('host') || undefined
+    const computedOrigin = (forwardedProto && host) ? `${forwardedProto}://${host}` : undefined
+    const origin = req.headers.get('origin') || computedOrigin || process.env.NEXT_PUBLIC_SITE_URL || 'https://www.cutple.com'
+
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: redirectTo || `${process.env.NEXT_PUBLIC_SITE_URL || 'https://duyo-website.vercel.app'}/auth/reset`
+      redirectTo: redirectTo || `${origin}/auth/reset`
     })
 
     if (error) {
