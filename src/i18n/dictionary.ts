@@ -16,7 +16,7 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     'pricing.vat': 'AI가 대본부터 편집까지 자동으로 처리합니다. 지금 바로 시작하세요.',
     'pricing.toggle.monthly': '월간',
     'pricing.toggle.yearly': '연간',
-    'pricing.badge.yearlyDiscount': '연간 결제 2개월 할인',
+    'pricing.badge.yearlyDiscount': '월 요금 대비 16.7% 할인',
 
     'plan.free': '프리',
     'plan.lite': '라이트',
