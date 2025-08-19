@@ -734,7 +734,7 @@ const DownloadPage = () => {
             )}
 
             {/* Footer Note */}
-            <div className="mt-16 border-t border-white/10 pt-8 text-center">
+            {/* <div className="mt-16 border-t border-white/10 pt-8 text-center">
               <p className="text-sm text-gray-400">
                 {t['download.footer.note']}{' '}
                 <a
@@ -745,7 +745,7 @@ const DownloadPage = () => {
                 </a>
                 {t['download.footer.reference']}
               </p>
-            </div>
+            </div> */}
           </div>
         </Container>
       </main>
