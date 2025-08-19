@@ -1,4 +1,5 @@
 import { getAdminDownloadRequests, updateAdminDownloadRequestStatus } from '@/lib/supabase-admin'
+import { supabaseAdmin } from '@/lib/supabase-admin'
 
 export async function GET(req: Request) {
   const { verifyAdminRequest } = await import('@/lib/admin-auth')
@@ -56,5 +57,35 @@ export async function POST(req: Request) {
   } catch (err) {
     console.error('[admin:update-download-request:error]', err)
     return Response.json({ ok: false, error: 'UPDATE_FAILED' }, { status: 500 })
+  }
+}
+
+export async function DELETE(req: Request) {
+  const { verifyAdminRequest } = await import('@/lib/admin-auth')
+  const auth = verifyAdminRequest()
+  if (!auth.ok) {
+    return Response.json({ ok: false, error: 'UNAUTHORIZED' }, { status: 401 })
+  }
+  try {
+    const body = await req.json().catch(() => ({})) as any
+    const { id } = body || {}
+    if (typeof id !== 'number') {
+      return Response.json({ ok: false, error: 'INVALID_PARAMS' }, { status: 400 })
+    }
+
+    const { error } = await supabaseAdmin
+      .from('download_requests')
+      .delete()
+      .eq('id', id)
+
+    if (error) {
+      console.error('[admin:download-request:delete:error]', error)
+      return Response.json({ ok: false, error: error.message || 'DELETE_FAILED' }, { status: 500 })
+    }
+
+    return Response.json({ ok: true })
+  } catch (err) {
+    console.error('[admin:download-request:delete:unexpected]', err)
+    return Response.json({ ok: false, error: 'UNEXPECTED' }, { status: 500 })
   }
 }

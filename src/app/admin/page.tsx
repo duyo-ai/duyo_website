@@ -81,6 +81,12 @@ export default function AdminPage() {
   const [uploadProgress, setUploadProgress] = useState(0)
   const [uploadStatus, setUploadStatus] = useState('')
 
+  // Pagination states
+  const [userPage, setUserPage] = useState(1)
+  const [userPageSize] = useState(10)
+  const [dlPage, setDlPage] = useState(1)
+  const [dlPageSize] = useState(10)
+
   const handleSort = (field: string) => {
     if (sortField === field) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
@@ -281,6 +287,12 @@ export default function AdminPage() {
     const matchesStatus = statusFilter === 'all' || user.status === statusFilter
     return matchesSearch && matchesStatus
   })
+
+  // Reset page when filters change
+  useEffect(() => {
+    setUserPage(1)
+    setDlPage(1)
+  }, [searchTerm, statusFilter])
 
   const filteredDownloads = downloadRequests.filter(request =>
     request.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -585,10 +597,17 @@ export default function AdminPage() {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     {lang === 'ko' ? '마지막 로그인' : 'Last Login'}
                   </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {lang === 'ko' ? '액션' : 'Actions'}
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredUsers.map((user) => (
+                {(() => {
+                  const total = filteredUsers.length
+                  const start = (userPage - 1) * userPageSize
+                  const pageItems = filteredUsers.slice(start, start + userPageSize)
+                  return pageItems.map((user) => (
                   <tr key={user.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{user.name}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.email}</td>
@@ -609,12 +628,75 @@ export default function AdminPage() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {user.lastLogin || (lang === 'ko' ? '없음' : 'Never')}
                     </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                      <button
+                        onClick={async () => {
+                          if (!confirm(lang === 'ko' ? '정말 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.' : 'Are you sure to delete? This cannot be undone.')) return
+                          try {
+                            const res = await fetch('/api/admin/users', {
+                              method: 'DELETE',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({ id: user.id })
+                            })
+                            const json = await res.json()
+                            if (!res.ok || !json.ok) throw new Error(json.error || 'DELETE_FAILED')
+                            // 즉시 목록 업데이트
+                            setUsers(prev => prev.filter(u => u.id !== user.id))
+                            alert(lang === 'ko' ? '삭제되었습니다.' : 'Deleted.')
+                          } catch (e) {
+                            alert(lang === 'ko' ? '삭제 중 오류가 발생했습니다.' : 'Failed to delete user.')
+                          }
+                        }}
+                        className="text-red-600 hover:text-red-700"
+                      >
+                        {lang === 'ko' ? '삭제' : 'Delete'}
+                      </button>
+                    </td>
                   </tr>
-                ))}
+                  ))
+                })()}
               </tbody>
             </table>
           </div>
         </div>
+
+        {/* Pagination controls */}
+        {(() => {
+          const total = filteredUsers.length
+          const totalPages = Math.max(1, Math.ceil(total / userPageSize))
+          return (
+            <div className="flex items-center justify-between gap-4">
+              <div className="text-sm text-gray-600">
+                {lang === 'ko' ? `총 회원수: ${total.toLocaleString()}명` : `Total users: ${total.toLocaleString()}`}
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setUserPage(p => Math.max(1, p - 1))}
+                  disabled={userPage <= 1}
+                  className="px-3 py-1 rounded border border-gray-300 text-sm disabled:opacity-50"
+                >
+                  {lang === 'ko' ? '이전' : 'Prev'}
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(n => (
+                  <button
+                    key={n}
+                    onClick={() => setUserPage(n)}
+                    className={`px-3 py-1 rounded border text-sm ${userPage === n ? 'bg-indigo-600 text-white border-indigo-600' : 'border-gray-300 hover:bg-gray-50'}`}
+                  >
+                    {n}
+                  </button>
+                ))}
+                <button
+                  onClick={() => setUserPage(p => Math.min(totalPages, p + 1))}
+                  disabled={userPage >= totalPages}
+                  className="px-3 py-1 rounded border border-gray-300 text-sm disabled:opacity-50"
+                >
+                  {lang === 'ko' ? '다음' : 'Next'}
+                </button>
+              </div>
+            </div>
+          )
+        })()}
       </div>
     )
   }
@@ -660,7 +742,11 @@ export default function AdminPage() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredDownloads.map((request) => (
+                {(() => {
+                  const total = filteredDownloads.length
+                  const start = (dlPage - 1) * dlPageSize
+                  const pageItems = filteredDownloads.slice(start, start + dlPageSize)
+                  return pageItems.map((request) => (
                   <tr key={request.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{request.email}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{request.platform}</td>
@@ -691,12 +777,73 @@ export default function AdminPage() {
                         </label>
                       </div>
                     </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                      <button
+                        onClick={async () => {
+                          if (!confirm(lang === 'ko' ? '이 다운로드 요청을 삭제할까요?' : 'Delete this request?')) return
+                          try {
+                            const res = await fetch('/api/admin/download-requests', {
+                              method: 'DELETE',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({ id: request.id })
+                            })
+                            const json = await res.json()
+                            if (!res.ok || !json.ok) throw new Error(json.error || 'DELETE_FAILED')
+                            setDownloadRequests(prev => prev.filter(r => r.id !== request.id))
+                          } catch (e) {
+                            alert(lang === 'ko' ? '삭제 중 오류가 발생했습니다.' : 'Failed to delete request.')
+                          }
+                        }}
+                        className="text-red-600 hover:text-red-700"
+                      >
+                        {lang === 'ko' ? '삭제' : 'Delete'}
+                      </button>
+                    </td>
                   </tr>
-                ))}
+                  ))
+                })()}
               </tbody>
             </table>
           </div>
         </div>
+
+        {/* Pagination controls */}
+        {(() => {
+          const total = filteredDownloads.length
+          const totalPages = Math.max(1, Math.ceil(total / dlPageSize))
+          return (
+            <div className="flex items-center justify-between gap-4">
+              <div className="text-sm text-gray-600">
+                {lang === 'ko' ? `총 요청수: ${total.toLocaleString()}건` : `Total requests: ${total.toLocaleString()}`}
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setDlPage(p => Math.max(1, p - 1))}
+                  disabled={dlPage <= 1}
+                  className="px-3 py-1 rounded border border-gray-300 text-sm disabled:opacity-50"
+                >
+                  {lang === 'ko' ? '이전' : 'Prev'}
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(n => (
+                  <button
+                    key={n}
+                    onClick={() => setDlPage(n)}
+                    className={`px-3 py-1 rounded border text-sm ${dlPage === n ? 'bg-indigo-600 text-white border-indigo-600' : 'border-gray-300 hover:bg-gray-50'}`}
+                  >
+                    {n}
+                  </button>
+                ))}
+                <button
+                  onClick={() => setDlPage(p => Math.min(totalPages, p + 1))}
+                  disabled={dlPage >= totalPages}
+                  className="px-3 py-1 rounded border border-gray-300 text-sm disabled:opacity-50"
+                >
+                  {lang === 'ko' ? '다음' : 'Next'}
+                </button>
+              </div>
+            </div>
+          )
+        })()}
       </div>
     )
   }
