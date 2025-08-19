@@ -6,7 +6,7 @@ import { GeistMono } from 'geist/font/mono'
 import '@/styles/tailwind.css'
 import ToolbarProvider from '@/components/ToolbarProvider'
 import { AuthProvider } from '@/components/AuthContext'
-
+import ChannelProvider from '@/components/ChannelProvider'
 
 export const metadata: Metadata = {
   title: {
@@ -15,7 +15,9 @@ export const metadata: Metadata = {
   },
   description:
     '키워드를 입력하면 대본이 나오고, 목소리가 입혀지고, 이미지가 배치됩니다. 심지어 장면 간의 간격까지 AI가 조절합니다.',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.cutple.com'),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://www.cutple.com',
+  ),
   openGraph: {
     type: 'website',
     url: 'https://www.cutple.com',
@@ -65,20 +67,20 @@ export default function RootLayout({
     <html
       lang="en"
       className={clsx(
-        'bg-slate-950  relative h-full overflow-x-hidden scroll-smooth antialiased',
+        'relative  h-full overflow-x-hidden scroll-smooth bg-slate-950 antialiased',
         inter.variable,
         lexend.variable,
         GeistMono.variable,
-        GeistSans.variable
+        GeistSans.variable,
       )}
     >
       <body className="flex h-full flex-col">
-        <AuthProvider>
-          <ToolbarProvider>
-            {children}
-          </ToolbarProvider>
-        </AuthProvider>
+        <ChannelProvider>
+          <AuthProvider>
+            <ToolbarProvider>{children}</ToolbarProvider>
+          </AuthProvider>
+        </ChannelProvider>
       </body>
-    </html> 
+    </html>
   )
 }
