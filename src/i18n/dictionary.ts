@@ -13,7 +13,8 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     'nav.getStarted': '지금 시작하기',
 
     'pricing.title': '단 몇 분만에 바이럴 쇼츠 완성',
-    'pricing.vat': 'AI가 대본부터 편집까지 자동으로 처리합니다. 지금 바로 시작하세요.',
+    'pricing.vat':
+      'AI가 대본부터 편집까지 자동으로 처리합니다. 지금 바로 시작하세요.',
     'pricing.toggle.monthly': '월간',
     'pricing.toggle.yearly': '연간',
     'pricing.badge.yearlyDiscount': '월 요금 대비 16.7% 할인',
@@ -28,7 +29,8 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     'plan.vatNote': 'VAT 별도',
     'hero.title.line1': '텍스트 한',
     'hero.title.line2': '줄로 만드는 바이럴 숏폼',
-    'hero.subtitle': '키워드를 입력하면 대본이 나오고, 목소리가 입혀지고, 이미지가 배치됩니다. 심지어 장면 간의 간격까지 AI가 조절합니다.',
+    'hero.subtitle':
+      '키워드를 입력하면 대본이 나오고, 목소리가 입혀지고, 이미지가 배치됩니다. 심지어 장면 간의 간격까지 AI가 조절합니다.',
     'hero.downloadFor': '다운로드',
 
     'pricing.desc.free': '가볍게 시작하는 개인 프로젝트용',
@@ -58,7 +60,8 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     'hero.h1.line1': '텍스트 한 줄로 만드는',
     'hero.h1.line2': '바이럴 숏폼',
     'hero.subtitle.line1': '대본, 목소리, 이미지까지, 클릭 몇 번으로 쉽게.',
-    'hero.subtitle.line2': '키워드를 입력하면 대본이 나오고, 목소리가 입혀지고, 이미지가 배치됩니다.',
+    'hero.subtitle.line2':
+      '키워드를 입력하면 대본이 나오고, 목소리가 입혀지고, 이미지가 배치됩니다.',
     'hero.cta.start': '지금 시작하기',
     'hero.cta.watch': 'Watch Demo',
     'hero.f1.title': 'AI 대본 생성',
@@ -86,14 +89,15 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     'footer.company.business': '사업자 등록번호',
     'footer.company.license': '통신판매업 신고번호',
     'footer.company.privacy': '개인정보보호책임자',
-    'footer.copyright': 'Copyright © 두요(DUYO) | 두고두고 요긴한 업무 자동화 솔루션. All Rights Reserved.',
+    'footer.copyright':
+      'Copyright © 두요(DUYO) | 두고두고 요긴한 업무 자동화 솔루션. All Rights Reserved.',
 
     'download.title': 'Download Cutple',
     'download.toggle.stable': '정식 버전',
     'download.toggle.beta': '베타 버전',
     'download.mac.title': 'Cutple for Mac',
     'download.mac.beta': 'Cutple for Mac Beta',
-    'download.mac.desc.stable': 'Apple Silicon과 Intel 모두 지원합니다.',
+    'download.mac.desc.stable': 'Apple Silicon만 지원합니다. *Intel 지원 불가',
     'download.mac.desc.beta': '최신 기능을 먼저 경험해보세요.',
     'download.windows.title': 'Cutple for Windows',
     'download.windows.beta': 'Cutple for Windows Beta',
@@ -107,27 +111,35 @@ export const dictionaries: Record<SupportedLang, Dict> = {
 
     // PrimaryFeatures - AI Section
     'features.ai.title': 'AI로 더 쉽게',
-    'features.ai.subtitle': 'AI가 자동으로 콘텐츠를 생성하고 최적화합니다. 키워드만 입력하면 완성도 높은 영상이 자동으로 제작됩니다.',
+    'features.ai.subtitle':
+      'AI가 자동으로 콘텐츠를 생성하고 최적화합니다. 키워드만 입력하면 완성도 높은 영상이 자동으로 제작됩니다.',
     'features.ai.voice.title': 'AI 목소리',
-    'features.ai.voice.desc': '감정에 따라 톤을 조절하는 다양한 AI 음성을 지원합니다. Typecast, 볼리, ElevenLabs를 통합하여 자연스러운 음성을 제공합니다.',
+    'features.ai.voice.desc':
+      '감정에 따라 톤을 조절하는 다양한 AI 음성을 지원합니다. Typecast, 볼리, ElevenLabs를 통합하여 자연스러운 음성을 제공합니다.',
     'features.ai.script.title': '대본 생성',
-    'features.ai.script.desc': '실제 바이럴 포맷 구조에 기반한 고품질 대본을 AI가 자동으로 생성합니다. 키워드만 입력하면 완성도 높은 스크립트가 완성됩니다.',
+    'features.ai.script.desc':
+      '실제 바이럴 포맷 구조에 기반한 고품질 대본을 AI가 자동으로 생성합니다. 키워드만 입력하면 완성도 높은 스크립트가 완성됩니다.',
     'features.ai.image.title': 'AI 이미지',
-    'features.ai.image.desc': '문맥에 맞는 이미지를 자동 생성하여 컷에 배치합니다. 프롬프트 기반으로 영상에 어울리는 비주얼을 실시간 생성합니다.',
+    'features.ai.image.desc':
+      '문맥에 맞는 이미지를 자동 생성하여 컷에 배치합니다. 프롬프트 기반으로 영상에 어울리는 비주얼을 실시간 생성합니다.',
 
     // PrimaryFeatures - Edit Section
     'features.edit.title': '누구나 쉽게',
     'features.edit.drag.title': '드래그&드롭',
-    'features.edit.drag.desc': '스톡 이미지나 웹 이미지를 드래그 한 번으로 바로 삽입할 수 있습니다. 복잡한 업로드 과정 없이 즉시 적용됩니다.',
+    'features.edit.drag.desc':
+      '스톡 이미지나 웹 이미지를 드래그 한 번으로 바로 삽입할 수 있습니다. 복잡한 업로드 과정 없이 즉시 적용됩니다.',
     'features.edit.spacing.title': '간격 조절',
-    'features.edit.spacing.desc': '문장 간격과 타이밍을 자동으로 최적화하여 시청 몰입도를 높입니다. 자연스러운 흐름을 위한 스마트 타이밍 조절.',
+    'features.edit.spacing.desc':
+      '문장 간격과 타이밍을 자동으로 최적화하여 시청 몰입도를 높입니다. 자연스러운 흐름을 위한 스마트 타이밍 조절.',
     'features.edit.sound.title': '효과음 추가',
-    'features.edit.sound.desc': '상황에 맞는 효과음을 자동으로 삽입하여 영상 완성도를 높입니다. 분위기와 내용에 맞는 사운드 이팩트를 제공합니다.',
+    'features.edit.sound.desc':
+      '상황에 맞는 효과음을 자동으로 삽입하여 영상 완성도를 높입니다. 분위기와 내용에 맞는 사운드 이팩트를 제공합니다.',
 
     // SecondaryFeatures
     'features.steps.title': '간단한 3단계로',
     'features.steps.subtitle': '콘텐츠 제작 완성.',
-    'features.steps.desc': '키워드만 입력하면 AI가 템플릿 추천부터 최종 완성까지 모든 과정을 도와드립니다.',
+    'features.steps.desc':
+      '키워드만 입력하면 AI가 템플릿 추천부터 최종 완성까지 모든 과정을 도와드립니다.',
     'features.step1.title': '키워드 입력',
     'features.step1.desc': '원하는 콘텐츠의 키워드를 간단히 입력하세요.',
     'features.step2.title': '템플릿 선택',
@@ -138,21 +150,26 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     // DarkBentoSection cards
     'bento.1.eyebrow': 'Beginner YouTuber',
     'bento.1.title': '초보 유튜버',
-    'bento.1.desc': '직접 영상 편집이 부담스러운 초보 유튜버들을 위해 설계되었습니다. 복잡한 편집 툴 없이도 전문적인 영상을 만들 수 있습니다.',
+    'bento.1.desc':
+      '직접 영상 편집이 부담스러운 초보 유튜버들을 위해 설계되었습니다. 복잡한 편집 툴 없이도 전문적인 영상을 만들 수 있습니다.',
     'bento.2.eyebrow': 'Content Creator',
     'bento.2.title': '얼굴 없는 크리에이터',
-    'bento.2.desc': '얼굴 노출 없이 전문 지식으로 콘텐츠를 만들고 싶은 크리에이터들에게 완벽한 솔루션입니다.',
+    'bento.2.desc':
+      '얼굴 노출 없이 전문 지식으로 콘텐츠를 만들고 싶은 크리에이터들에게 완벽한 솔루션입니다.',
     'bento.3.eyebrow': 'Content Manager',
     'bento.3.title': '콘텐츠 운영자',
-    'bento.3.desc': '매일 쇼츠 콘텐츠를 업로드해야 하는 운영자들을 위한 효율적인 대량 생산 시스템입니다.',
+    'bento.3.desc':
+      '매일 쇼츠 콘텐츠를 업로드해야 하는 운영자들을 위한 효율적인 대량 생산 시스템입니다.',
     'bento.4.eyebrow': 'Marketing & Sales',
     'bento.4.title': '마케팅 에이전시 & 셀러',
-    'bento.4.desc': '바이럴 영상 제작을 희망하는 마케팅 에이전시와 텍스트 기반 광고 콘텐츠가 필요한 셀러들을 지원합니다.',
+    'bento.4.desc':
+      '바이럴 영상 제작을 희망하는 마케팅 에이전시와 텍스트 기반 광고 콘텐츠가 필요한 셀러들을 지원합니다.',
 
     // Testimonials
     'testimonials.title': '실제 사용자들의',
     'testimonials.subtitle': '생생한 후기',
-    'testimonials.desc': '전국의 크리에이터들이 이미 경험하고 있는 변화를 확인해보세요. 간단한 키워드 입력만으로도 놀라운 결과를 만들어내고 있습니다.',
+    'testimonials.desc':
+      '전국의 크리에이터들이 이미 경험하고 있는 변화를 확인해보세요. 간단한 키워드 입력만으로도 놀라운 결과를 만들어내고 있습니다.',
 
     // Footer v2 (Cutple)
     'footer2.customer.title': '고객센터',
@@ -169,20 +186,24 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     // Install link sheet
     'install.title': '다운로드 링크 받기',
     'install.subtitle.1': '모바일에서는 직접 설치가 어려워요.',
-    'install.subtitle.2': '이메일을 남겨주시면 Mac/Windows 설치 링크를 보내드릴게요.',
+    'install.subtitle.2':
+      '이메일을 남겨주시면 Mac/Windows 설치 링크를 보내드릴게요.',
     'install.placeholder.email': '이메일 주소',
     'install.toast.sent': '이메일로 설치 링크를 보냈어요!',
 
     // Auth validation messages
     'auth.error.email.invalid': '올바른 이메일 주소를 입력해주세요',
     'auth.error.password.minLength': '비밀번호는 최소 8자 이상이어야 합니다',
-    'auth.error.password.specialChar': '비밀번호에 특수문자가 포함되어야 합니다',
+    'auth.error.password.specialChar':
+      '비밀번호에 특수문자가 포함되어야 합니다',
     'auth.error.invalidCredentials': '이메일 또는 비밀번호가 올바르지 않습니다',
     'auth.error.userNotFound': '등록되지 않은 이메일입니다',
     'auth.error.emailAlreadyExists': '이미 등록된 이메일입니다',
     'auth.error.weakPassword': '비밀번호가 너무 약합니다',
-    'auth.error.tooManyRequests': '너무 많은 요청이 발생했습니다. 잠시 후 다시 시도해주세요',
-    'auth.error.networkError': '네트워크 오류가 발생했습니다. 인터넷 연결을 확인해주세요',
+    'auth.error.tooManyRequests':
+      '너무 많은 요청이 발생했습니다. 잠시 후 다시 시도해주세요',
+    'auth.error.networkError':
+      '네트워크 오류가 발생했습니다. 인터넷 연결을 확인해주세요',
     'auth.error.unknown': '알 수 없는 오류가 발생했습니다',
   },
   en: {
@@ -210,7 +231,8 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     'plan.vatNote': 'VAT not included',
     'hero.title.line1': 'Make viral shorts',
     'hero.title.line2': 'from a single line of text',
-    'hero.subtitle': 'Type keywords, get a script, AI voice, and images laid out. Even scene spacing is auto-optimized.',
+    'hero.subtitle':
+      'Type keywords, get a script, AI voice, and images laid out. Even scene spacing is auto-optimized.',
     'hero.downloadFor': 'Download for',
 
     'pricing.desc.free': 'Get started with personal projects',
@@ -240,7 +262,8 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     'hero.h1.line1': 'Create viral shorts',
     'hero.h1.line2': 'from a single line',
     'hero.subtitle.line1': 'Script, voice, and images—ready in a few clicks.',
-    'hero.subtitle.line2': 'Type keywords; we generate the script, apply AI voice, and lay out images.',
+    'hero.subtitle.line2':
+      'Type keywords; we generate the script, apply AI voice, and lay out images.',
     'hero.cta.start': 'Get started',
     'hero.cta.watch': 'Watch demo',
     'hero.f1.title': 'AI Script Generation',
@@ -268,7 +291,8 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     'footer.company.business': 'Business Registration',
     'footer.company.license': 'E-commerce License',
     'footer.company.privacy': 'Privacy Officer',
-    'footer.copyright': 'Copyright © DUYO | Essential Business Automation Solutions. All Rights Reserved.',
+    'footer.copyright':
+      'Copyright © DUYO | Essential Business Automation Solutions. All Rights Reserved.',
 
     'download.title': 'Download Cutple',
     'download.toggle.stable': 'Stable',
@@ -283,58 +307,73 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     'download.windows.desc.beta': 'Experience the latest features first.',
     'download.mac.optimized': 'Optimized for Apple Silicon',
     'download.windows.support': 'Supports Windows 10+',
-    'download.footer.note': 'For system requirements and detailed information, please refer to the',
+    'download.footer.note':
+      'For system requirements and detailed information, please refer to the',
     'download.footer.docs': 'documentation',
     'download.footer.reference': '.',
 
     // PrimaryFeatures - AI Section
     'features.ai.title': 'Easier with AI',
-    'features.ai.subtitle': 'AI creates and optimizes content for you. Enter keywords and get production-ready videos.',
+    'features.ai.subtitle':
+      'AI creates and optimizes content for you. Enter keywords and get production-ready videos.',
     'features.ai.voice.title': 'AI Voice',
-    'features.ai.voice.desc': 'Support various AI voices that adjust tone based on emotion. Integrated with Typecast, Voli, and ElevenLabs for natural speech.',
+    'features.ai.voice.desc':
+      'Support various AI voices that adjust tone based on emotion. Integrated with Typecast, Voli, and ElevenLabs for natural speech.',
     'features.ai.script.title': 'Script Generation',
-    'features.ai.script.desc': 'AI automatically generates high-quality scripts based on actual viral format structures. Enter keywords and get polished scripts.',
+    'features.ai.script.desc':
+      'AI automatically generates high-quality scripts based on actual viral format structures. Enter keywords and get polished scripts.',
     'features.ai.image.title': 'AI Images',
-    'features.ai.image.desc': 'Automatically generate contextual images and place them in cuts. Create visuals that match your video in real-time based on prompts.',
+    'features.ai.image.desc':
+      'Automatically generate contextual images and place them in cuts. Create visuals that match your video in real-time based on prompts.',
 
     // PrimaryFeatures - Edit Section
     'features.edit.title': 'For Everyone',
     'features.edit.drag.title': 'Drag & Drop',
-    'features.edit.drag.desc': 'Insert stock or web images directly with a single drag. Apply instantly without complex upload processes.',
+    'features.edit.drag.desc':
+      'Insert stock or web images directly with a single drag. Apply instantly without complex upload processes.',
     'features.edit.spacing.title': 'Spacing Control',
-    'features.edit.spacing.desc': 'Automatically optimize sentence spacing and timing to increase viewer engagement. Smart timing adjustment for natural flow.',
+    'features.edit.spacing.desc':
+      'Automatically optimize sentence spacing and timing to increase viewer engagement. Smart timing adjustment for natural flow.',
     'features.edit.sound.title': 'Sound Effects',
-    'features.edit.sound.desc': 'Automatically insert appropriate sound effects to enhance video quality. Provide sound effects that match mood and content.',
+    'features.edit.sound.desc':
+      'Automatically insert appropriate sound effects to enhance video quality. Provide sound effects that match mood and content.',
 
     // SecondaryFeatures
     'features.steps.title': 'In three simple steps',
     'features.steps.subtitle': 'Create your content.',
-    'features.steps.desc': 'Enter keywords and AI helps from template recommendations to finishing touches.',
+    'features.steps.desc':
+      'Enter keywords and AI helps from template recommendations to finishing touches.',
     'features.step1.title': 'Enter Keywords',
     'features.step1.desc': 'Simply enter keywords for the content you want.',
     'features.step2.title': 'Select Template',
     'features.step2.desc': 'Choose a template including voice and images.',
     'features.step3.title': 'Final edits from 90% draft',
-    'features.step3.desc': 'Review the nearly completed draft and make detailed adjustments.',
+    'features.step3.desc':
+      'Review the nearly completed draft and make detailed adjustments.',
 
     // DarkBentoSection cards
     'bento.1.eyebrow': 'Beginner YouTuber',
     'bento.1.title': 'Beginner YouTuber',
-    'bento.1.desc': 'Designed for beginners who feel editing is burdensome. Create professional videos without complex tools.',
+    'bento.1.desc':
+      'Designed for beginners who feel editing is burdensome. Create professional videos without complex tools.',
     'bento.2.eyebrow': 'Content Creator',
     'bento.2.title': 'Faceless Creator',
-    'bento.2.desc': 'The perfect solution for creators who want to produce content without revealing their faces.',
+    'bento.2.desc':
+      'The perfect solution for creators who want to produce content without revealing their faces.',
     'bento.3.eyebrow': 'Content Manager',
     'bento.3.title': 'Content Manager',
-    'bento.3.desc': 'Efficient mass-production system for teams uploading Shorts every day.',
+    'bento.3.desc':
+      'Efficient mass-production system for teams uploading Shorts every day.',
     'bento.4.eyebrow': 'Marketing & Sales',
     'bento.4.title': 'Marketing Agencies & Sellers',
-    'bento.4.desc': 'Supports agencies aiming for viral videos and sellers needing text-based ad content.',
+    'bento.4.desc':
+      'Supports agencies aiming for viral videos and sellers needing text-based ad content.',
 
     // Testimonials
     'testimonials.title': 'What our users say',
     'testimonials.subtitle': 'Real stories',
-    'testimonials.desc': 'See how creators are changing their workflow. Stunning results from just a few keywords.',
+    'testimonials.desc':
+      'See how creators are changing their workflow. Stunning results from just a few keywords.',
 
     // Footer v2 (Cutple)
     'footer2.customer.title': 'Customer Support',
@@ -351,22 +390,25 @@ export const dictionaries: Record<SupportedLang, Dict> = {
     // Install link sheet
     'install.title': 'Get Installation Link',
     'install.subtitle.1': 'Direct install is not supported on mobile.',
-    'install.subtitle.2': 'Leave your email and we will send the Mac/Windows install link.',
+    'install.subtitle.2':
+      'Leave your email and we will send the Mac/Windows install link.',
     'install.placeholder.email': 'Your email',
     'install.toast.sent': 'Installation link sent to your email!',
 
     // Auth validation messages
     'auth.error.email.invalid': 'Please enter a valid email address',
-    'auth.error.password.minLength': 'Password must be at least 8 characters long',
-    'auth.error.password.specialChar': 'Password must contain at least one special character',
+    'auth.error.password.minLength':
+      'Password must be at least 8 characters long',
+    'auth.error.password.specialChar':
+      'Password must contain at least one special character',
     'auth.error.invalidCredentials': 'Invalid email or password',
     'auth.error.userNotFound': 'No account found with this email',
-    'auth.error.emailAlreadyExists': 'An account with this email already exists',
+    'auth.error.emailAlreadyExists':
+      'An account with this email already exists',
     'auth.error.weakPassword': 'Password is too weak',
     'auth.error.tooManyRequests': 'Too many requests. Please try again later',
-    'auth.error.networkError': 'Network error. Please check your internet connection',
+    'auth.error.networkError':
+      'Network error. Please check your internet connection',
     'auth.error.unknown': 'An unexpected error occurred',
   },
 }
-
-
